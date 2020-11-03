@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="preferences">
     <Layout :showBuilderTools="false">
       content
     </Layout>
@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.home {
+.preferences {
   height: 100%;
 }
 </style>

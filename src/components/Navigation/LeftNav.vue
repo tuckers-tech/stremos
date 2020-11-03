@@ -1,0 +1,125 @@
+<template>
+  <div>
+    <div class="leftnav-container">
+      <div class="icon is-large" @click="toggleLeftFlyout('menu')">
+        <i class="fal fa-bars fa-lg"></i>
+      </div>
+
+      <div class="spacer"></div>
+
+      <div class="icon-group" v-if="showBuilderTools">
+        <div class="icon is-large" @click="toggleLeftFlyout('layout')">
+          <i class="fal fa-columns fa-lg"></i>
+        </div>
+        <div class="icon is-large" @click="toggleLeftFlyout('components')">
+          <i class="fal fa-rectangle-wide fa-lg"></i>
+        </div>
+
+        <div class="icon is-large" @click="toggleLeftFlyout('settings')">
+          <i class="fal fa-cog fa-lg"></i>
+        </div>
+      </div>
+
+      <div class="spacer"></div>
+
+      <div class="icon is-large" @click="toggleLeftFlyout('profile')">
+        <i class="fal fa-user fa-lg"></i>
+      </div>
+    </div>
+    <div class="leftbar-flyout" v-if="isLeftbarOpen">
+      <LeftFlyout :menuType="leftbarType" />
+    </div>
+  </div>
+</template>
+
+<script>
+import LeftFlyout from '@/components/Navigation/LeftFlyout';
+
+export default {
+  name: 'LeftNav',
+  components: {
+    LeftFlyout
+  },
+  props: {
+    showBuilderTools: Boolean
+  },
+  data() {
+    return {
+      isLeftbarOpen: false,
+      leftbarType: 'hamburger'
+    };
+  },
+  methods: {
+    toggleLeftFlyout(type) {
+      if (this.isLeftbarOpen) {
+        if (this.leftbarType === type) {
+          this.isLeftbarOpen = false;
+          return;
+        }
+      }
+      this.leftbarType = type;
+      this.isLeftbarOpen = true;
+    }
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+.leftnav-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 5px 0 5px 5px;
+  background-color: #d4d4d4;
+  z-index: 1000;
+  position: relative;
+}
+
+.shadowed {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.icon-group {
+  display: flex;
+  flex-direction: column;
+
+  & > div {
+    margin-bottom: 2rem;
+  }
+}
+
+.icon {
+  padding-right: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  border: 2px solid transparent;
+
+  &:hover {
+    background-color: #f0f0f0;
+    border-left-color: #209cee;
+    border-top-color: #209cee;
+    border-bottom-color: #209cee;
+    cursor: pointer;
+  }
+}
+
+.active {
+  background-color: #f0f0f0;
+}
+
+.leftbar-flyout {
+  background-color: #f0f0f0;
+  width: 300px;
+  min-width: 300px;
+  position: fixed;
+  top: 0;
+  left: 53px;
+  height: 100%;
+  z-index: 100;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+</style>
