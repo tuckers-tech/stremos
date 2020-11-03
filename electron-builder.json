@@ -1,5 +1,5 @@
 {
-  "productName": "vue-electron",
+  "productName": "alchemist",
   "directories": {
     "output": "release/"
   },
@@ -19,17 +19,16 @@
     "!tsconfig.json",
     "!tslint.json"
   ],
-  "asarUnpack": ["dist-exe/"],
   "win": {
-    "icon": "dist/assets/icons",
-    "target": ["nsis", "portable"]
+    "icon": "dist/img/icons",
+    "target": ["nsis"]
   },
   "mac": {
-    "icon": "dist/assets/icons",
+    "icon": "dist/img/icons",
     "target": ["dmg"]
   },
   "linux": {
-    "icon": "dist/assets/icons",
+    "icon": "dist/img/icons",
     "target": ["AppImage"]
   }
 }
