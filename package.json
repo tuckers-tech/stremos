@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "main": "src-backend/main.js",
+  "description": "Visual Programming Language For Creating Applications",
+  "author": {
+    "name": "Tucker Hawkinson"
+  },
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
     "start": "run-p electron:serve vue:serve",
