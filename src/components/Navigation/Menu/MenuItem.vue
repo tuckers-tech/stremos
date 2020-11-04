@@ -77,9 +77,6 @@ export default {
     sendAction(actionName) {
       this.$store.dispatch(actionName.split('::')[1]);
     }
-  },
-  created() {
-    console.log(this.itemData);
   }
 };
 </script>

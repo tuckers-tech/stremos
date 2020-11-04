@@ -5,6 +5,8 @@ import { auth } from './config/firebase';
 
 Vue.config.productionTip = false;
 
+import './styles/app.scss';
+
 import Buefy from 'buefy';
 import 'buefy/dist/buefy.css';
 import '@fortawesome/fontawesome-pro/js/all';

@@ -1,19 +1,21 @@
 <template>
   <div class="home">
     <Layout :showBuilderTools="false">
-      content
+      <ProjectList />
     </Layout>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Layout from '@/components/Layout/Layout.vue';
+import Layout from '@/components/Layout/Layout';
+import ProjectList from '@/components/Home/ProjectList';
 
 export default {
   name: 'Home',
   components: {
-    Layout
+    Layout,
+    ProjectList
   }
 };
 </script>

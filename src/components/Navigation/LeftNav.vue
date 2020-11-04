@@ -71,7 +71,7 @@ export default {
   height: 100%;
   padding: 5px 0 5px 5px;
   background-color: #d4d4d4;
-  z-index: 1000;
+  z-index: 20;
   position: relative;
 }
 
@@ -119,7 +119,7 @@ export default {
   top: 0;
   left: 53px;
   height: 100%;
-  z-index: 100;
+  z-index: 10;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 </style>
