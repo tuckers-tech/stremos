@@ -22,7 +22,8 @@ export default {
         component: NewProjectForm,
         hasModalCard: true,
         customClass: 'custom-class custom-class-2',
-        trapFocus: true
+        trapFocus: true,
+        width: 500
       });
     }
   }
