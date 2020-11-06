@@ -1,11 +1,12 @@
-<template>
-  <div>
-    Content
-  </div>
-</template>
+<template> </template>
 
 <script>
-export default {};
+export default {
+  name: 'FormComponent',
+  props: {
+    formData: Array
+  }
+};
 </script>
 
-<style></style>
+<style lang="scss" scoped></style>

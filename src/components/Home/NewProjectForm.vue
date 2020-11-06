@@ -1,59 +1,81 @@
 <template>
-  <form class="new-project-form" @action.prevent>
-    <div class="modal-card" style="width: auto">
-      <header class="modal-card-head">
-        <p class="modal-card-title">New Project</p>
-        <button type="button" class="delete" @click="$emit('close')" />
-      </header>
-      <section class="modal-card-body">
-        <div class="field">
-          <label class="label">Project Name</label>
-          <div class="control">
-            <input
-              class="input"
-              type="text"
-              placeholder="Project Name"
-              required
-            />
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="label">Project Type</label>
-          <div class="control is-full-width">
-            <div class="select is-full-width">
-              <select class="is-full-width" required>
-                <option value="null">Select A Project Type</option>
-                <option value="web">Web</option>
-                <option value="desktop" disabled>Desktop</option>
-                <option value="embed" disabled>Embedded</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </section>
-      <footer class="modal-card-foot">
-        <button class="button" type="button" @click="$emit('close')">
-          Close
-        </button>
-        <button class="button is-success">Add Project</button>
-      </footer>
-    </div>
-  </form>
+  <ModalFormComponent
+    :formData="formData"
+    @formSubmit="handleSubmit"
+    @close="$emit('close')"
+  />
 </template>
 
 <script>
+import ModalFormComponent from '@/components/Forms/ModalFormComponent';
+
 export default {
-  name: 'NewProjectForm'
+  name: 'NewProjectForm',
+  components: {
+    ModalFormComponent
+  },
+  data() {
+    return {
+      formData: {
+        slug: 'newProjectForm',
+        title: 'New Project',
+        width: 450,
+        buttons: [
+          {
+            label: 'Close',
+            action: 'close'
+          },
+          {
+            label: 'Add Project',
+            action: 'execute'
+          }
+        ],
+        components: [
+          {
+            slug: 'projectName',
+            type: 'text',
+            label: 'Project Name',
+            placeHolder: 'Project Name',
+            defaultValue: '',
+            disabled: false,
+            required: true
+          },
+          {
+            slug: 'projectType',
+            type: 'dropdown',
+            label: 'Project Type',
+            placeHolder: 'Project Name',
+            defaultValue: '',
+            disabled: false,
+            required: true,
+            options: [
+              {
+                label: 'Web',
+                value: 'web',
+                disabled: false
+              },
+              {
+                label: 'Desktop',
+                value: 'desktop',
+                disabled: false
+              },
+              {
+                label: 'Embedded',
+                value: 'embedded',
+                disabled: false
+              }
+            ]
+          }
+        ]
+      }
+    };
+  },
+  methods: {
+    handleSubmit(event) {
+      console.log(event);
+    }
+  }
 };
 </script>
 
-<style lang="scss" scoped>
-.new-project-form {
-  width: 450px;
-}
-
-.is-full-width {
-  width: 100%;
-}
-</style>
+<style lang="scss" scoped></style>
