@@ -6,7 +6,7 @@
         <select
           class="is-full-width"
           v-model="value"
-          @input="handleInput"
+          @change="handleInput"
           :required="this.inputData.required"
           :disabled="this.inputData.disabled"
         >
@@ -42,17 +42,16 @@ export default {
       if (!this.inputData.required) {
         return true;
       } else {
-        if (this.value == null) {
-          return true;
-        } else {
+        if (this.value === null || this.value === 'null') {
           return false;
+        } else {
+          return true;
         }
       }
     }
   },
   methods: {
     handleInput() {
-      console.log('input change');
       this.$emit('inputChange', {
         slug: this.inputData.slug,
         value: this.value,

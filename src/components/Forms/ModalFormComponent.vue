@@ -23,8 +23,6 @@
             :inputData="input"
             @inputChange="handleInputChange"
           />
-
-          {{ isFormValid }}
         </template>
       </section>
       <footer class="modal-card-foot">
@@ -91,10 +89,9 @@ export default {
       event.preventDefault();
       event.stopPropagation();
 
-      this.$emit('formSubmit', {});
+      this.$emit('formSubmit', this.formValue);
     },
     handleInputChange(event) {
-      console.log(event);
       let newFormValue = [];
 
       this.formValue.forEach(element => {

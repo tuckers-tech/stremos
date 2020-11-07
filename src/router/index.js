@@ -16,6 +16,26 @@ const routes = [
     }
   },
   {
+    path: '/project',
+    component: () =>
+      import(
+        /* webpackChunkName: "projectDetail" */ '../views/ProjectDetail.vue'
+      ),
+    meta: {
+      requiresAuth: true
+    },
+    children: [
+      {
+        path: ':projectID',
+        name: 'projectDetail',
+        component: () =>
+          import(
+            /* webpackChunkName: "projectDetailHome" */ '../components/ProjectDetail/ProjectDetailHome.vue'
+          )
+      }
+    ]
+  },
+  {
     path: '/about',
     name: 'about',
     // route level code-splitting

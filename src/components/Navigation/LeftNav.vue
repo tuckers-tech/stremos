@@ -1,28 +1,63 @@
 <template>
   <div>
     <div class="leftnav-container">
-      <div class="icon is-large" @click="toggleLeftFlyout('menu')">
+      <div
+        :class="{
+          icon: true,
+          'is-large': true,
+          active: leftbarType === 'menu'
+        }"
+        @click="toggleLeftFlyout('menu')"
+      >
         <i class="fal fa-bars fa-lg"></i>
       </div>
 
       <div class="spacer"></div>
 
       <div class="icon-group" v-if="showBuilderTools">
-        <div class="icon is-large" @click="toggleLeftFlyout('layout')">
+        <div
+          :class="{
+            icon: true,
+            'is-large': true,
+            active: leftbarType === 'layout'
+          }"
+          @click="toggleLeftFlyout('layout')"
+        >
           <i class="fal fa-columns fa-lg"></i>
         </div>
-        <div class="icon is-large" @click="toggleLeftFlyout('components')">
+        <div
+          :class="{
+            icon: true,
+            'is-large': true,
+            active: leftbarType === 'components'
+          }"
+          @click="toggleLeftFlyout('components')"
+        >
           <i class="fal fa-rectangle-wide fa-lg"></i>
         </div>
 
-        <div class="icon is-large" @click="toggleLeftFlyout('settings')">
+        <div
+          :class="{
+            icon: true,
+            'is-large': true,
+            active: leftbarType === 'settings'
+          }"
+          @click="toggleLeftFlyout('settings')"
+        >
           <i class="fal fa-cog fa-lg"></i>
         </div>
       </div>
 
       <div class="spacer"></div>
 
-      <div class="icon is-large" @click="toggleLeftFlyout('profile')">
+      <div
+        :class="{
+          icon: true,
+          'is-large': true,
+          active: leftbarType === 'profile'
+        }"
+        @click="toggleLeftFlyout('profile')"
+      >
         <i class="fal fa-user fa-lg"></i>
       </div>
     </div>
@@ -46,7 +81,7 @@ export default {
   data() {
     return {
       isLeftbarOpen: false,
-      leftbarType: 'hamburger'
+      leftbarType: ''
     };
   },
   methods: {

@@ -72,7 +72,27 @@ export default {
   },
   methods: {
     handleSubmit(event) {
-      console.log(event);
+      let projectData = this.buildProjectData(event);
+
+      this.$store
+        .dispatch('addProject', projectData)
+        .then(result => {
+          console.log(result);
+          this.$store.dispatch('updateProjects');
+          this.$emit('close');
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    },
+    buildProjectData(data) {
+      let returnData = {};
+
+      data.forEach(el => {
+        returnData[el.slug] = el.value;
+      });
+
+      return returnData;
     }
   }
 };

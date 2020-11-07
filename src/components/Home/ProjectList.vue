@@ -5,7 +5,9 @@
       <NoProjectList />
     </div>
     <div v-if="!hasNoProjects">
-      Content
+      <template v-for="project in $store.getters.projectList">
+        <ProjectPreviewCard :key="project.id" :projectData="project" />
+      </template>
     </div>
   </div>
 </template>
@@ -13,15 +15,18 @@
 <script>
 import NoProjectList from '@/components/Home/NoProjectList';
 import NewProjectRow from '@/components/Home/NewProjectRow';
+import ProjectPreviewCard from '@/components/Home/ProjectPreviewCard';
 
 export default {
   name: 'ProjectList',
   components: {
     NoProjectList,
-    NewProjectRow
+    NewProjectRow,
+    ProjectPreviewCard
   },
   computed: {
     hasNoProjects() {
+      console.log(this.$store.getters.projectList);
       return this.$store.getters.projectList.length === 0 ? true : false;
     }
   },
