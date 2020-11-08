@@ -12,7 +12,7 @@
         <i class="fal fa-bars fa-lg"></i>
       </div>
 
-      <div class="spacer"></div>
+      <div class="spacer" v-if="showBuilderTools"></div>
 
       <div class="icon-group" v-if="showBuilderTools">
         <div
@@ -48,6 +48,55 @@
         </div>
       </div>
 
+      <div class="spacer" v-if="showProjectTools"></div>
+
+      <div class="icon-group" v-if="showProjectTools">
+        <router-link
+          :to="{
+            name: 'projectDashboard',
+            params: { projectID: $route.params.projectID }
+          }"
+          tag="div"
+          class="icon is-large"
+          exact="true"
+        >
+          <i class="fal fa-home fa-lg"></i>
+        </router-link>
+
+        <router-link
+          :to="{
+            name: 'projectTopology',
+            params: { projectID: $route.params.projectID }
+          }"
+          tag="div"
+          class="icon is-large"
+        >
+          <i class="fal fa-chart-network fa-lg"></i>
+        </router-link>
+
+        <router-link
+          :to="{
+            name: 'projectBilling',
+            params: { projectID: $route.params.projectID }
+          }"
+          tag="div"
+          class="icon is-large"
+        >
+          <i class="fal fa-money-bill-alt fa-lg"></i>
+        </router-link>
+
+        <router-link
+          :to="{
+            name: 'projectSettings',
+            params: { projectID: $route.params.projectID }
+          }"
+          tag="div"
+          class="icon is-large"
+        >
+          <i class="fal fa-cog fa-lg"></i>
+        </router-link>
+      </div>
+
       <div class="spacer"></div>
 
       <div
@@ -76,7 +125,8 @@ export default {
     LeftFlyout
   },
   props: {
-    showBuilderTools: Boolean
+    showBuilderTools: Boolean,
+    showProjectTools: Boolean
   },
   data() {
     return {
@@ -89,6 +139,7 @@ export default {
       if (this.isLeftbarOpen) {
         if (this.leftbarType === type) {
           this.isLeftbarOpen = false;
+          this.leftbarType = '';
           return;
         }
       }
@@ -156,5 +207,9 @@ export default {
   height: 100%;
   z-index: 10;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.router-link-active {
+  background-color: #ffffff;
 }
 </style>

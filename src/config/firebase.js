@@ -23,5 +23,18 @@ const auth = firebase.default.auth();
 // collection references
 const usersCollection = db.collection('users');
 const projectMetadata = db.collection('projectMetadata');
+const projectSettings = db.collection('projectSettings');
+const projectBilling = db.collection('projectBilling');
+const projectTopology = db.collection('projectTopology');
+const components = db.collection('components');
 
-export { db, auth, usersCollection, projectMetadata };
+export {
+  db,
+  auth,
+  usersCollection,
+  projectMetadata,
+  projectSettings,
+  projectBilling,
+  projectTopology,
+  components
+};

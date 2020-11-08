@@ -1,6 +1,6 @@
 <template>
   <div class="preferences">
-    <Layout :showBuilderTools="false">
+    <Layout :showBuilderTools="false" :showProjectTools="false">
       content
     </Layout>
   </div>

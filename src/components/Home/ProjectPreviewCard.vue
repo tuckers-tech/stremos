@@ -1,6 +1,6 @@
 <template>
   <router-link
-    :to="{ name: 'projectDetail', params: { projectID: projectData.id } }"
+    :to="{ name: 'projectDashboard', params: { projectID: projectData.id } }"
     tag="div"
     class="box project-preview-card"
   >

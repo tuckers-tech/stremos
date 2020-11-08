@@ -1,6 +1,9 @@
 <template>
   <div class="layout">
-    <LeftNav :showBuilderTools="showBuilderTools" />
+    <LeftNav
+      :showBuilderTools="showBuilderTools"
+      :showProjectTools="showProjectTools"
+    />
     <div class="main-content-container">
       <slot></slot>
     </div>
@@ -16,7 +19,8 @@ export default {
     LeftNav
   },
   props: {
-    showBuilderTools: Boolean
+    showBuilderTools: Boolean,
+    showProjectTools: Boolean
   }
 };
 </script>

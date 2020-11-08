@@ -1,6 +1,6 @@
 <template>
   <div class="profile">
-    <Layout :showBuilderTools="false">
+    <Layout :showBuilderTools="false" :showProjectTools="false">
       <div class="columns">
         <div class="column is-one-fifth">
           <b-image
@@ -24,7 +24,7 @@
 <script>
 // @ is an alias to /src
 import Layout from '@/components/Layout/Layout.vue';
-import UserDataUpdateForm from './UserDataUpdateForm';
+import UserDataUpdateForm from '@/components/Profile/UserDataUpdateForm';
 
 export default {
   name: 'Home',

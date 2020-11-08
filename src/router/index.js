@@ -16,21 +16,45 @@ const routes = [
     }
   },
   {
-    path: '/project',
+    path: '/project/:projectID',
     component: () =>
       import(
-        /* webpackChunkName: "projectDetail" */ '../views/ProjectDetail.vue'
+        /* webpackChunkName: "projectDetail" */ '../views/Project/ProjectDetail.vue'
       ),
     meta: {
       requiresAuth: true
     },
     children: [
       {
-        path: ':projectID',
-        name: 'projectDetail',
+        path: '/',
+        name: 'projectDashboard',
         component: () =>
           import(
-            /* webpackChunkName: "projectDetailHome" */ '../components/ProjectDetail/ProjectDetailHome.vue'
+            /* webpackChunkName: "projectDashboard" */ '../components/ProjectDetail/ProjectDashboard.vue'
+          )
+      },
+      {
+        path: 'settings',
+        name: 'projectSettings',
+        component: () =>
+          import(
+            /* webpackChunkName: "projectSettings" */ '../components/ProjectDetail/ProjectSettings.vue'
+          )
+      },
+      {
+        path: 'billing',
+        name: 'projectBilling',
+        component: () =>
+          import(
+            /* webpackChunkName: "projectBilling" */ '../components/ProjectDetail/ProjectBilling.vue'
+          )
+      },
+      {
+        path: 'topology',
+        name: 'projectTopology',
+        component: () =>
+          import(
+            /* webpackChunkName: "projectTopology" */ '../components/ProjectDetail/ProjectTopology.vue'
           )
       }
     ]
@@ -69,7 +93,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(
-        /* webpackChunkName: "profile" */ '../views/UserManagement/Profile/Profile.vue'
+        /* webpackChunkName: "profile" */ '../views/UserManagement/Profile.vue'
       ),
     meta: {
       requiresAuth: true

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Layout :showBuilderTools="false">
+    <Layout :showBuilderTools="false" :showProjectTools="false">
       <ProjectList />
     </Layout>
   </div>
