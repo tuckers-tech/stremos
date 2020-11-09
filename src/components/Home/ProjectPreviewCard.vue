@@ -9,7 +9,6 @@
         <div class="content">
           <h3>{{ projectData.projectName }}</h3>
           <h5>{{ projectData.projectType }}</h5>
-          {{ projectData.id }}
         </div>
       </div>
     </article>
@@ -30,6 +29,8 @@ export default {
   width: 250px;
   cursor: pointer;
   border: 2px solid transparent;
+  margin-right: 15px;
+  margin-bottom: 24px;
 
   &:hover {
     border-color: #209cee;

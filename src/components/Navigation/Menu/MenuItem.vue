@@ -1,7 +1,7 @@
 <template>
   <div class="menu-item">
     <router-link
-      :to="itemData.to"
+      :to="{ name: navigateTo }"
       tag="div"
       class="box menu-item-link"
       v-if="itemData.isLink"
@@ -73,10 +73,20 @@ export default {
   props: {
     itemData: Object
   },
+  computed: {
+    navigateTo() {
+      let splitAction = this.itemData.actionName.split('::');
+
+      return splitAction[1];
+    }
+  },
   methods: {
     sendAction(actionName) {
       this.$store.dispatch(actionName.split('::')[1]);
     }
+  },
+  created() {
+    console.log(this.itemData);
   }
 };
 </script>

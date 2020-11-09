@@ -1,6 +1,10 @@
 <template>
   <div class="profile">
-    <Layout :showBuilderTools="false" :showProjectTools="false">
+    <Layout
+      :showBuilderTools="false"
+      :showProjectTools="false"
+      :hasPadding="true"
+    >
       <div class="columns">
         <div class="column is-one-fifth">
           <b-image

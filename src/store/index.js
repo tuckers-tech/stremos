@@ -5,6 +5,9 @@ import Vuex from 'vuex';
 import auth from './auth/auth';
 import user from './user/user';
 import project from './project/project';
+import projectTopology from './project/projectTopology';
+import mouseMonitor from './InputMonitor/mouseMonitor';
+import keyboardMonitor from './InputMonitor/keyboardMonitor';
 
 Vue.use(Vuex);
 
@@ -16,6 +19,9 @@ export default new Vuex.Store({
   modules: {
     auth,
     user,
-    project
+    project,
+    projectTopology,
+    mouseMonitor,
+    keyboardMonitor
   }
 });

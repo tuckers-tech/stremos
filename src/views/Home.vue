@@ -1,6 +1,10 @@
 <template>
   <div class="home">
-    <Layout :showBuilderTools="false" :showProjectTools="false">
+    <Layout
+      :showBuilderTools="false"
+      :showProjectTools="false"
+      :hasPadding="true"
+    >
       <ProjectList />
     </Layout>
   </div>

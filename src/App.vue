@@ -4,6 +4,33 @@
   </div>
 </template>
 
+<script>
+export default {
+  methods: {
+    handleMouseEvent(event) {
+      this.$store.dispatch('handleMouseEvent', event);
+    },
+    handleKeyboardEvents(event) {
+      this.$store.dispatch('handleKeyboardEvent', event);
+    }
+  },
+  mounted() {
+    window.addEventListener('keydown', event => {
+      this.handleKeyboardEvents(event);
+    });
+    window.addEventListener('keyup', event => {
+      this.handleKeyboardEvents(event);
+    });
+    window.addEventListener('mousedown', event => {
+      this.handleMouseEvent(event);
+    });
+    window.addEventListener('mouseup', event => {
+      this.handleMouseEvent(event);
+    });
+  }
+};
+</script>
+
 <style>
 html,
 body {

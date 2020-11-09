@@ -58,7 +58,7 @@
           }"
           tag="div"
           class="icon is-large"
-          exact="true"
+          :exact="true"
         >
           <i class="fal fa-home fa-lg"></i>
         </router-link>

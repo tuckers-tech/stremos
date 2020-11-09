@@ -1,6 +1,10 @@
 <template>
   <div class="project-detail">
-    <Layout :showBuilderTools="false" :showProjectTools="true">
+    <Layout
+      :showBuilderTools="false"
+      :showProjectTools="true"
+      :hasPadding="false"
+    >
       <router-view></router-view>
     </Layout>
   </div>

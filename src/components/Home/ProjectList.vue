@@ -4,7 +4,7 @@
     <div v-if="hasNoProjects">
       <NoProjectList />
     </div>
-    <div v-if="!hasNoProjects">
+    <div class="project-list-container" v-if="!hasNoProjects">
       <template v-for="project in $store.getters.projectList">
         <ProjectPreviewCard :key="project.id" :projectData="project" />
       </template>
@@ -36,4 +36,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.project-list-container {
+  display: flex;
+  flex-direction: row;
+}
+</style>

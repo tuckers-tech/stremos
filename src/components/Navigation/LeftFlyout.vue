@@ -98,7 +98,7 @@ export default {
         hamburger: [
           {
             label: 'Home',
-            description: 'Go to project home.',
+            description: 'Go to application home.',
             icon: 'house',
             iconType: 'icon-fa',
             actionName: 'navigate::home',

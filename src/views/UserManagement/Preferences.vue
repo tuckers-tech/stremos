@@ -1,6 +1,10 @@
 <template>
   <div class="preferences">
-    <Layout :showBuilderTools="false" :showProjectTools="false">
+    <Layout
+      :showBuilderTools="false"
+      :showProjectTools="false"
+      :hasPadding="true"
+    >
       content
     </Layout>
   </div>

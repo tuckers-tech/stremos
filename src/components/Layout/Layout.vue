@@ -4,7 +4,7 @@
       :showBuilderTools="showBuilderTools"
       :showProjectTools="showProjectTools"
     />
-    <div class="main-content-container">
+    <div :class="{ 'main-content-container': true, 'has-padding': hasPadding }">
       <slot></slot>
     </div>
   </div>
@@ -20,7 +20,8 @@ export default {
   },
   props: {
     showBuilderTools: Boolean,
-    showProjectTools: Boolean
+    showProjectTools: Boolean,
+    hasPadding: Boolean
   }
 };
 </script>
@@ -35,6 +36,9 @@ export default {
 .main-content-container {
   flex-grow: 1;
   height: 100%;
+}
+
+.has-padding {
   padding: 20px;
 }
 </style>

@@ -30,7 +30,7 @@ const routes = [
         name: 'projectDashboard',
         component: () =>
           import(
-            /* webpackChunkName: "projectDashboard" */ '../components/ProjectDetail/ProjectDashboard.vue'
+            /* webpackChunkName: "projectDashboard" */ '../components/Project/ProjectDashboard.vue'
           )
       },
       {
@@ -38,7 +38,7 @@ const routes = [
         name: 'projectSettings',
         component: () =>
           import(
-            /* webpackChunkName: "projectSettings" */ '../components/ProjectDetail/ProjectSettings.vue'
+            /* webpackChunkName: "projectSettings" */ '../components/Project/ProjectSettings.vue'
           )
       },
       {
@@ -46,7 +46,7 @@ const routes = [
         name: 'projectBilling',
         component: () =>
           import(
-            /* webpackChunkName: "projectBilling" */ '../components/ProjectDetail/ProjectBilling.vue'
+            /* webpackChunkName: "projectBilling" */ '../components/Project/ProjectBilling.vue'
           )
       },
       {
@@ -54,7 +54,7 @@ const routes = [
         name: 'projectTopology',
         component: () =>
           import(
-            /* webpackChunkName: "projectTopology" */ '../components/ProjectDetail/ProjectTopology.vue'
+            /* webpackChunkName: "projectTopology" */ '../components/Project/ProjectTopology.vue'
           )
       }
     ]
@@ -103,7 +103,7 @@ const routes = [
     path: '/login',
     name: 'login',
     component: () =>
-      import(/* webpackChunkName: "login" */ '../views/auth/Login.vue')
+      import(/* webpackChunkName: "login" */ '../views/Auth/Login.vue')
   }
 ];
 
