@@ -23,13 +23,21 @@
       }"
       style="width: 100%; height: 100%;"
     >
-      <TopologyNode />
+      <SVGBackground
+        :majorGridLineSpacing="100"
+        :minorGridLineSpacing="20"
+        :backgroundGridSize="25"
+      />
+      <g>
+        <TopologyNode />
+      </g>
     </svg>
   </SvgPanZoom>
 </template>
 
 <script>
-import TopologyNode from '@/components/Project/Topology/Node/TopologyNode';
+import SVGBackground from '@/components/Project/Topology/SVG/SVGBackground/SVGBackground';
+import TopologyNode from '@/components/Project/Topology/SVG/Node/TopologyNode';
 import SvgPanZoom from 'vue-svg-pan-zoom';
 import { mapGetters } from 'vuex';
 
@@ -37,7 +45,8 @@ export default {
   name: 'TopologySVGContainer',
   components: {
     TopologyNode,
-    SvgPanZoom
+    SvgPanZoom,
+    SVGBackground
   },
   data() {
     return {
@@ -54,8 +63,7 @@ export default {
     }
   },
   methods: {
-    beforeZoom(oldZoom, newZoom) {
-      console.log('beforeZoom', oldZoom, newZoom);
+    beforeZoom(/* oldZoom, newZoom */) {
       return true;
     },
     onZoom(newZoomScale) {

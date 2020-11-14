@@ -1,7 +1,7 @@
 <template>
   <rect
-    width="300"
-    height="200"
+    width="150"
+    height="100"
     :class="{ 'topology-node': true }"
     rx="10"
   ></rect>
