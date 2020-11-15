@@ -13,6 +13,7 @@
     :onZoom="onZoom"
     :beforePan="beforePan"
     :onPan="onPan"
+    :onUpdatedCTM="onUpdatedCTM"
     @svgpanzoom="registerSvgPanZoom"
   >
     <svg
@@ -21,6 +22,7 @@
         'can-pan': isSpaceDown,
         'is-panning': isPanning
       }"
+      ref="svgEl"
       style="width: 100%; height: 100%;"
     >
       <SVGBackground
@@ -28,23 +30,21 @@
         :minorGridLineSpacing="20"
         :backgroundGridSize="25"
       />
-      <g>
-        <TopologyNode />
-      </g>
+      <TopologyGraph />
     </svg>
   </SvgPanZoom>
 </template>
 
 <script>
 import SVGBackground from '@/components/Project/Topology/SVG/SVGBackground/SVGBackground';
-import TopologyNode from '@/components/Project/Topology/SVG/Node/TopologyNode';
+import TopologyGraph from '@/components/Project/Topology/SVG/Graph/TopologyGraph';
 import SvgPanZoom from 'vue-svg-pan-zoom';
 import { mapGetters } from 'vuex';
 
 export default {
   name: 'TopologySVGContainer',
   components: {
-    TopologyNode,
+    TopologyGraph,
     SvgPanZoom,
     SVGBackground
   },
