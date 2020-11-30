@@ -17,10 +17,7 @@ const state = {
       }
     ],
     connections: [{}]
-  },
-
-  currentCTM: null,
-  SVGPoint: null
+  }
 };
 
 const getters = {
