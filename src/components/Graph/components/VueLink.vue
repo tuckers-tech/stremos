@@ -1,5 +1,5 @@
 <template>
-  <svg width="100%" height="100%">
+  <svg class="background">
     <g v-for="(p, index) in renderedPathes" :key="index">
       <path v-if="outline" :d="p.data" :style="p.outlineStyle"></path>
       <path :d="p.data" :style="p.style"></path>
@@ -101,4 +101,11 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.background {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* background-color: red; */
+}
+</style>

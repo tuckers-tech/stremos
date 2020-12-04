@@ -355,7 +355,7 @@ export default {
       y += this.optionsForChild.titleHeight;
 
       if (isInput && block.inputs.length > slotNumber) {
-        console.log('pass');
+        // pass
       } else if (!isInput && block.outputs.length > slotNumber) {
         x += this.optionsForChild.width;
       } else {
@@ -697,10 +697,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.vue-container {
-  position: relative;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-</style>
+<style lang="scss" scoped></style>
