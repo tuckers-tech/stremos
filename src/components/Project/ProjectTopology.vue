@@ -1,14 +1,14 @@
 <template>
   <div class="topology-container">
-    <TopologySVGContainer />
+    <TopologyContainer />
   </div>
 </template>
 
 <script>
-import TopologySVGContainer from '@/components/Project/Topology/TopologySVGContainer';
+import TopologyContainer from '@/components/Project/Topology/TopologyContainer';
 export default {
   components: {
-    TopologySVGContainer
+    TopologyContainer
   }
 };
 </script>
