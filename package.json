@@ -9,8 +9,8 @@
   },
   "license": "SEE LICENSE IN LICENSE.txt",
   "scripts": {
-    "vue:serve": "vue-cli-service serve",
-    "vue:build": "vue-cli-service build",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
     "unit": "vue-cli-service test:unit",
     "e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint"
