@@ -1,4 +1,4 @@
-# alchemist
+# stremos
 
 ## Project setup
 

@@ -5,10 +5,10 @@ import 'firebase/storage';
 
 const configOptions = {
   apiKey: 'AIzaSyC3foqEfTZ02YzRzD4ME104fzWAwKRaCgo',
-  authDomain: 'alchemist-e70cd.firebaseapp.com',
-  databaseURL: 'https://alchemist-e70cd.firebaseio.com',
-  projectId: 'alchemist-e70cd',
-  storageBucket: 'alchemist-e70cd.appspot.com',
+  authDomain: 'stremos-e70cd.firebaseapp.com',
+  databaseURL: 'https://stremos-e70cd.firebaseio.com',
+  projectId: 'stremos-e70cd',
+  storageBucket: 'stremos-e70cd.appspot.com',
   messagingSenderId: '375309314555',
   appId: '1:375309314555:web:7c7224fb07e98e5e8b035e',
   measurementId: 'G-J5XQWYLC0J'
