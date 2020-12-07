@@ -22,7 +22,7 @@
     "bulma": "^0.9.1",
     "core-js": "^3.6.5",
     "deepmerge": "^4.2.2",
-    "firebase": "^8.0.0",
+    "firebase": "^8.0.2",
     "register-service-worker": "^1.7.1",
     "svg-pan-zoom": "^3.6.1",
     "vue": "^2.6.11",
