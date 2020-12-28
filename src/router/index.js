@@ -2,8 +2,6 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 
-import { auth } from '../config/firebase';
-
 Vue.use(VueRouter);
 
 const routes = [
@@ -116,8 +114,10 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
 
-  if (requiresAuth && !auth.currentUser) {
-    next('/login');
+  if (requiresAuth) {
+    console.log('auth failed');
+
+    next();
   } else {
     next();
   }

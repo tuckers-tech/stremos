@@ -14,6 +14,7 @@ export default {
       this.$store.dispatch('handleKeyboardEvent', event);
     }
   },
+  created() {},
   mounted() {
     window.addEventListener('keydown', event => {
       this.handleKeyboardEvents(event);

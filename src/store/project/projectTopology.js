@@ -1,5 +1,3 @@
-// import * as fb from '../../config/firebase';
-
 const state = {};
 
 const getters = {};
