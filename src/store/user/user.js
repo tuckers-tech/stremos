@@ -17,6 +17,9 @@ const getters = {
   userFirstName(state) {
     return state.userProfile.tokenParsed.given_name;
   },
+  userEmail(state) {
+    return state.userProfile.tokenParsed.email;
+  },
   userLastName(state) {
     return state.userProfile.tokenParsed.family_name;
   },

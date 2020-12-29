@@ -9,8 +9,8 @@
               class="input"
               type="text"
               placeholder="First Name"
-              :value="currentUser.fname"
-              @input="updateLocalUserData($event, 'fname')"
+              :value="userFirstName"
+              @input="updateFirstName($event)"
             />
             <span class="icon is-small is-left">
               <i class="fal fa-user"></i>
@@ -24,8 +24,8 @@
               class="input"
               type="text"
               placeholder="Last Name"
-              :value="currentUser.lname"
-              @input="updateLocalUserData($event, 'lname')"
+              :value="userLastName"
+              @input="updateFirstName($event)"
             />
             <span class="icon is-small is-left">
               <i class="fal fa-user"></i>
@@ -42,20 +42,16 @@
           class="input"
           type="email"
           placeholder="Email"
-          :value="currentUser.email"
-          @input="updateLocalUserData($event, 'email')"
+          :value="userEmail"
+          @input="updateFirstName($event)"
         />
         <span class="icon is-small is-left">
-          <i class="fal fa-user"></i>
+          <i class="fal fa-envelope"></i>
         </span>
       </p>
     </div>
 
-    <button
-      v-if="isDataOutOfSync"
-      class="button is-success"
-      @click="handleUpdateClick"
-    >
+    <button v-if="true" class="button is-success" @click="handleUpdateClick">
       Update
     </button>
   </div>
@@ -70,23 +66,15 @@ export default {
     return {};
   },
   methods: {
-    updateLocalUserData(e, target) {
-      //   this.userDataChange[target] = e.target.value;
-
-      let dataUpdate = {
-        ...this.currentUser
-      };
-
-      dataUpdate[target] = e.target.value;
-
-      this.$store.dispatch('updateLocalUserStore', dataUpdate);
+    updateFirstName(event) {
+      console.log(event);
     },
     handleUpdateClick() {
-      this.$store.dispatch('synchronizeDataWithDatabase');
+      // this.$store.dispatch('synchronizeDataWithDatabase');
     }
   },
   computed: {
-    ...mapGetters(['currentUser', 'isDataOutOfSync'])
+    ...mapGetters(['userFirstName', 'userLastName', 'userEmail'])
   }
 };
 </script>
