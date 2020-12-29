@@ -14,20 +14,8 @@ export default {
       this.$store.dispatch('handleKeyboardEvent', event);
     }
   },
-  created() {},
-  mounted() {
-    window.addEventListener('keydown', event => {
-      this.handleKeyboardEvents(event);
-    });
-    window.addEventListener('keyup', event => {
-      this.handleKeyboardEvents(event);
-    });
-    window.addEventListener('mousedown', event => {
-      this.handleMouseEvent(event);
-    });
-    window.addEventListener('mouseup', event => {
-      this.handleMouseEvent(event);
-    });
+  created() {
+    this.$store.dispatch('setUserProfile', this.$keycloak);
   }
 };
 </script>
