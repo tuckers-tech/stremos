@@ -18,10 +18,10 @@ Vue.use(Buefy, {
   defaultIconPack: 'fal'
 });
 
-const ssoUrl = 'http://localhost:8080/auth';
+const ssoUrl = 'http://auth.stremos.com/auth';
 const ssoClientId = 'development';
 const ssoRealm = 'STREMOS';
-const logoutUrl = 'http://localhost:8081';
+const logoutUrl = 'http://localhost:8080';
 
 function tokenInterceptor() {
   Axios.interceptors.request.use(
