@@ -15,7 +15,7 @@ import store from './store';
 
 Vue.use(Buefy, {
   defaultIconComponent: 'vue-fontawesome',
-  defaultIconPack: 'fal'
+  defaultIconPack: 'fal',
 });
 
 const ssoUrl = 'http://auth.stremos.com/auth';
@@ -30,32 +30,32 @@ function tokenInterceptor() {
       currentConfig.headers.Authorization = `Bearer ${Vue.prototype.$keycloak.token}`;
       return currentConfig;
     },
-    error => Promise.reject(error)
+    error => Promise.reject(error),
   );
 }
 
 Vue.use(VueKeyCloak, {
   logout: {
-    redirectUri: logoutUrl
+    redirectUri: logoutUrl,
   },
   init: {
     onLoad: 'login-required',
-    checkLoginIframe: false
+    checkLoginIframe: false,
   },
   config: {
     realm: ssoRealm,
     url: ssoUrl,
     clientId: ssoClientId,
-    logoutRedirectUri: logoutUrl
+    logoutRedirectUri: logoutUrl,
   },
   onReady: () => {
     tokenInterceptor();
     new Vue({
       router,
       store,
-      render: h => h(App)
+      render: h => h(App),
     }).$mount('#app');
-  }
+  },
 });
 
 window.addEventListener('message', e => {
