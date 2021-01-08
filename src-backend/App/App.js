@@ -2,8 +2,8 @@ const { BrowserWindow, ipcMain } = require('electron');
 const url = require('url');
 const path = require('path');
 const Logger = require('./Logging/Logger');
-const DataManager = require('./Data/DataManager');
-const PreferenceManager = require('./Preferences/PreferenceManager');
+const DataController = require('./Data/DataController');
+const PreferenceController = require('./Preferences/PreferenceController');
 
 module.exports = class App {
   constructor(app, options) {
@@ -18,12 +18,16 @@ module.exports = class App {
       this.app.getPath('logs'),
       options.verbose,
     );
-    this.preferencesManager = new PreferenceManager(
+    this.preferenceCtrl = new PreferenceController(
       this.options,
       this.logger,
       appDataRootFolder,
     );
-    this.dataManager = new DataManager(this.options, this.logger);
+    this.dataCtrl = new DataController(
+      this.options,
+      this.logger,
+      this.preferenceCtrl,
+    );
   }
 
   start() {
@@ -85,7 +89,7 @@ module.exports = class App {
 
   destroy() {
     this.logger.destroy();
-    this.preferencesManager.destroy();
-    this.dataManager.destroy();
+    this.preferenceCtrl.destroy();
+    this.dataCtrl.destroy();
   }
 };

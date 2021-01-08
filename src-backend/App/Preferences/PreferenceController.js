@@ -4,8 +4,9 @@ const getParentDirectory = require('../Utilities/getParentDirectory');
 
 const defaultPreferences = require('./defaults/preferences.default');
 
-module.exports = class PreferenceManager {
+module.exports = class PreferenceController {
   constructor(options, logger, appDataLoc) {
+    this.appDataLoc = appDataLoc;
     this.preferencesFileLocation = path.join(
       appDataLoc,
       'AppPreferences',
