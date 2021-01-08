@@ -12,11 +12,14 @@ export default {
     },
     handleKeyboardEvents(event) {
       this.$store.dispatch('handleKeyboardEvent', event);
-    }
+    },
   },
   created() {
+    window.ipc.receive('fromMain', data => {
+      console.log(data);
+    });
     this.$store.dispatch('setUserProfile', this.$keycloak);
-  }
+  },
 };
 </script>
 
