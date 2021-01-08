@@ -15,6 +15,9 @@ export default {
     },
   },
   created() {
+    window.ipc.receive('fromMain', data => {
+      console.log(data);
+    });
     this.$store.dispatch('setUserProfile', this.$keycloak);
   },
 };

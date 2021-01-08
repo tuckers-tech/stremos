@@ -1,5 +1,4 @@
 // import router from '../../router/index';
-const app = window.require('electron').remote;
 
 const state = {
   userProfile: {},
@@ -40,8 +39,8 @@ const mutations = {
 
 const actions = {
   setUserProfile({ commit }, keycloakData) {
-    console.log(app);
     console.log(keycloakData);
+    window.ipc.send('toMain', 'some data');
     commit('setUserProfile', keycloakData);
   },
 };

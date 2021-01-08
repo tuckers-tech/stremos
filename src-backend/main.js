@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const url = require('url');
 const path = require('path');
 
@@ -13,8 +13,10 @@ function createWindow() {
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true,
-      allowRunningInsecureContent: isDevEnv ? true : false,
+      nodeIntegration: false, // is default value after Electron v5
+      contextIsolation: true, // protect against prototype pollution
+      enableRemoteModule: false, // turn off remote
+      preload: path.join(__dirname, 'preload', 'preload.js'),
     },
   });
 
@@ -32,8 +34,11 @@ function createWindow() {
     );
     win.webContents.openDevTools();
   }
+  ipcMain.on('toMain', (event, args) => {
+    console.log(event, args);
 
-  win.webContents.openDevTools();
+    win.webContents.send('fromMain', 'return data');
+  });
 }
 
 app.whenReady().then(createWindow);
