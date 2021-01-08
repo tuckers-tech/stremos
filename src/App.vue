@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import { ipcRenderer } from 'electron';
+
 export default {
   methods: {
     handleMouseEvent(event) {
@@ -12,11 +14,12 @@ export default {
     },
     handleKeyboardEvents(event) {
       this.$store.dispatch('handleKeyboardEvent', event);
-    }
+    },
   },
   created() {
+    console.log(ipcRenderer);
     this.$store.dispatch('setUserProfile', this.$keycloak);
-  }
+  },
 };
 </script>
 
