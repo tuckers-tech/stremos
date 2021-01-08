@@ -18,6 +18,8 @@ Vue.use(Buefy, {
   defaultIconPack: 'fal',
 });
 
+process.env.NODE_ENV;
+
 const ssoUrl = 'http://auth.stremos.com/auth';
 const ssoClientId = 'development';
 const ssoRealm = 'STREMOS';
@@ -27,44 +29,57 @@ function tokenInterceptor() {
   Axios.interceptors.request.use(
     config => {
       const currentConfig = config;
-      currentConfig.headers.Authorization = `Bearer ${Vue.prototype.$keycloak.token}`;
+      if (process.env.NODE_ENV === 'development') {
+        currentConfig.headers.Authorization = `Bearer ${Vue.prototype.$keycloak.token}`;
+      } else {
+        currentConfig.headers.Authorization = `Bearer devToken`;
+      }
       return currentConfig;
     },
     error => Promise.reject(error),
   );
 }
 
-Vue.use(VueKeyCloak, {
-  logout: {
-    redirectUri: logoutUrl,
-  },
-  init: {
-    onLoad: 'login-required',
-    checkLoginIframe: false,
-  },
-  config: {
-    realm: ssoRealm,
-    url: ssoUrl,
-    clientId: ssoClientId,
-    logoutRedirectUri: logoutUrl,
-  },
-  onReady: () => {
-    tokenInterceptor();
-    new Vue({
-      router,
-      store,
-      render: h => h(App),
-    }).$mount('#app');
-  },
-});
+if (process.env.NODE_ENV === 'development') {
+  tokenInterceptor();
+  new Vue({
+    router,
+    store,
+    render: h => h(App),
+  }).$mount('#app');
+} else {
+  Vue.use(VueKeyCloak, {
+    logout: {
+      redirectUri: logoutUrl,
+    },
+    init: {
+      onLoad: 'login-required',
+      checkLoginIframe: false,
+    },
+    config: {
+      realm: ssoRealm,
+      url: ssoUrl,
+      clientId: ssoClientId,
+      logoutRedirectUri: logoutUrl,
+    },
+    onReady: () => {
+      tokenInterceptor();
+      new Vue({
+        router,
+        store,
+        render: h => h(App),
+      }).$mount('#app');
+    },
+  });
 
-window.addEventListener('message', e => {
-  if (
-    e.data &&
-    typeof e.data === 'string' &&
-    e.data.match(/webpackHotUpdate/)
-  ) {
-    location.reload();
-    console.clear();
-  }
-});
+  window.addEventListener('message', e => {
+    if (
+      e.data &&
+      typeof e.data === 'string' &&
+      e.data.match(/webpackHotUpdate/)
+    ) {
+      location.reload();
+      console.clear();
+    }
+  });
+}
