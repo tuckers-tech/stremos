@@ -16,7 +16,7 @@
     "vue:serve": "vue-cli-service serve",
     "vue:build": "vue-cli-service build",
     "electron:serve-tsc": "tsc -p tsconfig-serve.json",
-    "electron:serve": "wait-on tcp:8080 && npx electron . --dev",
+    "electron:serve": "wait-on tcp:8080 && electron . --dev",
     "electron:build": "run-s vue:build electron:builder",
     "electron:builder": "electron-builder build",
     "unit": "vue-cli-service test:unit",

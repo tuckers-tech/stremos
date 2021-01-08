@@ -5,8 +5,6 @@
 </template>
 
 <script>
-import { ipcRenderer } from 'electron';
-
 export default {
   methods: {
     handleMouseEvent(event) {
@@ -17,7 +15,6 @@ export default {
     },
   },
   created() {
-    console.log(ipcRenderer);
     this.$store.dispatch('setUserProfile', this.$keycloak);
   },
 };

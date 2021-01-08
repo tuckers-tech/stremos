@@ -1,7 +1,8 @@
 // import router from '../../router/index';
+const app = window.require('electron').remote;
 
 const state = {
-  userProfile: {}
+  userProfile: {},
 };
 
 const getters = {
@@ -28,25 +29,26 @@ const getters = {
   },
   userResourceAccess(state) {
     return state.userProfile.tokenParsed.resource_access.account.roles;
-  }
+  },
 };
 
 const mutations = {
   setUserProfile(state, userProfile) {
     state.userProfile = userProfile;
-  }
+  },
 };
 
 const actions = {
   setUserProfile({ commit }, keycloakData) {
+    console.log(app);
     console.log(keycloakData);
     commit('setUserProfile', keycloakData);
-  }
+  },
 };
 
 export default {
   state,
   mutations,
   actions,
-  getters
+  getters,
 };
