@@ -1,15 +1,13 @@
 const fs = require('fs-extra');
 const path = require('path');
-const getParentDirectory = require('../Utilities/getParentDirectory');
 
 const defaultPreferences = require('./defaults/preferences.default');
 
 module.exports = class PreferenceController {
-  constructor(options, logger, appDataLoc) {
-    this.appDataLoc = appDataLoc;
+  constructor(options, logger, preferencesDir) {
+    this.appDataLoc = preferencesDir;
     this.preferencesFileLocation = path.join(
-      appDataLoc,
-      'AppPreferences',
+      preferencesDir,
       'preferences.json',
     );
     this.ensurePreferencesExists(this.preferencesFileLocation);
@@ -21,19 +19,8 @@ module.exports = class PreferenceController {
     } catch (err) {
       if (err.code === 'ENOENT') {
         // Doesn't Exist
-        this.ensurePreferencesDirExists(preferencesFileLocation);
         this.createDefaultPreferencesFile(preferencesFileLocation);
       }
-    }
-  }
-
-  ensurePreferencesDirExists(preferencesFileLocation) {
-    let preferencesParent = getParentDirectory(preferencesFileLocation);
-    try {
-      fs.statSync(preferencesParent);
-    } catch (err) {
-      // TODO(TUCKER)  - I think I need to catch an error here
-      fs.mkdirSync(preferencesParent, { recursive: true });
     }
   }
 

@@ -4,6 +4,7 @@ const path = require('path');
 const Logger = require('./Logging/Logger');
 const DataController = require('./Data/DataController');
 const PreferenceController = require('./Preferences/PreferenceController');
+const DirectoryManager = require('./FileSystem/DirectoryManager');
 
 module.exports = class App {
   constructor(app, options) {
@@ -11,7 +12,9 @@ module.exports = class App {
     this.isDevEnv = options.isDevEnv;
     this.options = options;
 
-    let appDataRootFolder = path.join(this.app.getPath('appData'), 'stremos');
+    this.directoryManager = new DirectoryManager(this.app);
+
+    this.directoryManager.ensureApplicationDirectoriesExist();
 
     this.logger = new Logger(
       this.isDevEnv,
@@ -21,12 +24,12 @@ module.exports = class App {
     this.preferenceCtrl = new PreferenceController(
       this.options,
       this.logger,
-      appDataRootFolder,
+      this.directoryManager.preferencesDir,
     );
     this.dataCtrl = new DataController(
       this.options,
       this.logger,
-      this.preferenceCtrl,
+      this.directoryManager.dataDir,
     );
   }
 

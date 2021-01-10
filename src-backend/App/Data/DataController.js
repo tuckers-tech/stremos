@@ -4,15 +4,16 @@ const path = require('path');
 const SqliteController = require('./SqliteController');
 
 module.exports = class DataController {
-  constructor(options, logger, preferenceCtrl) {
+  constructor(options, logger, dataDir) {
     this.options = options;
     this.logger = logger;
-    this.preferenceCtrl = preferenceCtrl;
+    this.dataDir = dataDir;
 
-    let appDataDir = path.join(this.preferenceCtrl.appDataLoc, 'AppData');
-
-    this.ensureDataDirectoryIsAvailable(appDataDir);
-    this.sqlCtrl = new SqliteController(this.options, this.logger, appDataDir);
+    this.sqlCtrl = new SqliteController(
+      this.options,
+      this.logger,
+      this.dataDir,
+    );
   }
 
   ensureDataDirectoryIsAvailable(dataDir) {
@@ -24,5 +25,7 @@ module.exports = class DataController {
     }
   }
 
-  destroy() {}
+  destroy() {
+    this.sqlCtrl.destroy();
+  }
 };
