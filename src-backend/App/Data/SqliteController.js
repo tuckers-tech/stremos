@@ -7,6 +7,8 @@ const initializeDb = require('../Data/SQL/initializeDB');
 module.exports = class SqliteController {
   constructor(options, logger, dataDir) {
     this.loggerCurrentFile = 'SqliteController';
+    this.isDatabaseReady = false;
+
     this.options = options;
     this.logger = logger;
 
@@ -16,12 +18,20 @@ module.exports = class SqliteController {
     this.startDb(dbPath);
 
     if (this.isFirstTimeRun) {
-      this.initializeDatabase()
+      this.initializeDatabase(this.db)
         .then(data => {
           console.log('init success');
           console.log(data);
+          this.isDatabaseReady = true;
         })
-        .catch(err => console.log(err));
+        .catch(() =>
+          this.logger.logError(
+            'Unable to initialize database',
+            this.loggerCurrentFile,
+          ),
+        );
+    } else {
+      this.isDatabaseReady = true;
     }
   }
 
@@ -31,13 +41,20 @@ module.exports = class SqliteController {
   }
 
   initializeDatabase() {
-    this.logger.logInfo(`Initializing DB`, this.loggerCurrentFile);
-    return this.executeQuery(initializeDb);
+    return new Promise((resolve, reject) => {
+      this.logger.logInfo(`Initializing DB`, this.loggerCurrentFile);
+      return this.executeQuery(initializeDb)
+        .then(() => {
+          console.log('Upload Data');
+          resolve();
+        })
+        .catch(err => reject(err));
+    });
   }
 
   doesDBExist(dbPath) {
     this.logger.logInfo(
-      `Trying To Find DB File At: ${dbPath}`,
+      `Looking For DB File At: ${dbPath}`,
       this.loggerCurrentFile,
     );
     try {
@@ -51,10 +68,12 @@ module.exports = class SqliteController {
 
   executeQuery(query) {
     return new Promise((resolve, reject) => {
-      this.db.run(query, (err, data) => {
+      this.db.exec(query, (data, err) => {
         if (err) {
+          console.log(err);
           reject(err);
         }
+        console.log(data);
         resolve(data);
       });
     });

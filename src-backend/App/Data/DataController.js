@@ -25,6 +25,10 @@ module.exports = class DataController {
     }
   }
 
+  isDatabaseReady() {
+    return this.sqlCtrl.isDatabaseReady;
+  }
+
   destroy() {
     this.sqlCtrl.destroy();
   }
