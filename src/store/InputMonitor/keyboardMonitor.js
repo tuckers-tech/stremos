@@ -1,6 +1,6 @@
 const state = {
   isKeyDown: false,
-  activeKeyboardButtons: []
+  activeKeyboardButtons: [],
 };
 
 const getters = {
@@ -28,7 +28,7 @@ const getters = {
     }
 
     return false;
-  }
+  },
 };
 
 const mutations = {
@@ -44,10 +44,10 @@ const mutations = {
     if (state.activeKeyboardButtons.includes(key)) {
       state.activeKeyboardButtons.splice(
         state.activeKeyboardButtons.indexOf(key),
-        1
+        1,
       );
     }
-  }
+  },
 };
 
 const actions = {
@@ -62,12 +62,12 @@ const actions = {
         commit('addKeyToActiveKeyboardButtons', keyboardEvent.code);
         break;
     }
-  }
+  },
 };
 
 export default {
   state,
   mutations,
   actions,
-  getters
+  getters,
 };

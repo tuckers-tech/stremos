@@ -15,5 +15,5 @@ export function getOffsetRect(element) {
 }
 
 export default {
-  getOffsetRect
+  getOffsetRect,
 };

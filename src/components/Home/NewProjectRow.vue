@@ -23,10 +23,10 @@ export default {
         hasModalCard: true,
         customClass: 'custom-class custom-class-2',
         trapFocus: true,
-        width: 500
+        width: 500,
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

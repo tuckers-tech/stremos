@@ -6,22 +6,22 @@ const state = {
         name: 'User API',
         ports: {
           input: [],
-          output: []
+          output: [],
         },
         location: {
           x: 0,
-          y: 0
-        }
-      }
+          y: 0,
+        },
+      },
     ],
-    connections: [{}]
-  }
+    connections: [{}],
+  },
 };
 
 const getters = {
   topologyGraph(state) {
     return state.topologyGraph;
-  }
+  },
 };
 
 const mutations = {};
@@ -32,5 +32,5 @@ export default {
   state,
   mutations,
   actions,
-  getters
+  getters,
 };

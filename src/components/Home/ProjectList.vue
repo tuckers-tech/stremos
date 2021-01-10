@@ -22,17 +22,17 @@ export default {
   components: {
     NoProjectList,
     NewProjectRow,
-    ProjectPreviewCard
+    ProjectPreviewCard,
   },
   computed: {
     hasNoProjects() {
       console.log(this.$store.getters.projectList);
       return this.$store.getters.projectList.length === 0 ? true : false;
-    }
+    },
   },
   created() {
     this.$store.dispatch('updateProjects');
-  }
+  },
 };
 </script>
 

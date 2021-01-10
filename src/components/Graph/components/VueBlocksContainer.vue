@@ -27,14 +27,14 @@ export default {
   name: 'VueBlockContainer',
   components: {
     VueBlock,
-    VueLink
+    VueLink,
   },
   props: {
     blocksContent: {
       type: Array,
       default() {
         return [];
-      }
+      },
     },
     scene: {
       type: Object,
@@ -42,24 +42,24 @@ export default {
         return {
           blocks: [],
           links: [],
-          container: {}
+          container: {},
         };
-      }
+      },
     },
     options: {
-      type: Object
-    }
+      type: Object,
+    },
   },
   mounted() {
     document.documentElement.addEventListener(
       'mousemove',
       this.handleMove,
-      true
+      true,
     );
     document.documentElement.addEventListener(
       'mousedown',
       this.handleDown,
-      true
+      true,
     );
     document.documentElement.addEventListener('mouseup', this.handleUp, true);
     document.documentElement.addEventListener('wheel', this.handleWheel, true);
@@ -74,22 +74,22 @@ export default {
     document.documentElement.removeEventListener(
       'mousemove',
       this.handleMove,
-      true
+      true,
     );
     document.documentElement.removeEventListener(
       'mousedown',
       this.handleDown,
-      true
+      true,
     );
     document.documentElement.removeEventListener(
       'mouseup',
       this.handleUp,
-      true
+      true,
     );
     document.documentElement.removeEventListener(
       'wheel',
       this.handleWheel,
-      true
+      true,
     );
   },
   created() {
@@ -110,7 +110,7 @@ export default {
     this.defaultScene = {
       blocks: [],
       links: [],
-      container: {}
+      container: {},
     };
   },
   data() {
@@ -127,7 +127,7 @@ export default {
       //
       tempLink: null,
       selectedBlock: null,
-      hasDragged: false
+      hasDragged: false,
     };
   },
   computed: {
@@ -139,15 +139,15 @@ export default {
         inputSlotClassName: this.inputSlotClassName,
         center: {
           x: this.centerX,
-          y: this.centerY
-        }
+          y: this.centerY,
+        },
       };
     },
     container() {
       return {
         centerX: this.centerX,
         centerY: this.centerY,
-        scale: this.scale
+        scale: this.scale,
       };
     },
     // Links calculate
@@ -178,12 +178,12 @@ export default {
         let originLinkPos = this.getConnectionPos(
           originBlock,
           link.originSlot,
-          false
+          false,
         );
         let targetLinkPos = this.getConnectionPos(
           targetBlock,
           link.targetSlot,
-          true
+          true,
         );
 
         if (!originLinkPos || !targetLinkPos) {
@@ -206,14 +206,14 @@ export default {
           style: {
             stroke: '#F85',
             strokeWidth: 4 * this.scale,
-            fill: 'none'
+            fill: 'none',
           },
           outlineStyle: {
             stroke: '#666',
             strokeWidth: 6 * this.scale,
             strokeOpacity: 0.6,
-            fill: 'none'
-          }
+            fill: 'none',
+          },
         });
       }
 
@@ -224,14 +224,14 @@ export default {
       }
 
       return lines;
-    }
+    },
   },
   methods: {
     changeTempLinkStyle() {
       this.tempLink.style = {
         stroke: '#8f8f8f',
         strokeWidth: 4 * this.scale,
-        fill: 'none'
+        fill: 'none',
       };
     },
 
@@ -259,13 +259,13 @@ export default {
         let linkStartPos = this.getConnectionPos(
           this.linkStartData.block,
           this.linkStartData.slotNumber,
-          false
+          false,
         );
         this.tempLink = {
           x1: linkStartPos.x,
           y1: linkStartPos.y,
           x2: this.mouseX,
-          y2: this.mouseY
+          y2: this.mouseY,
         };
       }
     },
@@ -328,7 +328,7 @@ export default {
 
         let zoomingCenter = {
           x: this.mouseX,
-          y: this.mouseY
+          y: this.mouseY,
         };
 
         let deltaOffsetX = (zoomingCenter.x - this.centerX) * (deltaScale - 1);
@@ -361,7 +361,7 @@ export default {
       } else {
         console.error(
           'slot ' + slotNumber + ' not found, is input: ' + isInput,
-          block
+          block,
         );
         return undefined;
       }
@@ -385,13 +385,13 @@ export default {
       let linkStartPos = this.getConnectionPos(
         this.linkStartData.block,
         this.linkStartData.slotNumber,
-        false
+        false,
       );
       this.tempLink = {
         x1: linkStartPos.x,
         y1: linkStartPos.y,
         x2: this.mouseX,
-        y2: this.mouseY
+        y2: this.mouseY,
       };
 
       this.linking = true;
@@ -408,7 +408,7 @@ export default {
           0,
           ...this.links.map(function(o) {
             return o.id;
-          })
+          }),
         );
 
         // skip if looping
@@ -418,7 +418,7 @@ export default {
             originID: this.linkStartData.block.id,
             originSlot: this.linkStartData.slotNumber,
             targetID: targetBlock.id,
-            targetSlot: slotNumber
+            targetSlot: slotNumber,
           });
           this.updateScene();
         }
@@ -465,7 +465,7 @@ export default {
         0,
         ...this.blocks.map(function(o) {
           return o.id;
-        })
+        }),
       );
 
       let node = this.nodes.find(n => {
@@ -501,12 +501,12 @@ export default {
         if (field.attr === 'input') {
           inputs.push({
             name: field.name,
-            label: field.label || field.name
+            label: field.label || field.name,
           });
         } else if (field.attr === 'output') {
           outputs.push({
             name: field.name,
-            label: field.label || field.name
+            label: field.label || field.name,
           });
         } else {
           if (!values[field.attr]) {
@@ -534,7 +534,7 @@ export default {
         title: node.title || node.name,
         inputs: inputs,
         outputs: outputs,
-        values: values
+        values: values,
       };
     },
     deselectAll(withoutID = null) {
@@ -591,7 +591,7 @@ export default {
           newBlock = merge(newBlock, block, {
             arrayMerge: (d, s) => {
               return s.length === 0 ? d : s;
-            }
+            },
           });
 
           return newBlock;
@@ -624,7 +624,7 @@ export default {
         block.outputs.forEach((s, index) => {
           // is linked
           block.outputs[index].active = outputs.some(
-            i => i.originSlot === index
+            i => i.originSlot === index,
           );
         });
 
@@ -679,12 +679,12 @@ export default {
       return {
         blocks: blocks,
         links: this.links,
-        container: this.container
+        container: this.container,
       };
     },
     updateScene() {
       this.$emit('update:scene', this.exportScene());
-    }
+    },
   },
   watch: {
     blocksContent() {
@@ -692,8 +692,8 @@ export default {
     },
     scene() {
       this.importScene();
-    }
-  }
+    },
+  },
 };
 </script>
 

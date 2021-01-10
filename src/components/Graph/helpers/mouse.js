@@ -17,10 +17,10 @@ export function getMousePosition(element, event) {
 
   return {
     x: x,
-    y: y
+    y: y,
   };
 }
 
 export default {
-  getMousePosition
+  getMousePosition,
 };

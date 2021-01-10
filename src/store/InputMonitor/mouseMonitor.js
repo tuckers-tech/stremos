@@ -1,6 +1,6 @@
 const state = {
   isMouseDown: false,
-  activeMouseButton: []
+  activeMouseButton: [],
 };
 
 const getters = {
@@ -14,7 +14,7 @@ const getters = {
     }
 
     return false;
-  }
+  },
 };
 
 const mutations = {
@@ -30,10 +30,10 @@ const mutations = {
     if (state.activeMouseButton.includes(button)) {
       state.activeMouseButton.splice(
         state.activeMouseButton.indexOf(button),
-        1
+        1,
       );
     }
-  }
+  },
 };
 
 const actions = {
@@ -48,12 +48,12 @@ const actions = {
         commit('addButtonToActiveMouseButtons', mouseEvent.button);
         break;
     }
-  }
+  },
 };
 
 export default {
   state,
   mutations,
   actions,
-  getters
+  getters,
 };

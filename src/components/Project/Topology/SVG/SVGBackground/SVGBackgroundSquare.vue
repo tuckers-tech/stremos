@@ -28,13 +28,13 @@ export default {
     majorGridLineSpacing: Number,
     minorGridLineSpacing: Number,
     globalX: Number,
-    globalY: Number
+    globalY: Number,
   },
   data() {
     return {
-      minorGridLineCount: this.majorGridLineSpacing / this.minorGridLineSpacing
+      minorGridLineCount: this.majorGridLineSpacing / this.minorGridLineSpacing,
     };
-  }
+  },
 };
 </script>
 

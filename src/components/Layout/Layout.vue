@@ -16,13 +16,13 @@ import LeftNav from '@/components/Navigation/LeftNav';
 export default {
   name: 'Layout',
   components: {
-    LeftNav
+    LeftNav,
   },
   props: {
     showBuilderTools: Boolean,
     showProjectTools: Boolean,
-    hasPadding: Boolean
-  }
+    hasPadding: Boolean,
+  },
 };
 </script>
 

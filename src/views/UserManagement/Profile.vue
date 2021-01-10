@@ -34,17 +34,17 @@ export default {
   name: 'Home',
   components: {
     Layout,
-    UserDataUpdateForm
+    UserDataUpdateForm,
   },
   data() {
     return {
       userData: {
         fname: '',
         lname: '',
-        email: ''
-      }
+        email: '',
+      },
     };
-  }
+  },
 };
 </script>
 

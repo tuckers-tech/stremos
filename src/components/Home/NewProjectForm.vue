@@ -12,7 +12,7 @@ import ModalFormComponent from '@/components/Forms/ModalFormComponent';
 export default {
   name: 'NewProjectForm',
   components: {
-    ModalFormComponent
+    ModalFormComponent,
   },
   data() {
     return {
@@ -23,12 +23,12 @@ export default {
         buttons: [
           {
             label: 'Close',
-            action: 'close'
+            action: 'close',
           },
           {
             label: 'Add Project',
-            action: 'execute'
-          }
+            action: 'execute',
+          },
         ],
         components: [
           {
@@ -38,7 +38,7 @@ export default {
             placeHolder: 'Project Name',
             defaultValue: '',
             disabled: false,
-            required: true
+            required: true,
           },
           {
             slug: 'projectType',
@@ -52,22 +52,22 @@ export default {
               {
                 label: 'Web',
                 value: 'web',
-                disabled: false
+                disabled: false,
               },
               {
                 label: 'Desktop',
                 value: 'desktop',
-                disabled: false
+                disabled: false,
               },
               {
                 label: 'Embedded',
                 value: 'embedded',
-                disabled: false
-              }
-            ]
-          }
-        ]
-      }
+                disabled: false,
+              },
+            ],
+          },
+        ],
+      },
     };
   },
   methods: {
@@ -93,8 +93,8 @@ export default {
       });
 
       return returnData;
-    }
-  }
+    },
+  },
 };
 </script>
 

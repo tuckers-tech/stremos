@@ -59,11 +59,11 @@ export default {
   name: 'ModalFormComponent',
   components: {
     TextInput,
-    DropdownInput
+    DropdownInput,
   },
   data() {
     return {
-      formValue: []
+      formValue: [],
     };
   },
   computed: {
@@ -79,10 +79,10 @@ export default {
       }
 
       return false;
-    }
+    },
   },
   props: {
-    formData: Object
+    formData: Object,
   },
   methods: {
     handleSubmit(event) {
@@ -103,17 +103,17 @@ export default {
       });
 
       this.formValue = newFormValue;
-    }
+    },
   },
   created() {
     this.formData.components.forEach(el => {
       this.formValue.push({
         slug: el.slug,
         value: el.defaultValue,
-        isValid: false
+        isValid: false,
       });
     });
-  }
+  },
 };
 </script>
 

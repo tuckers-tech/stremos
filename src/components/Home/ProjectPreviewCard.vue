@@ -19,8 +19,8 @@
 export default {
   name: 'ProjectPreviewCard',
   props: {
-    projectData: Object
-  }
+    projectData: Object,
+  },
 };
 </script>
 

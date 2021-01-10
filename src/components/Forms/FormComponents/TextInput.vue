@@ -20,11 +20,11 @@ export default {
   name: 'TextInput',
   data() {
     return {
-      value: ''
+      value: '',
     };
   },
   props: {
-    inputData: Object
+    inputData: Object,
   },
 
   computed: {
@@ -38,7 +38,7 @@ export default {
           return false;
         }
       }
-    }
+    },
   },
 
   methods: {
@@ -46,15 +46,15 @@ export default {
       this.$emit('inputChange', {
         slug: this.inputData.slug,
         value: this.value,
-        isValid: this.isValid
+        isValid: this.isValid,
       });
-    }
+    },
   },
   created() {
     if (this.inputData && this.inputData.defaultValue !== '') {
       this.value = this.inputData.defaultValue;
     }
-  }
+  },
 };
 </script>
 

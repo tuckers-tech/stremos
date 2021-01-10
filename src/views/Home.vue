@@ -19,8 +19,8 @@ export default {
   name: 'Home',
   components: {
     Layout,
-    ProjectList
-  }
+    ProjectList,
+  },
 };
 </script>
 

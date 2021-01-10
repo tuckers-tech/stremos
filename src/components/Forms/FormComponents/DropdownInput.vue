@@ -30,11 +30,11 @@
 export default {
   name: 'DropdownInput',
   props: {
-    inputData: Object
+    inputData: Object,
   },
   data() {
     return {
-      value: null
+      value: null,
     };
   },
   computed: {
@@ -48,22 +48,22 @@ export default {
           return true;
         }
       }
-    }
+    },
   },
   methods: {
     handleInput() {
       this.$emit('inputChange', {
         slug: this.inputData.slug,
         value: this.value,
-        isValid: this.isValid
+        isValid: this.isValid,
       });
-    }
+    },
   },
   created() {
     if (this.inputData && this.inputData.defaultValue !== '') {
       this.value = this.inputData.defaultValue;
     }
-  }
+  },
 };
 </script>
 

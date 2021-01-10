@@ -37,26 +37,26 @@ export default {
       default: 0,
       validator: function(val) {
         return typeof val === 'number';
-      }
+      },
     },
     y: {
       type: Number,
       default: 0,
       validator: function(val) {
         return typeof val === 'number';
-      }
+      },
     },
     selected: Boolean,
     title: {
       type: String,
-      default: 'Title'
+      default: 'Title',
     },
     inputs: Array,
     outputs: Array,
 
     options: {
-      type: Object
-    }
+      type: Object,
+    },
   },
   created() {
     this.mouseX = 0;
@@ -72,12 +72,12 @@ export default {
     document.documentElement.addEventListener(
       'mousemove',
       this.handleMove,
-      true
+      true,
     );
     document.documentElement.addEventListener(
       'mousedown',
       this.handleDown,
-      true
+      true,
     );
     document.documentElement.addEventListener('mouseup', this.handleUp, true);
   },
@@ -85,23 +85,23 @@ export default {
     document.documentElement.removeEventListener(
       'mousemove',
       this.handleMove,
-      true
+      true,
     );
     document.documentElement.removeEventListener(
       'mousedown',
       this.handleDown,
-      true
+      true,
     );
     document.documentElement.removeEventListener(
       'mouseup',
       this.handleUp,
-      true
+      true,
     );
   },
   data() {
     return {
       width: this.options.width,
-      hasDragged: false
+      hasDragged: false,
     };
   },
   methods: {
@@ -180,7 +180,7 @@ export default {
 
       this.$emit('update:x', left);
       this.$emit('update:y', top);
-    }
+    },
   },
   computed: {
     style() {
@@ -189,15 +189,15 @@ export default {
         left: this.options.center.x + this.x * this.options.scale + 'px',
         width: this.width + 'px',
         transform: 'scale(' + (this.options.scale + '') + ')',
-        transformOrigin: 'top left'
+        transformOrigin: 'top left',
       };
     },
     headerStyle() {
       return {
-        height: this.options.titleHeight + 'px'
+        height: this.options.titleHeight + 'px',
       };
-    }
-  }
+    },
+  },
 };
 </script>
 

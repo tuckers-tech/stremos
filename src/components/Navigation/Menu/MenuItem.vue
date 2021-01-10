@@ -71,23 +71,23 @@
 export default {
   name: 'MenuItem',
   props: {
-    itemData: Object
+    itemData: Object,
   },
   computed: {
     navigateTo() {
       let splitAction = this.itemData.actionName.split('::');
 
       return splitAction[1];
-    }
+    },
   },
   methods: {
     sendAction(actionName) {
       this.$store.dispatch(actionName.split('::')[1]);
-    }
+    },
   },
   created() {
     console.log(this.itemData);
-  }
+  },
 };
 </script>
 

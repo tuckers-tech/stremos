@@ -8,8 +8,8 @@
 import TopologyContainer from '@/components/Project/Topology/TopologyContainer';
 export default {
   components: {
-    TopologyContainer
-  }
+    TopologyContainer,
+  },
 };
 </script>
 

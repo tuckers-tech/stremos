@@ -151,27 +151,27 @@ export default {
       showLogin: true,
       loginForm: {
         email: '',
-        password: ''
+        password: '',
       },
       registerForm: {
         fname: '',
         lname: '',
         email: '',
         password: '',
-        passwordConfirm: ''
-      }
+        passwordConfirm: '',
+      },
     };
   },
   computed: {
     getToggleButtonText() {
       return this.showLogin ? 'Need An Account?' : 'Already Have An Account?';
-    }
+    },
   },
   methods: {
     login() {
       this.$store.dispatch('login', {
         email: this.loginForm.email,
-        password: this.loginForm.password
+        password: this.loginForm.password,
       });
     },
     register() {
@@ -180,7 +180,7 @@ export default {
           fname: this.registerForm.fname,
           lname: this.registerForm.lname,
           email: this.registerForm.email,
-          password: this.registerForm.password
+          password: this.registerForm.password,
         });
       } else {
         console.error('Passwords Do Not Match!');
@@ -188,8 +188,8 @@ export default {
     },
     toggleAccount() {
       this.showLogin = !this.showLogin;
-    }
-  }
+    },
+  },
 };
 </script>
 

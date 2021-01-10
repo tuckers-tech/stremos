@@ -71,11 +71,11 @@ export default {
     },
     handleUpdateClick() {
       // this.$store.dispatch('synchronizeDataWithDatabase');
-    }
+    },
   },
   computed: {
-    ...mapGetters(['userFirstName', 'userLastName', 'userEmail'])
-  }
+    ...mapGetters(['userFirstName', 'userLastName', 'userEmail']),
+  },
 };
 </script>
 

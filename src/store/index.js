@@ -20,6 +20,6 @@ export default new Vuex.Store({
     projectTopology,
     mouseMonitor,
     keyboardMonitor,
-    topologyGraph
-  }
+    topologyGraph,
+  },
 });

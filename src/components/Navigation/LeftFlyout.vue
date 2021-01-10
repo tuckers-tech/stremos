@@ -87,10 +87,10 @@ import MenuItem from '@/components/Navigation/Menu/MenuItem';
 export default {
   name: 'LeftFlyout',
   components: {
-    MenuItem
+    MenuItem,
   },
   props: {
-    menuType: String
+    menuType: String,
   },
   data() {
     return {
@@ -105,8 +105,8 @@ export default {
             actionTrigger: ['click'],
             isLink: true,
             isDraggable: false,
-            to: '/'
-          }
+            to: '/',
+          },
         ],
         layout: [
           {
@@ -117,7 +117,7 @@ export default {
             actionName: 'drag::columns',
             actionTrigger: ['drag'],
             isLink: false,
-            isDraggable: true
+            isDraggable: true,
           },
           {
             label: 'Column',
@@ -127,7 +127,7 @@ export default {
             actionName: 'drag::columns',
             actionTrigger: ['drag'],
             isLink: false,
-            isDraggable: true
+            isDraggable: true,
           },
           {
             label: 'Column Group',
@@ -137,7 +137,7 @@ export default {
             actionName: 'drag::columns',
             actionTrigger: ['drag'],
             isLink: false,
-            isDraggable: true
+            isDraggable: true,
           },
           {
             label: 'Spacer',
@@ -147,8 +147,8 @@ export default {
             actionName: 'drag::columns',
             actionTrigger: ['drag'],
             isLink: false,
-            isDraggable: true
-          }
+            isDraggable: true,
+          },
         ],
         components: [
           {
@@ -159,7 +159,7 @@ export default {
             actionName: 'drag::columns',
             actionTrigger: ['drag'],
             isLink: false,
-            isDraggable: true
+            isDraggable: true,
           },
           {
             label: 'Image',
@@ -169,8 +169,8 @@ export default {
             actionName: 'drag::columns',
             actionTrigger: ['drag'],
             isLink: false,
-            isDraggable: true
-          }
+            isDraggable: true,
+          },
         ],
         settings: [],
         profile: [
@@ -183,7 +183,7 @@ export default {
             actionTrigger: ['click'],
             isLink: true,
             isDraggable: false,
-            to: 'profile'
+            to: 'profile',
           },
           {
             label: 'Preferences',
@@ -194,7 +194,7 @@ export default {
             actionTrigger: ['click'],
             isLink: true,
             isDraggable: false,
-            to: 'preferences'
+            to: 'preferences',
           },
           {
             label: 'Logout',
@@ -204,12 +204,12 @@ export default {
             actionName: 'auth::logout',
             actionTrigger: ['click'],
             isLink: false,
-            isDraggable: false
-          }
-        ]
-      }
+            isDraggable: false,
+          },
+        ],
+      },
     };
-  }
+  },
 };
 </script>
 

@@ -5,7 +5,7 @@
         :class="{
           icon: true,
           'is-large': true,
-          active: leftbarType === 'menu'
+          active: leftbarType === 'menu',
         }"
         @click="toggleLeftFlyout('menu')"
       >
@@ -19,7 +19,7 @@
           :class="{
             icon: true,
             'is-large': true,
-            active: leftbarType === 'layout'
+            active: leftbarType === 'layout',
           }"
           @click="toggleLeftFlyout('layout')"
         >
@@ -29,7 +29,7 @@
           :class="{
             icon: true,
             'is-large': true,
-            active: leftbarType === 'components'
+            active: leftbarType === 'components',
           }"
           @click="toggleLeftFlyout('components')"
         >
@@ -40,7 +40,7 @@
           :class="{
             icon: true,
             'is-large': true,
-            active: leftbarType === 'settings'
+            active: leftbarType === 'settings',
           }"
           @click="toggleLeftFlyout('settings')"
         >
@@ -54,7 +54,7 @@
         <router-link
           :to="{
             name: 'projectDashboard',
-            params: { projectID: $route.params.projectID }
+            params: { projectID: $route.params.projectID },
           }"
           tag="div"
           class="icon is-large"
@@ -66,7 +66,7 @@
         <router-link
           :to="{
             name: 'projectTopology',
-            params: { projectID: $route.params.projectID }
+            params: { projectID: $route.params.projectID },
           }"
           tag="div"
           class="icon is-large"
@@ -77,7 +77,7 @@
         <router-link
           :to="{
             name: 'projectBilling',
-            params: { projectID: $route.params.projectID }
+            params: { projectID: $route.params.projectID },
           }"
           tag="div"
           class="icon is-large"
@@ -88,7 +88,7 @@
         <router-link
           :to="{
             name: 'projectSettings',
-            params: { projectID: $route.params.projectID }
+            params: { projectID: $route.params.projectID },
           }"
           tag="div"
           class="icon is-large"
@@ -103,7 +103,7 @@
         :class="{
           icon: true,
           'is-large': true,
-          active: leftbarType === 'profile'
+          active: leftbarType === 'profile',
         }"
         @click="toggleLeftFlyout('profile')"
       >
@@ -122,16 +122,16 @@ import LeftFlyout from '@/components/Navigation/LeftFlyout';
 export default {
   name: 'LeftNav',
   components: {
-    LeftFlyout
+    LeftFlyout,
   },
   props: {
     showBuilderTools: Boolean,
-    showProjectTools: Boolean
+    showProjectTools: Boolean,
   },
   data() {
     return {
       isLeftbarOpen: false,
-      leftbarType: ''
+      leftbarType: '',
     };
   },
   methods: {
@@ -145,8 +145,8 @@ export default {
       }
       this.leftbarType = type;
       this.isLeftbarOpen = true;
-    }
-  }
+    },
+  },
 };
 </script>
 

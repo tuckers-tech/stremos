@@ -19,7 +19,7 @@ import * as axios from 'axios';
 export default {
   name: 'TopologyContainer',
   components: {
-    VueBlocksContainer
+    VueBlocksContainer,
   },
   data() {
     return {
@@ -33,9 +33,9 @@ export default {
             {
               name: 'Request',
               type: 'request',
-              attr: 'output'
-            }
-          ]
+              attr: 'output',
+            },
+          ],
         },
         {
           name: 'router',
@@ -46,14 +46,14 @@ export default {
             {
               name: 'Request',
               type: 'request',
-              attr: 'input'
+              attr: 'input',
             },
             {
               name: 'Request',
               type: 'request',
-              attr: 'output'
-            }
-          ]
+              attr: 'output',
+            },
+          ],
         },
         {
           name: 'routeHandler',
@@ -64,9 +64,9 @@ export default {
             {
               name: 'Request',
               type: 'request',
-              attr: 'input'
-            }
-          ]
+              attr: 'input',
+            },
+          ],
         },
         {
           name: 'getById',
@@ -77,19 +77,19 @@ export default {
             {
               name: 'Request',
               type: 'request',
-              attr: 'input'
+              attr: 'input',
             },
             {
               name: 'ID',
               type: 'string',
-              attr: 'output'
+              attr: 'output',
             },
             {
               name: 'ERROR',
               type: 'error',
-              attr: 'output'
-            }
-          ]
+              attr: 'output',
+            },
+          ],
         },
         {
           name: 'getDataElement',
@@ -100,14 +100,14 @@ export default {
             {
               name: 'ID || Query',
               type: 'any',
-              attr: 'input'
+              attr: 'input',
             },
             {
               name: 'Element[]',
               type: 'elementArr',
-              attr: 'output'
-            }
-          ]
+              attr: 'output',
+            },
+          ],
         },
         {
           name: 'sendResponse',
@@ -118,9 +118,9 @@ export default {
             {
               name: 'Element[]',
               type: 'any',
-              attr: 'input'
-            }
-          ]
+              attr: 'input',
+            },
+          ],
         },
         {
           name: 'postHandler',
@@ -131,15 +131,15 @@ export default {
             {
               name: 'Request',
               type: 'request',
-              attr: 'input'
+              attr: 'input',
             },
             {
               name: 'Data',
               type: 'any',
-              attr: 'output'
-            }
-          ]
-        }
+              attr: 'output',
+            },
+          ],
+        },
       ],
       scene: {
         blocks: [
@@ -153,10 +153,10 @@ export default {
               property: [
                 {
                   name: 'message',
-                  type: 'string'
-                }
-              ]
-            }
+                  type: 'string',
+                },
+              ],
+            },
           },
           {
             id: 2,
@@ -168,10 +168,10 @@ export default {
               property: [
                 {
                   name: 'message',
-                  type: 'string'
-                }
-              ]
-            }
+                  type: 'string',
+                },
+              ],
+            },
           },
           {
             id: 3,
@@ -183,10 +183,10 @@ export default {
               property: [
                 {
                   name: 'id',
-                  type: 'string'
-                }
-              ]
-            }
+                  type: 'string',
+                },
+              ],
+            },
           },
           {
             id: 4,
@@ -198,10 +198,10 @@ export default {
               property: [
                 {
                   name: 'id',
-                  type: 'string'
-                }
-              ]
-            }
+                  type: 'string',
+                },
+              ],
+            },
           },
           {
             id: 5,
@@ -213,10 +213,10 @@ export default {
               property: [
                 {
                   name: 'id',
-                  type: 'string'
-                }
-              ]
-            }
+                  type: 'string',
+                },
+              ],
+            },
           },
           {
             id: 6,
@@ -228,10 +228,10 @@ export default {
               property: [
                 {
                   name: 'id',
-                  type: 'string'
-                }
-              ]
-            }
+                  type: 'string',
+                },
+              ],
+            },
           },
           {
             id: 7,
@@ -243,11 +243,11 @@ export default {
               property: [
                 {
                   name: 'id',
-                  type: 'string'
-                }
-              ]
-            }
-          }
+                  type: 'string',
+                },
+              ],
+            },
+          },
         ],
         links: [
           {
@@ -255,54 +255,54 @@ export default {
             originID: 1,
             originSlot: 0,
             targetID: 2,
-            targetSlot: 0
+            targetSlot: 0,
           },
           {
             id: 2,
             originID: 2,
             originSlot: 0,
             targetID: 3,
-            targetSlot: 0
+            targetSlot: 0,
           },
           {
             id: 3,
             originID: 3,
             originSlot: 0,
             targetID: 4,
-            targetSlot: 0
+            targetSlot: 0,
           },
           {
             id: 4,
             originID: 4,
             originSlot: 0,
             targetID: 5,
-            targetSlot: 0
+            targetSlot: 0,
           },
           {
             id: 5,
             originID: 3,
             originSlot: 1,
             targetID: 6,
-            targetSlot: 0
+            targetSlot: 0,
           },
           {
             id: 6,
             originID: 2,
             originSlot: 0,
             targetID: 7,
-            targetSlot: 0
-          }
+            targetSlot: 0,
+          },
         ],
         container: {
           centerX: 0,
           centerY: 0,
-          scale: 1
-        }
-      }
+          scale: 1,
+        },
+      },
     };
   },
   computed: {
-    ...mapGetters(['isCtrlDown', 'isSpaceDown', 'isPrimaryMouseDown'])
+    ...mapGetters(['isCtrlDown', 'isSpaceDown', 'isPrimaryMouseDown']),
   },
   methods: {
     createServer() {
@@ -319,7 +319,7 @@ export default {
     showContextMenu(event) {
       event.preventDefault();
       console.log('showcontextmenu');
-    }
+    },
   },
   mounted() {},
   watch: {
@@ -328,8 +328,8 @@ export default {
     },
     scene(newValue) {
       console.log('scene', newValue);
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -19,18 +19,18 @@ import SVGBackgroundSquare from '@/components/Project/Topology/SVG/SVGBackground
 export default {
   name: 'SVGBackground',
   components: {
-    SVGBackgroundSquare
+    SVGBackgroundSquare,
   },
   props: {
     majorGridLineSpacing: Number,
     minorGridLineSpacing: Number,
-    backgroundGridSize: Number
+    backgroundGridSize: Number,
   },
   computed: {
     startCoords() {
       return (this.backgroundGridSize / 2) * this.majorGridLineSpacing * -1;
-    }
-  }
+    },
+  },
 };
 </script>
 

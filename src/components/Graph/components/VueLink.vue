@@ -23,12 +23,12 @@ export default {
       type: Array,
       default() {
         return [];
-      }
+      },
     },
     outline: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   methods: {
     distance(x1, y1, x2, y2) {
@@ -49,7 +49,7 @@ export default {
       let x = c1 * p0.x + c2 * p1.x + c3 * p2.x + c4 * p3.x;
       let y = c1 * p0.y + c2 * p1.y + c3 * p2.y + c4 * p3.y;
       return { x: x, y: y };
-    }
+    },
   },
   computed: {
     renderedPathes() {
@@ -64,7 +64,7 @@ export default {
           data: `M ${l.x1}, ${l.y1} C ${l.x1 + dist}, ${l.y1}, ${l.x2 -
             dist}, ${l.y2}, ${l.x2}, ${l.y2}`,
           style: l.style,
-          outlineStyle: l.outlineStyle
+          outlineStyle: l.outlineStyle,
         });
       });
 
@@ -90,14 +90,14 @@ export default {
           style: {
             stroke: l.style.stroke,
             strokeWidth: l.style.strokeWidth * 2,
-            fill: l.style.stroke
-          }
+            fill: l.style.stroke,
+          },
         });
       });
 
       return arrows;
-    }
-  }
+    },
+  },
 };
 </script>
 

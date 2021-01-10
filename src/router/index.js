@@ -10,8 +10,8 @@ const routes = [
     name: 'home',
     component: Home,
     meta: {
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
   {
     path: '/project/:projectID',
@@ -20,7 +20,7 @@ const routes = [
         /* webpackChunkName: "projectDetail" */ '../views/Project/ProjectDetail.vue'
       ),
     meta: {
-      requiresAuth: true
+      requiresAuth: true,
     },
     children: [
       {
@@ -29,7 +29,7 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "projectDashboard" */ '../components/Project/ProjectDashboard.vue'
-          )
+          ),
       },
       {
         path: 'settings',
@@ -37,7 +37,7 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "projectSettings" */ '../components/Project/ProjectSettings.vue'
-          )
+          ),
       },
       {
         path: 'billing',
@@ -45,7 +45,7 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "projectBilling" */ '../components/Project/ProjectBilling.vue'
-          )
+          ),
       },
       {
         path: 'topology',
@@ -53,9 +53,9 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "projectTopology" */ '../components/Project/ProjectTopology.vue'
-          )
-      }
-    ]
+          ),
+      },
+    ],
   },
   {
     path: '/about',
@@ -66,8 +66,8 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ '../views/About.vue'),
     meta: {
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
   {
     path: '/preferences',
@@ -80,8 +80,8 @@ const routes = [
         /* webpackChunkName: "preferences" */ '../views/UserManagement/Preferences.vue'
       ),
     meta: {
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
   {
     path: '/profile',
@@ -94,21 +94,21 @@ const routes = [
         /* webpackChunkName: "profile" */ '../views/UserManagement/Profile.vue'
       ),
     meta: {
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
   {
     path: '/login',
     name: 'login',
     component: () =>
-      import(/* webpackChunkName: "login" */ '../views/Auth/Login.vue')
-  }
+      import(/* webpackChunkName: "login" */ '../views/Auth/Login.vue'),
+  },
 ];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
 
 router.beforeEach((to, from, next) => {

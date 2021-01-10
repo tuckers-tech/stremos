@@ -29,11 +29,11 @@ import * as SVGHelpers from '@/components/Helpers/SVG/svgHelpers';
 export default {
   name: 'TopologyNode',
   props: {
-    nodeData: Object
+    nodeData: Object,
   },
   data() {
     return {
-      isDragging: false
+      isDragging: false,
     };
   },
   methods: {
@@ -50,7 +50,7 @@ export default {
         const newCords = SVGHelpers.convertScreenToSVGCoords(
           this.svgElement,
           event.clientX,
-          event.clientY
+          event.clientY,
         );
 
         console.log(newCords);
@@ -64,13 +64,13 @@ export default {
       if (event.button === 0) {
         this.isDragging = false;
       }
-    }
+    },
   },
   computed: {
     svgElement() {
       return this.$parent.$parent.$parent.$refs.svgEl;
-    }
-  }
+    },
+  },
 };
 </script>
 
