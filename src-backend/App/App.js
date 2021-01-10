@@ -12,22 +12,23 @@ module.exports = class App {
     this.isDevEnv = options.isDevEnv;
     this.options = options;
 
-    this.directoryManager = new DirectoryManager(this.app);
-
-    this.directoryManager.ensureApplicationDirectoriesExist();
-
     this.logger = new Logger(
       this.isDevEnv,
       this.app.getPath('logs'),
       options.verbose,
     );
+
+    this.directoryManager = new DirectoryManager(this.app, this.logger);
+
+    this.directoryManager.ensureApplicationDirectoriesExist();
+
     this.preferenceCtrl = new PreferenceController(
-      this.options,
+      this.app,
       this.logger,
       this.directoryManager.preferencesDir,
     );
     this.dataCtrl = new DataController(
-      this.options,
+      this.app,
       this.logger,
       this.directoryManager.dataDir,
     );
@@ -58,7 +59,7 @@ module.exports = class App {
   }
 
   createWindow() {
-    this.logger.logInfo('Creating Window', 'App.js');
+    this.logger.logInfo('Creating Window', 'App.js\t\t');
 
     const win = new BrowserWindow({
       width: 1200,

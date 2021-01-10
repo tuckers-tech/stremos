@@ -3,14 +3,12 @@ const path = require('path');
 
 const sqlite3 = require('sqlite3').verbose();
 const initializeDb = require('../Data/SQL/initializeDB');
+const Controller = require('../Parents/Controller');
 
-module.exports = class SqliteController {
-  constructor(options, logger, dataDir) {
-    this.loggerCurrentFile = 'SqliteController';
+module.exports = class SqliteController extends Controller {
+  constructor(app, logger, dataDir) {
+    super(app, logger, 'SQLController\t');
     this.isDatabaseReady = false;
-
-    this.options = options;
-    this.logger = logger;
 
     let dbPath = path.join(dataDir, 'data.db');
     this.isFirstTimeRun = !this.doesDBExist(dbPath);
@@ -24,12 +22,7 @@ module.exports = class SqliteController {
           console.log(data);
           this.isDatabaseReady = true;
         })
-        .catch(() =>
-          this.logger.logError(
-            'Unable to initialize database',
-            this.loggerCurrentFile,
-          ),
-        );
+        .catch(() => this.logError('Unable to initialize database'));
     } else {
       this.isDatabaseReady = true;
     }
@@ -42,7 +35,7 @@ module.exports = class SqliteController {
 
   initializeDatabase() {
     return new Promise((resolve, reject) => {
-      this.logger.logInfo(`Initializing DB`, this.loggerCurrentFile);
+      this.logInfo(`Initializing DB`);
       return this.executeQuery(initializeDb)
         .then(() => {
           console.log('Upload Data');
@@ -53,15 +46,12 @@ module.exports = class SqliteController {
   }
 
   doesDBExist(dbPath) {
-    this.logger.logInfo(
-      `Looking For DB File At: ${dbPath}`,
-      this.loggerCurrentFile,
-    );
+    this.logInfo(`Looking For DB File At: ${dbPath}`);
     try {
       fs.statSync(dbPath);
       return true;
     } catch (err) {
-      this.logger.logInfo(`Unable To find DB File`, this.loggerCurrentFile);
+      this.logInfo(`Unable To find DB File`);
       return false;
     }
   }
@@ -79,5 +69,7 @@ module.exports = class SqliteController {
     });
   }
 
-  destroy() {}
+  destroy() {
+    this.db.close();
+  }
 };

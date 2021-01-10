@@ -9,15 +9,19 @@ module.exports = class Logger {
   }
 
   logInfo(logMessage, origin) {
-    this.logMessage('INFO', logMessage, origin);
+    this.logMessage('INFO\t', logMessage, origin);
   }
 
   logWarn(logMessage, origin) {
-    this.logMessage('WARN', logMessage, origin);
+    this.logMessage('WARN\t', logMessage, origin);
   }
 
   logError(logMessage, origin) {
-    this.logMessage('ERROR', logMessage, origin);
+    this.logMessage('ERROR\t', logMessage, origin);
+  }
+
+  logSuccess(logMessage, origin) {
+    this.logMessage('SUCCESS', logMessage, origin);
   }
 
   logMessage(status, logMessage, origin) {
@@ -33,6 +37,7 @@ module.exports = class Logger {
     message += ' :: ';
 
     message += logMessage;
+    message += '\n';
 
     if (this.isDevEnv && this.verbose) {
       console.log(message);
