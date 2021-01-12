@@ -15,6 +15,7 @@ module.exports = class SqliteController extends Controller {
 
     this.startDb(dbPath);
 
+    this.logInfo(`First Run: ${this.isFirstTimeRun}`);
     if (this.isFirstTimeRun) {
       this.initializeDatabase(this.db)
         .then(data => {

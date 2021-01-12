@@ -5,6 +5,7 @@ const Logger = require('./Logging/Logger');
 const DataController = require('./Data/DataController');
 const PreferenceController = require('./Preferences/PreferenceController');
 const DirectoryManager = require('./FileSystem/DirectoryManager');
+const IPCController = require('./IPC/IPCController');
 
 module.exports = class App {
   constructor(app, options) {
@@ -27,11 +28,14 @@ module.exports = class App {
       this.logger,
       this.directoryManager.preferencesDir,
     );
+
     this.dataCtrl = new DataController(
       this.app,
       this.logger,
       this.directoryManager.dataDir,
     );
+
+    this.IPCController = new IPCController(this.app, this.logger);
   }
 
   start() {
@@ -86,9 +90,6 @@ module.exports = class App {
       );
       win.webContents.openDevTools();
     }
-    ipcMain.on('toMain', () => {
-      win.webContents.send('fromMain', 'return data');
-    });
   }
 
   destroy() {
