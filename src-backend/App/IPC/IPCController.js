@@ -4,8 +4,8 @@ const mainChannels = require('./constants/mainChannels');
 const renderChannels = require('./constants/renderChannels');
 
 module.exports = class IPCController extends Controller {
-  constructor(app, logger) {
-    super(app, logger, 'IPCController');
+  constructor(app, logger, name) {
+    super(app, logger, name);
 
     // ipcMain.on('toMain', () => {
     //   win.webContents.send('fromMain', 'return data');

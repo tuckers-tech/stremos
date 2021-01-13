@@ -17,11 +17,11 @@ module.exports = class DirectoryManager extends Controller {
     this.logInfo(`==========================================`);
     this.logInfo(`\t\tDirectories`);
     this.logInfo(`==========================================`);
-    this.logInfo(`Logs: ${this.app.getPath('logs')}`);
-    this.logInfo(`Documents: ${this.app.getPath('documents')}`);
-    this.logInfo(`Temp: ${this.app.getPath('temp')}`);
-    this.logInfo(`AppData: ${this.app.getPath('appData')}`);
-    this.logInfo(`Cache: ${this.app.getPath('cache')}`);
+    this.logInfo(`Logs:\t${this.app.getPath('logs')}`);
+    this.logInfo(`Documents:\t${this.app.getPath('documents')}`);
+    this.logInfo(`Temp:\t${this.app.getPath('temp')}`);
+    this.logInfo(`AppData:\t${this.app.getPath('appData')}`);
+    this.logInfo(`Cache:\t${this.app.getPath('cache')}`);
     this.logInfo(`==========================================\n`);
   }
 

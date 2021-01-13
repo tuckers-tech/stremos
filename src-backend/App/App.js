@@ -1,11 +1,12 @@
-const { BrowserWindow, ipcMain } = require('electron');
-const url = require('url');
-const path = require('path');
 const Logger = require('./Logging/Logger');
 const DataController = require('./Data/DataController');
 const PreferenceController = require('./Preferences/PreferenceController');
 const DirectoryManager = require('./FileSystem/DirectoryManager');
 const IPCController = require('./IPC/IPCController');
+const WindowController = require('./Window/WindowController');
+const StateController = require('./State/StateController');
+const ApplicationRuntime = require('./ApplicationRuntime');
+const EventBus = require('./Utilities/EventBus');
 
 module.exports = class App {
   constructor(app, options) {
@@ -18,6 +19,16 @@ module.exports = class App {
       this.app.getPath('logs'),
       options.verbose,
     );
+
+    this.eventBus = new EventBus(this.app, this.logger);
+
+    this.stateCtrl = new StateController(this.app, this.logger, this.eventBus);
+
+    this.stateCtrl.state.subscribe(data => {
+      console.log(data);
+    });
+
+    this.stateCtrl.goToState('startup');
 
     this.directoryManager = new DirectoryManager(this.app, this.logger);
 
@@ -35,18 +46,32 @@ module.exports = class App {
       this.directoryManager.dataDir,
     );
 
-    this.IPCController = new IPCController(this.app, this.logger);
+    this.windowCtrl = new WindowController(
+      this.app,
+      this.logger,
+      this.isDevEnv,
+    );
+
+    this.appRuntime = new ApplicationRuntime(this.app, this.logger, {
+      options,
+      stateCtrl: this.stateCtrl,
+      directoryManager: this.directoryManager,
+      preferenceCtrl: this.preferenceCtrl,
+      dataCtrl: this.dataCtrl,
+      windowCtrl: this.windowCtrl,
+    });
   }
 
   start() {
     this.registerApplicationListeners();
 
-    this.createWindow();
+    this.appRuntime.startRuntime();
   }
 
   registerApplicationListeners() {
     this.app.on('window-all-closed', () => {
       if (process.platform !== 'darwin') {
+        this.destroy();
         this.app.quit();
       }
     });
@@ -62,39 +87,10 @@ module.exports = class App {
     });
   }
 
-  createWindow() {
-    this.logger.logInfo('Creating Window', 'App.js\t\t');
-
-    const win = new BrowserWindow({
-      width: 1200,
-      height: 800,
-      webPreferences: {
-        nodeIntegration: false, // is default value after Electron v5
-        contextIsolation: true, // protect against prototype pollution
-        enableRemoteModule: false, // turn off remote
-        preload: path.join(__dirname, '/..', 'preload', 'preload.js'),
-      },
-    });
-
-    if (this.isDevEnv) {
-      win.webContents.openDevTools();
-
-      win.loadURL('http://localhost:8080');
-    } else {
-      win.loadURL(
-        url.format({
-          pathname: path.join(this.app.getAppPath(), 'dist', 'index.html'),
-          protocol: 'file:',
-          slashes: true,
-        }),
-      );
-      win.webContents.openDevTools();
-    }
-  }
-
   destroy() {
     this.logger.destroy();
     this.preferenceCtrl.destroy();
     this.dataCtrl.destroy();
+    this.windowCtrl.destroy();
   }
 };
