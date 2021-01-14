@@ -18,9 +18,7 @@ module.exports = class SqliteController extends Controller {
     this.logInfo(`First Run: ${this.isFirstTimeRun}`);
     if (this.isFirstTimeRun) {
       this.initializeDatabase(this.db)
-        .then(data => {
-          console.log('init success');
-          console.log(data);
+        .then(() => {
           this.isDatabaseReady = true;
         })
         .catch(() => this.logError('Unable to initialize database'));
@@ -39,7 +37,6 @@ module.exports = class SqliteController extends Controller {
       this.logInfo(`Initializing DB`);
       return this.executeQuery(initializeDb)
         .then(() => {
-          console.log('Upload Data');
           resolve();
         })
         .catch(err => reject(err));
@@ -70,7 +67,5 @@ module.exports = class SqliteController extends Controller {
     });
   }
 
-  destroy() {
-    this.db.close();
-  }
+  destroy() {}
 };

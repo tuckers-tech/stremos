@@ -1,8 +1,8 @@
 const Logger = require('./Logging/Logger');
+const { BrowserWindow } = require('electron');
 const DataController = require('./Data/DataController');
 const PreferenceController = require('./Preferences/PreferenceController');
 const DirectoryManager = require('./FileSystem/DirectoryManager');
-const IPCController = require('./IPC/IPCController');
 const WindowController = require('./Window/WindowController');
 const StateController = require('./State/StateController');
 const ApplicationRuntime = require('./ApplicationRuntime');
@@ -23,10 +23,6 @@ module.exports = class App {
     this.eventBus = new EventBus(this.app, this.logger);
 
     this.stateCtrl = new StateController(this.app, this.logger, this.eventBus);
-
-    this.stateCtrl.state.subscribe(data => {
-      console.log(data);
-    });
 
     this.stateCtrl.goToState('startup');
 
@@ -49,6 +45,7 @@ module.exports = class App {
     this.windowCtrl = new WindowController(
       this.app,
       this.logger,
+      this.eventBus,
       this.isDevEnv,
     );
 
@@ -59,6 +56,7 @@ module.exports = class App {
       preferenceCtrl: this.preferenceCtrl,
       dataCtrl: this.dataCtrl,
       windowCtrl: this.windowCtrl,
+      eventBus: this.eventBus,
     });
   }
 

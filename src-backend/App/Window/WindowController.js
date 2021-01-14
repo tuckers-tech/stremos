@@ -4,8 +4,10 @@ const url = require('url');
 const Controller = require('../Parents/Controller');
 
 module.exports = class WindowController extends Controller {
-  constructor(app, logger, isDevEnv) {
+  constructor(app, logger, eventBus, isDevEnv) {
     super(app, logger, 'WindowController\t');
+
+    this.eventBus = eventBus;
 
     this.isDevEnv = isDevEnv;
 
@@ -40,6 +42,8 @@ module.exports = class WindowController extends Controller {
       );
       win.webContents.openDevTools();
     }
+
+    this.windowArray.push(win);
   }
 
   destroy() {}

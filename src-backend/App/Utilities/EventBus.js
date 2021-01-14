@@ -16,7 +16,7 @@ module.exports = class EventBus extends LoggerBase {
     });
   }
 
-  watchEvents(targetChannel) {
+  watch(targetChannel) {
     if (targetChannel === '*') {
       // Return all events
       return this.events;

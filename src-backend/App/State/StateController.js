@@ -6,6 +6,10 @@ module.exports = class StateController extends Controller {
     super(app, logger, 'StateController\t');
     this.state = new BehaviorSubject('null');
     this.eventBus = eventBus;
+    this.state.subscribe(newState => {
+      console.log('new app state');
+      this.eventBus.emit('app-state', newState);
+    });
   }
 
   goToState(targetState) {
