@@ -39,7 +39,6 @@ const mutations = {
 
 const actions = {
   setUserProfile({ commit }, keycloakData) {
-    console.log(keycloakData);
     window.ipc.send('toMain', 'some data');
     commit('setUserProfile', keycloakData);
   },

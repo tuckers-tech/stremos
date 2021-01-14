@@ -1,5 +1,6 @@
 const Logger = require('./Logging/Logger');
-const { BrowserWindow } = require('electron');
+const { BrowserWindow, session } = require('electron');
+const os = require('os');
 const DataController = require('./Data/DataController');
 const PreferenceController = require('./Preferences/PreferenceController');
 const DirectoryManager = require('./FileSystem/DirectoryManager');
@@ -13,6 +14,14 @@ module.exports = class App {
     this.app = app;
     this.isDevEnv = options.isDevEnv;
     this.options = options;
+
+    if (this.isDevEnv) {
+      if (os.platform() === 'win32') {
+        session.defaultSession.loadExtension(
+          'C:\\Users\\hawki\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\nhdogjmejiglipccpnnnanhbledajbpd\\5.3.3_0',
+        );
+      }
+    }
 
     this.logger = new Logger(
       this.isDevEnv,

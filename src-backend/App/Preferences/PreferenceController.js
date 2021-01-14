@@ -10,4 +10,8 @@ module.exports = class PreferenceController extends JSONController {
       defaultValue: defaultPreferences,
     });
   }
+
+  getAllPreferences() {
+    return this.value;
+  }
 };

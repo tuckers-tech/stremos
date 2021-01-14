@@ -78,7 +78,7 @@ export default {
         .dispatch('addProject', projectData)
         .then(result => {
           console.log(result);
-          this.$store.dispatch('updateProjects');
+          // this.$store.dispatch('updateProjects');
           this.$emit('close');
         })
         .catch(err => {

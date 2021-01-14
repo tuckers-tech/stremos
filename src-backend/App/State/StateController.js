@@ -7,7 +7,6 @@ module.exports = class StateController extends Controller {
     this.state = new BehaviorSubject('null');
     this.eventBus = eventBus;
     this.state.subscribe(newState => {
-      console.log('new app state');
       this.eventBus.emit('app-state', newState);
     });
   }

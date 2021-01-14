@@ -1,4 +1,6 @@
 const IPCController = require('./IPC/IPCController');
+const ProjectController = require('./Project/ProjectController');
+const ProjectMetadataController = require('./Project/ProjectMetadataController');
 
 module.exports = class ApplicationRuntime extends IPCController {
   constructor(app, logger, controllers) {
@@ -11,12 +13,21 @@ module.exports = class ApplicationRuntime extends IPCController {
     this.windowCtrl = controllers.windowCtrl;
     this.eventBus = controllers.eventBus;
 
-    this.eventSubscriptions = [];
+    this.projectMetadataCtrl = new ProjectMetadataController(
+      this.app,
+      this.logger,
+      this.directoryManager.dataDir,
+    );
+
+    this.projectCtrl = new ProjectController(this.app, this.logger);
+
+    // this.eventSubscriptions = [];
 
     this.watchApplicationEvents();
   }
 
   startRuntime() {
+    this.watchUIEvents();
     this.windowCtrl.createWindow();
   }
 
@@ -28,6 +39,15 @@ module.exports = class ApplicationRuntime extends IPCController {
 
     this.eventBus.watch('window-create').subscribe(data => {
       console.log(data);
+    });
+  }
+
+  watchUIEvents() {
+    this.registerChannelWatcher('preferences::update', ipcEvent => {
+      ipcEvent.reply(
+        'preferences::update',
+        this.preferenceCtrl.getAllPreferences(),
+      );
     });
   }
 

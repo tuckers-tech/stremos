@@ -8,7 +8,7 @@ module.exports = class JSONController extends Controller {
 
     this.jsonOptions = jsonOptions;
 
-    this.fileContents = {};
+    this.value = {};
     this.hasLoaded = false;
 
     this.jsonFileLocation = path.join(
@@ -44,7 +44,7 @@ module.exports = class JSONController extends Controller {
   loadInitialFileContents() {
     fs.readFile(this.jsonFileLocation)
       .then(fileData => {
-        this.fileContents = JSON.parse(fileData.toString());
+        this.value = JSON.parse(fileData.toString());
       })
       .catch(err => this.logError(err));
   }

@@ -1,20 +1,19 @@
 const { contextBridge, ipcRenderer } = require('electron');
-const mainChannels = require('../App/IPC/constants/mainChannels');
-const renderChannels = require('../App/IPC/constants/renderChannels');
+const validChannels = require('../App/IPC/constants/validChannels');
 
 // Expose protected methods that allow the renderer process to use
 // the ipcRenderer without exposing the entire object
 contextBridge.exposeInMainWorld('ipc', {
   send: (channel, data) => {
     // whitelist channels
-    if (mainChannels.includes(channel)) {
+    if (validChannels.includes(channel)) {
       ipcRenderer.send(channel, data);
     } else {
       console.log('not a valid channel');
     }
   },
-  receive: (channel, func) => {
-    if (renderChannels.includes(channel)) {
+  watch: (channel, func) => {
+    if (validChannels.includes(channel)) {
       // Deliberately strip event as it includes `sender`
       ipcRenderer.on(channel, (event, ...args) => func(...args));
     } else {

@@ -5,7 +5,7 @@
       :showProjectTools="false"
       :hasPadding="true"
     >
-      content
+      {{ preferences }}
     </Layout>
   </div>
 </template>
@@ -18,6 +18,18 @@ export default {
   name: 'Home',
   components: {
     Layout,
+  },
+  computed: {
+    preferences() {
+      let prefs = this.$store.getters.allPreferences;
+      return prefs;
+    },
+  },
+  created() {
+    this.$store.dispatch('sendPreferenceUpdateRequest');
+    window.ipc.watch('preferences::update', event => {
+      this.$store.dispatch('setPreferences', event);
+    });
   },
 };
 </script>

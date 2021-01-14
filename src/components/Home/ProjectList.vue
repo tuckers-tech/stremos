@@ -31,7 +31,7 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('updateProjects');
+    // this.$store.dispatch('updateProjects');
   },
 };
 </script>
