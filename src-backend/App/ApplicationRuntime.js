@@ -27,18 +27,31 @@ module.exports = class ApplicationRuntime extends IPCController {
   }
 
   startRuntime() {
-    this.watchUIEvents();
+    this.watchControllerEvents();
     this.windowCtrl.createWindow();
   }
 
   watchApplicationEvents() {
     this.eventBus.watch('app-state').subscribe(data => {
-      console.log('app state change');
       this.logInfo('app-state', data);
     });
 
     this.eventBus.watch('window-create').subscribe(data => {
       console.log(data);
+    });
+  }
+
+  watchControllerEvents() {
+    this.watchProjectMetadataEvents();
+    this.watchUIEvents();
+  }
+
+  watchProjectMetadataEvents() {
+    this.registerChannelWatcher('project-metadata::update', ipcEvent => {
+      ipcEvent.reply(
+        'project-metadata::update',
+        this.projectMetadataCtrl.getProjectMetadata(),
+      );
     });
   }
 

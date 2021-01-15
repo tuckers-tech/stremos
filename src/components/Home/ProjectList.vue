@@ -9,6 +9,7 @@
         <ProjectPreviewCard :key="project.id" :projectData="project" />
       </template>
     </div>
+    {{ this.recentProjects }}
   </div>
 </template>
 
@@ -25,14 +26,15 @@ export default {
     ProjectPreviewCard,
   },
   computed: {
+    recentProjects() {
+      return this.$store.getters.recentProjects;
+    },
     hasNoProjects() {
-      console.log(this.$store.getters.projectList);
+      // console.log(this.$store.getters.projectList);
       return this.$store.getters.projectList.length === 0 ? true : false;
     },
   },
-  created() {
-    // this.$store.dispatch('updateProjects');
-  },
+  created() {},
 };
 </script>
 

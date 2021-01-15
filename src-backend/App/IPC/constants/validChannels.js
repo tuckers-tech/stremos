@@ -1,1 +1,1 @@
-module.exports = ['toMain', 'preferences::update'];
+module.exports = ['preferences::update', 'project-metadata::update'];

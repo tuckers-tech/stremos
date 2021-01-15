@@ -18,7 +18,7 @@ module.exports = class IPCController extends Controller {
     }
   }
 
-  sendToUI(targetWindow, channel, eventData) {
+  send(targetWindow, channel, eventData) {
     if (validChannels.includes(channel)) {
       targetWindow.webContents.send(channel, eventData);
     } else {

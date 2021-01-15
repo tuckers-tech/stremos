@@ -26,10 +26,10 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('sendPreferenceUpdateRequest');
     window.ipc.watch('preferences::update', event => {
       this.$store.dispatch('setPreferences', event);
     });
+    this.$store.dispatch('sendPreferenceUpdateRequest');
   },
 };
 </script>

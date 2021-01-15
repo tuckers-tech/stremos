@@ -9,4 +9,8 @@ module.exports = class ProjectMetadataController extends JSONController {
       defaultValue: defaultProjectMetadata,
     });
   }
+
+  getProjectMetadata() {
+    return this.value;
+  }
 };
