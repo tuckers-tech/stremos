@@ -13,4 +13,6 @@ module.exports = class ProjectMetadataController extends JSONController {
   getProjectMetadata() {
     return this.value;
   }
+
+  addProject() {}
 };

@@ -35,7 +35,7 @@ export default {
             slug: 'projectName',
             type: 'text',
             label: 'Project Name',
-            placeHolder: 'Project Name',
+            placeholder: 'Project Name',
             defaultValue: '',
             disabled: false,
             required: true,
@@ -44,7 +44,7 @@ export default {
             slug: 'projectType',
             type: 'dropdown',
             label: 'Project Type',
-            placeHolder: 'Project Name',
+            placeholder: 'Project Type',
             defaultValue: '',
             disabled: false,
             required: true,
@@ -66,6 +66,23 @@ export default {
               },
             ],
           },
+          {
+            slug: 'projectLocation',
+            type: 'filePath',
+            label: 'Project Path',
+            placeholder: 'C:\\Users\\severus\\Documents',
+            // TODO (TUCKER) - Default to folder defined in ProjectsFolder
+            defaultValue: '',
+            disabled: false,
+            required: true,
+            // This options is the dialog options
+            options: {
+              title: 'Project Path',
+              buttonLabel: 'Select Path',
+              properties: ['openDirectory', 'createDirectory'],
+              message: 'Please select a directory',
+            },
+          },
         ],
       },
     };
@@ -75,10 +92,10 @@ export default {
       let projectData = this.buildProjectData(event);
 
       this.$store
-        .dispatch('addProject', projectData)
+        .dispatch('createProject', projectData)
         .then(result => {
           console.log(result);
-          // this.$store.dispatch('updateProjects');
+          this.$store.dispatch('updateProjectMetadata');
           this.$emit('close');
         })
         .catch(err => {

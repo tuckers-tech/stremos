@@ -5,11 +5,10 @@
       <NoProjectList />
     </div>
     <div class="project-list-container" v-if="!hasNoProjects">
-      <template v-for="project in $store.getters.projectList">
+      <template v-for="project in recentProjects">
         <ProjectPreviewCard :key="project.id" :projectData="project" />
       </template>
     </div>
-    {{ this.recentProjects }}
   </div>
 </template>
 
@@ -27,14 +26,28 @@ export default {
   },
   computed: {
     recentProjects() {
-      return this.$store.getters.recentProjects;
+      return this.$store.getters['allProjects'];
     },
     hasNoProjects() {
-      // console.log(this.$store.getters.projectList);
-      return this.$store.getters.projectList.length === 0 ? true : false;
+      let allProjects = this.$store.getters['allProjects'];
+
+      if (!allProjects) {
+        return null;
+      } else {
+        if (this.$store.getters['allProjects'].length === 0) {
+          return true;
+        } else {
+          return false;
+        }
+      }
     },
   },
-  created() {},
+  created() {
+    window.ipc.watch('project-metadata::update', eventData => {
+      this.$store.dispatch('setProjectMetadata', eventData);
+    });
+    this.$store.dispatch('updateProjectMetadata');
+  },
 };
 </script>
 

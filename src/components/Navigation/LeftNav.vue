@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="leftnav-container">
+  <div class="leftnav-container">
+    <div class="left-icon-container">
       <div
         :class="{
           icon: true,
@@ -153,6 +153,10 @@ export default {
 <style lang="scss" scoped>
 .leftnav-container {
   display: flex;
+}
+
+.left-icon-container {
+  display: flex;
   flex-direction: column;
   height: 100%;
   padding: 5px 0 5px 5px;
@@ -201,9 +205,9 @@ export default {
   background-color: #f0f0f0;
   width: 300px;
   min-width: 300px;
-  position: fixed;
-  top: 0;
-  left: 53px;
+  // position: fixed;
+  // top: 0;
+  // left: 53px;
   height: 100%;
   z-index: 10;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);

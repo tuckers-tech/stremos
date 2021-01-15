@@ -23,6 +23,12 @@
             :inputData="input"
             @inputChange="handleInputChange"
           />
+          <PathInput
+            v-if="input.type === 'filePath'"
+            :key="input.slug"
+            :inputData="input"
+            @inputChange="handleInputChange"
+          />
         </template>
       </section>
       <footer class="modal-card-foot">
@@ -54,12 +60,14 @@
 <script>
 import TextInput from '@/components/Forms/FormComponents/TextInput';
 import DropdownInput from '@/components/Forms/FormComponents/DropdownInput';
+import PathInput from '@/components/Forms/FormComponents/PathInput';
 
 export default {
   name: 'ModalFormComponent',
   components: {
     TextInput,
     DropdownInput,
+    PathInput,
   },
   data() {
     return {
@@ -107,6 +115,7 @@ export default {
   },
   created() {
     this.formData.components.forEach(el => {
+      console.log(el);
       this.formValue.push({
         slug: el.slug,
         value: el.defaultValue,

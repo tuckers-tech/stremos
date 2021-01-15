@@ -7,7 +7,7 @@
         class="input"
         type="text"
         @input="handleInput"
-        :placeholder="inputData.label"
+        :placeholder="inputData.placeholder"
         :required="this.inputData.required"
         :disabled="this.inputData.disabled"
       />

@@ -1,10 +1,13 @@
+import { v4 as uuidv4 } from 'uuid';
+import { requestData } from '../../utilites/ipc';
+
 const state = {
   projectMetadata: {},
 };
 
 const getters = {
-  recentProjects(state) {
-    return state.projectMetadata;
+  allProjects(state) {
+    return state.projectMetadata.projects;
   },
 };
 
@@ -20,6 +23,14 @@ const actions = {
   },
   async setProjectMetadata({ commit }, newProjectMetadata) {
     commit('setProjectMetadata', newProjectMetadata);
+  },
+  async createProject(ctx, projectData) {
+    console.log(ctx, projectData);
+    requestData('project-metadata::create', { ...projectData, id: uuidv4() })
+      .then(result => {
+        console.log(result);
+      })
+      .catch(err => console.log(err));
   },
 };
 

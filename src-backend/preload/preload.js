@@ -9,7 +9,7 @@ contextBridge.exposeInMainWorld('ipc', {
     if (validChannels.includes(channel)) {
       ipcRenderer.send(channel, data);
     } else {
-      console.log('not a valid channel');
+      console.log(`${channel} is not a valid channel`);
     }
   },
   watch: (channel, func) => {
@@ -17,7 +17,14 @@ contextBridge.exposeInMainWorld('ipc', {
       // Deliberately strip event as it includes `sender`
       ipcRenderer.on(channel, (event, ...args) => func(...args));
     } else {
-      console.log('not a valid channel');
+      console.log(`${channel} is not a valid channel`);
+    }
+  },
+  watchOnce: (channel, func) => {
+    if (validChannels.includes(channel)) {
+      ipcRenderer.once(channel, (event, ...args) => func(...args));
+    } else {
+      console.log(`${channel} is not a valid channel`);
     }
   },
 });

@@ -1,4 +1,4 @@
 module.exports = {
-  version: '0.0.1',
-  recentProjects: [],
+  version: '1.0',
+  projects: [],
 };
