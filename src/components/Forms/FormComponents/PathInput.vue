@@ -77,7 +77,6 @@ export default {
     },
   },
   created() {
-    console.log(this.inputData);
     if (this.inputData && this.inputData.defaultValue !== '') {
       this.value = this.inputData.defaultValue;
     }
