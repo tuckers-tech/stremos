@@ -1,9 +1,17 @@
 <template>
-  <div>Project Settings for project {{ $route.params.projectID }}</div>
+  <div>
+    <DangerZone />
+  </div>
 </template>
 
 <script>
-export default {};
+import DangerZone from './ProjectSettings/DangerZone.vue';
+
+export default {
+  components: {
+    DangerZone,
+  },
+};
 </script>
 
 <style lang="scss" scoped></style>

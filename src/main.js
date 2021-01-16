@@ -13,9 +13,12 @@ import 'buefy/dist/buefy.css';
 import '@fortawesome/fontawesome-pro/js/all';
 import store from './store';
 
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
+Vue.component('font-awesome-icon', FontAwesomeIcon);
+
 Vue.use(Buefy, {
-  defaultIconComponent: 'vue-fontawesome',
-  defaultIconPack: 'fal',
+  defaultIconPack: 'fas',
 });
 
 process.env.NODE_ENV;

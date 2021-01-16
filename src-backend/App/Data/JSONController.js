@@ -49,5 +49,26 @@ module.exports = class JSONController extends Controller {
       .catch(err => this.logError(err));
   }
 
+  addElementToArray(targetArr, element) {
+    return new Promise((resolve, reject) => {
+      this.value[targetArr].push(element);
+      this.writeDataToFile()
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => reject(err));
+    });
+  }
+
+  writeDataToFile() {
+    return new Promise((resolve, reject) => {
+      fs.outputJSON(this.jsonFileLocation, this.value, {
+        encoding: 'utf-8',
+      })
+        .then(result => resolve(result))
+        .catch(err => reject(err));
+    });
+  }
+
   destroy() {}
 };

@@ -14,5 +14,15 @@ module.exports = class ProjectMetadataController extends JSONController {
     return this.value;
   }
 
-  addProject() {}
+  addProject(projectData) {
+    return new Promise((resolve, reject) => {
+      this.addElementToArray('projects', projectData)
+        .then(() => {
+          resolve();
+        })
+        .catch(err => {
+          reject();
+        });
+    });
+  }
 };

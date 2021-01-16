@@ -7,8 +7,8 @@
     <article class="media">
       <div class="media-content">
         <div class="content">
-          <h3>{{ projectData.name }}</h3>
-          <h5>{{ projectData.type }}</h5>
+          <h3>{{ projectData.projectName }}</h3>
+          <h5>{{ projectData.projectType }}</h5>
         </div>
       </div>
     </article>

@@ -115,7 +115,6 @@ export default {
   },
   created() {
     this.formData.components.forEach(el => {
-      console.log(el);
       this.formValue.push({
         slug: el.slug,
         value: el.defaultValue,

@@ -73,16 +73,14 @@ module.exports = class ApplicationRuntime extends IPCController {
     this.registerChannelWatcher(
       'project-metadata::create',
       (ipcEvent, projectData) => {
-        console.log(projectData);
-        ipcEvent.reply('project-metadata::create', { data: 'return data' });
-      },
-    );
-
-    this.registerChannelWatcher(
-      'project-metadata::create',
-      (ipcEvent, projectData) => {
-        console.log(projectData);
-        ipcEvent.reply('project-metadata::create', { data: 'return data' });
+        this.projectMetadataCtrl
+          .addProject(projectData)
+          .then(() => {
+            ipcEvent.reply('project-metadata::create', { data: 'success' });
+          })
+          .catch(err => {
+            ipcEvent.reply('project-metadata::create', { data: err });
+          });
       },
     );
   }
