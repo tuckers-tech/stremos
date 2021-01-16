@@ -11,7 +11,7 @@ module.exports = class WindowController extends Controller {
 
     this.isDevEnv = isDevEnv;
 
-    this.windowArray = [];
+    this.mainWindow = null;
   }
 
   createWindow() {
@@ -43,7 +43,7 @@ module.exports = class WindowController extends Controller {
       win.webContents.openDevTools();
     }
 
-    this.windowArray.push(win);
+    this.mainWindow = win;
   }
 
   destroy() {}
