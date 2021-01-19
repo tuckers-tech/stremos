@@ -69,6 +69,7 @@ export default {
     sendPathRequestToBackend() {
       requestPath(this.inputData.options)
         .then(res => {
+          console.log('getting path');
           if (!res.canceled) {
             this.value = res.filePaths[0];
           }

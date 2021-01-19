@@ -2,6 +2,8 @@ const { dialog } = require('electron');
 const IPCController = require('./IPC/IPCController');
 const ProjectController = require('./Project/ProjectController');
 const ProjectMetadataController = require('./Project/ProjectMetadataController');
+const path = require('path');
+const { sanitizeProjectName } = require('./Utilities/sanitizeProjectName');
 
 module.exports = class ApplicationRuntime extends IPCController {
   constructor(app, logger, controllers) {
@@ -53,7 +55,7 @@ module.exports = class ApplicationRuntime extends IPCController {
       'utilities::select-path',
       (ipcEvent, options) => {
         dialog
-          .showOpenDialog(this.windowCtrl.windowArray[0], options)
+          .showOpenDialog(this.windowCtrl.mainWindow, options)
           .then(path => {
             ipcEvent.reply('utilities::select-path', path);
           })
@@ -73,10 +75,30 @@ module.exports = class ApplicationRuntime extends IPCController {
     this.registerChannelWatcher(
       'project-metadata::create',
       (ipcEvent, projectData) => {
+        let sanitizedProjectName = sanitizeProjectName(projectData.projectName);
+
+        let projectOptions = {
+          name: sanitizedProjectName,
+          id: projectData.id,
+          type: projectData.projectType,
+        };
+
         this.projectMetadataCtrl
           .addProject(projectData)
           .then(() => {
-            ipcEvent.reply('project-metadata::create', { data: 'success' });
+            this.projectCtrl
+              .createProjectFiles(projectData)
+              .then(() => {
+                this.logInfo(
+                  `Loading Project ${sanitizedProjectName} from ${projectData.projectLocation}`,
+                );
+                this.projectCtrl.loadProject(
+                  path.join(projectData.projectLocation, sanitizedProjectName),
+                  projectOptions,
+                );
+                ipcEvent.reply('project-metadata::create', { data: 'success' });
+              })
+              .catch(err => console.log(err));
           })
           .catch(err => {
             ipcEvent.reply('project-metadata::create', { data: err });

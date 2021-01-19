@@ -3,7 +3,7 @@ const defaultProjectMetadata = require('./defaults/defaultProjectMetadata');
 
 module.exports = class ProjectMetadataController extends JSONController {
   constructor(app, logger, dataDir) {
-    super(app, logger, 'ProjectController', {
+    super(app, logger, 'ProjectMetadataController', {
       location: dataDir,
       fileName: 'projectMetadata.json',
       defaultValue: defaultProjectMetadata,
@@ -20,7 +20,7 @@ module.exports = class ProjectMetadataController extends JSONController {
         .then(() => {
           resolve();
         })
-        .catch(err => {
+        .catch(() => {
           reject();
         });
     });
