@@ -9,6 +9,11 @@ const getters = {
   allProjects(state) {
     return state.projectMetadata.projects;
   },
+  projectMetadataByID: state => targetID => {
+    return state.projectMetadata.projects.filter(
+      project => project.id === targetID,
+    );
+  },
 };
 
 const mutations = {
@@ -25,12 +30,15 @@ const actions = {
     commit('setProjectMetadata', newProjectMetadata);
   },
   async createProject(ctx, projectData) {
-    console.log(ctx, projectData);
-    requestData('project-metadata::create', { ...projectData, id: uuidv4() })
-      .then(result => {
-        console.log(result);
-      })
-      .catch(err => console.log(err));
+    return new Promise(resolve => {
+      let newProjectData = { ...projectData, id: uuidv4() };
+
+      requestData('project-metadata::create', newProjectData)
+        .then(() => {
+          resolve(newProjectData);
+        })
+        .catch(err => console.log(err));
+    });
   },
 };
 

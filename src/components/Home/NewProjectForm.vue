@@ -96,6 +96,7 @@ export default {
         .then(result => {
           console.log(result);
           this.$store.dispatch('updateProjectMetadata');
+          this.$router.push(`project/${result.id}`);
           this.$emit('close');
         })
         .catch(err => {

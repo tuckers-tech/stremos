@@ -8,7 +8,6 @@ module.exports = class ProjectController extends Controller {
   constructor(app, logger) {
     super(app, logger, 'Project Controller');
 
-    this.isProjectLoaded = false;
     this.projectFileController = null;
     this.projectLocation = null;
   }
@@ -52,7 +51,26 @@ module.exports = class ProjectController extends Controller {
     });
   }
 
-  getProjectData() {}
+  getProjectData(filter) {
+    if (this.isProjectLoaded()) {
+      if (filter === '*') {
+        return this.projectFileController.value;
+      }
+    } else {
+      this.logWarn(
+        'Project Not Initialized! Load Project Before Requesting Project Data!',
+      );
+      return null;
+    }
+  }
+
+  isProjectLoaded() {
+    if (this.projectFileController === null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   setProjectData() {}
 

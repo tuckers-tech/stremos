@@ -17,6 +17,22 @@ export default {
   components: {
     Layout,
   },
+  computed: {
+    targetProject() {
+      let matchingProjects = this.$store.getters.projectMetadataByID(
+        this.$route.params.projectID,
+      );
+
+      if (matchingProjects.length > 0) {
+        return matchingProjects[0];
+      }
+
+      return null;
+    },
+  },
+  created() {
+    this.$store.dispatch('loadProject', this.targetProject);
+  },
 };
 </script>
 

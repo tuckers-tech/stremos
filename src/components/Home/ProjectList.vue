@@ -42,12 +42,7 @@ export default {
       }
     },
   },
-  created() {
-    window.ipc.watch('project-metadata::update', eventData => {
-      this.$store.dispatch('setProjectMetadata', eventData);
-    });
-    this.$store.dispatch('updateProjectMetadata');
-  },
+  created() {},
 };
 </script>
 

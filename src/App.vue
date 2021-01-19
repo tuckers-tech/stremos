@@ -15,10 +15,12 @@ export default {
     },
   },
   created() {
-    // window.ipc.watch('fromMain', data => {
-    //   console.log(data);
-    // });
     this.$store.dispatch('setUserProfile', this.$keycloak);
+
+    window.ipc.watch('project-metadata::update', eventData => {
+      this.$store.dispatch('setProjectMetadata', eventData);
+    });
+    this.$store.dispatch('updateProjectMetadata');
   },
 };
 </script>

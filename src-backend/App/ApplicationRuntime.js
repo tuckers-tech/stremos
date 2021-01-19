@@ -47,6 +47,7 @@ module.exports = class ApplicationRuntime extends IPCController {
   watchControllerEvents() {
     this.watchUtilityEvents();
     this.watchProjectMetadataEvents();
+    this.watchProjectEvents();
     this.watchUIEvents();
   }
 
@@ -102,6 +103,37 @@ module.exports = class ApplicationRuntime extends IPCController {
           })
           .catch(err => {
             ipcEvent.reply('project-metadata::create', { data: err });
+          });
+      },
+    );
+  }
+
+  watchProjectEvents() {
+    this.registerChannelWatcher(
+      'project::load',
+      (ipcEvent, projectMetadata) => {
+        let sanitizedProjectName = sanitizeProjectName(
+          projectMetadata.projectName,
+        );
+
+        let projectOptions = {
+          name: sanitizedProjectName,
+          id: projectMetadata.id,
+          type: projectMetadata.projectType,
+        };
+
+        this.projectCtrl
+          .loadProject(
+            path.join(projectMetadata.projectLocation, sanitizedProjectName),
+            projectOptions,
+          )
+          .then(projectData => {
+            // TODO - NEXT - (TUCKER) - Figure out how to get data back from this request
+            // without breaking the json controllers for other files
+            ipcEvent.reply('project::load', projectData);
+          })
+          .catch(err => {
+            ipcEvent.reply('project::load', err);
           });
       },
     );
