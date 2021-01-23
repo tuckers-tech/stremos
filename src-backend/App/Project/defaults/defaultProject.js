@@ -12,6 +12,7 @@ const template = `
     "nodes": [],
     "connections": []
   },
+  "data": {},
   "services": {}
 }
 `;

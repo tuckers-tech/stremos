@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { requestPath } from '../../../utilites/ipc';
+import { requestPath } from '../../../utilities/ipc';
 
 export default {
   name: 'PathInput',

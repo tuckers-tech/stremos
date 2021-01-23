@@ -1,10 +1,14 @@
-import { requestData } from '../../utilites/ipc';
+import { requestData } from '../../utilities/ipc';
 
 const state = {
   currentProject: {},
 };
 
-const getters = {};
+const getters = {
+  metadata(state) {
+    return state.currentProject.metadata;
+  },
+};
 
 const mutations = {
   setProjectData(state, projectData) {
