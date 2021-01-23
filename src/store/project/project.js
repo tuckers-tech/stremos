@@ -1,17 +1,23 @@
 import { requestData } from '../../utilites/ipc';
 
-const state = {};
+const state = {
+  currentProject: {},
+};
 
 const getters = {};
 
-const mutations = {};
+const mutations = {
+  setProjectData(state, projectData) {
+    state.currentProject = projectData;
+  },
+};
 
 const actions = {
-  async loadProject(_, projectMetadata) {
+  async loadProject({ commit }, projectMetadata) {
     return new Promise((resolve, reject) => {
       requestData('project::load', projectMetadata)
         .then(data => {
-          console.log(data);
+          commit('setProjectData', data);
           resolve();
         })
         .catch(err => reject(err));

@@ -1,10 +1,12 @@
 const Controller = require('../Parents/Controller');
 const fs = require('fs-extra');
 const path = require('path');
+const { BehaviorSubject } = require('rxjs');
 
 module.exports = class JSONController extends Controller {
   constructor(app, logger, parentClassName, jsonOptions) {
     super(app, logger, `${parentClassName} -> JSONController`);
+    this.isLoading = new BehaviorSubject(true);
 
     this.jsonOptions = jsonOptions;
 
@@ -45,6 +47,8 @@ module.exports = class JSONController extends Controller {
     fs.readFile(this.jsonFileLocation)
       .then(fileData => {
         this.value = JSON.parse(fileData.toString());
+        this.hasLoaded = true;
+        this.isLoading.next(false);
       })
       .catch(err => this.logError(err));
   }

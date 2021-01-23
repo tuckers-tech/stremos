@@ -65,6 +65,17 @@
 
         <router-link
           :to="{
+            name: 'projectData',
+            params: { projectID: $route.params.projectID },
+          }"
+          tag="div"
+          class="icon is-large"
+        >
+          <i class="fal fa-database fa-lg"></i>
+        </router-link>
+
+        <router-link
+          :to="{
             name: 'projectTopology',
             params: { projectID: $route.params.projectID },
           }"

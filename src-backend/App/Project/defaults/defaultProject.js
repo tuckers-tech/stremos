@@ -1,9 +1,18 @@
 const template = `
 {
+  "metadata": {
     "api-version": "1.0",
     "id": "::id::",
     "name": "::projectName::",
-    "type": "::type::"
+    "type": "::type::",
+    "description": ""
+  },
+  "dependencies": {},
+  "topology": {
+    "nodes": [],
+    "connections": []
+  },
+  "services": {}
 }
 `;
 

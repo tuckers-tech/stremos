@@ -75,16 +75,27 @@ module.exports = class ProjectController extends Controller {
   setProjectData() {}
 
   loadProject(projectFileLocation, projectOptions) {
-    this.projectLocation = projectFileLocation;
-    this.projectFileController = new ProjectFileController(
-      this.app,
-      this.logger,
-      {
-        location: projectFileLocation,
-        fileName: 'stremos.project',
-        defaultValue: generateDefaultProjectJSON(projectOptions),
-      },
-    );
+    return new Promise(resolve => {
+      this.projectLocation = projectFileLocation;
+      this.projectFileController = new ProjectFileController(
+        this.app,
+        this.logger,
+        {
+          location: projectFileLocation,
+          fileName: 'stremos.project',
+          defaultValue: generateDefaultProjectJSON(projectOptions),
+        },
+      );
+
+      this.projectFileController
+        .getProjectData()
+        .then(data => {
+          resolve(data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    });
   }
 
   unloadProject() {

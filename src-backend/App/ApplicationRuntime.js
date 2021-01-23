@@ -128,8 +128,6 @@ module.exports = class ApplicationRuntime extends IPCController {
             projectOptions,
           )
           .then(projectData => {
-            // TODO - NEXT - (TUCKER) - Figure out how to get data back from this request
-            // without breaking the json controllers for other files
             ipcEvent.reply('project::load', projectData);
           })
           .catch(err => {

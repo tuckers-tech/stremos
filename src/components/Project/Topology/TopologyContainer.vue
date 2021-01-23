@@ -7,7 +7,6 @@
       :scene.sync="scene"
       class="container"
     />
-    <button @click="createServer">Create Server</button>
   </div>
 </template>
 

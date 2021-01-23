@@ -32,6 +32,14 @@ const routes = [
           ),
       },
       {
+        path: 'data',
+        name: 'projectData',
+        component: () =>
+          import(
+            /* webpackChunkName: "projectData" */ '../components/Project/ProjectData.vue'
+          ),
+      },
+      {
         path: 'settings',
         name: 'projectSettings',
         component: () =>

@@ -1,5 +1,5 @@
 function sanitizeProjectName(projectPath) {
-  return projectPath.replace(' ', '-');
+  return projectPath.replaceAll(' ', '-');
 }
 
 module.exports = {
