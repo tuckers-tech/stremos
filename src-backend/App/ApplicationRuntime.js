@@ -4,6 +4,7 @@ const ProjectController = require('./Project/ProjectController');
 const ProjectMetadataController = require('./Project/ProjectMetadataController');
 const path = require('path');
 const { sanitizeProjectName } = require('./Utilities/sanitizeProjectName');
+const PluginController = require('./Project/Plugins/PluginController');
 
 module.exports = class ApplicationRuntime extends IPCController {
   constructor(app, logger, controllers) {
@@ -16,13 +17,23 @@ module.exports = class ApplicationRuntime extends IPCController {
     this.windowCtrl = controllers.windowCtrl;
     this.eventBus = controllers.eventBus;
 
+    this.pluginCtrl = new PluginController(
+      this.app,
+      this.logger,
+      this.directoryManager,
+    );
+
     this.projectMetadataCtrl = new ProjectMetadataController(
       this.app,
       this.logger,
       this.directoryManager.dataDir,
     );
 
-    this.projectCtrl = new ProjectController(this.app, this.logger);
+    this.projectCtrl = new ProjectController(
+      this.app,
+      this.logger,
+      this.pluginCtrl,
+    );
 
     // this.eventSubscriptions = [];
 
@@ -30,8 +41,10 @@ module.exports = class ApplicationRuntime extends IPCController {
   }
 
   startRuntime() {
-    this.watchControllerEvents();
-    this.windowCtrl.createWindow();
+    this.pluginCtrl.loadPlugins().then(() => {
+      this.watchControllerEvents();
+      this.windowCtrl.createWindow();
+    });
   }
 
   watchApplicationEvents() {

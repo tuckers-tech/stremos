@@ -7,8 +7,10 @@ module.exports = class DirectoryManager extends Controller {
     super(app, logger, 'DirectoryManager\t');
 
     this.documentsDir = path.join(this.app.getPath('documents'), 'Stremos');
+    this.appDataDir = path.join(this.app.getPath('appData'), 'Stremos');
     this.dataDir = path.join(this.documentsDir, 'data');
     this.preferencesDir = path.join(this.documentsDir, 'preferences');
+    this.pluginDir = path.join(this.documentsDir, 'plugins');
 
     this.logDirectories();
   }
@@ -27,8 +29,10 @@ module.exports = class DirectoryManager extends Controller {
 
   ensureApplicationDirectoriesExist() {
     this.ensureDirectoryExists(this.documentsDir);
+    this.ensureDirectoryExists(this.appDataDir);
     this.ensureDirectoryExists(this.dataDir);
     this.ensureDirectoryExists(this.preferencesDir);
+    this.ensureDirectoryExists(this.pluginDir);
   }
 
   ensureDirectoryExists(targetDir) {

@@ -5,11 +5,12 @@ const ProjectFileController = require('./ProjectFileController');
 const { generateDefaultProjectJSON } = require('./defaults/defaultProject');
 const { sanitizeProjectName } = require('../Utilities/sanitizeProjectName');
 module.exports = class ProjectController extends Controller {
-  constructor(app, logger) {
+  constructor(app, logger, pluginCtrl) {
     super(app, logger, 'Project Controller');
 
     this.projectFileController = null;
     this.projectLocation = null;
+    this.pluginCtrl = pluginCtrl;
   }
 
   createProjectFiles(projectData) {
