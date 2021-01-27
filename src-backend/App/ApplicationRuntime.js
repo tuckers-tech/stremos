@@ -61,7 +61,14 @@ module.exports = class ApplicationRuntime extends IPCController {
     this.watchUtilityEvents();
     this.watchProjectMetadataEvents();
     this.watchProjectEvents();
+    this.watchPluginEvents();
     this.watchUIEvents();
+  }
+
+  watchPluginEvents() {
+    this.registerChannelWatcher('plugins::load', ipcEvent => {
+      ipcEvent.reply('plugins::load', this.pluginCtrl.loadedPlugins);
+    });
   }
 
   watchUtilityEvents() {

@@ -8,7 +8,7 @@ module.exports = class PluginController extends Controller {
     super(app, logger, 'Plugin Controller\t');
     this.directoryManager = directoryManager;
     this.pluginDir = this.directoryManager.pluginDir;
-    this.pluginData = {};
+    this.loadedPlugins = [];
   }
 
   loadPlugins() {
@@ -20,10 +20,12 @@ module.exports = class PluginController extends Controller {
           pluginLoader.push(this.loadSinglePlugin(pluginName));
         });
 
-        Promise.all(pluginLoader).then(pluginData => {
-          console.log(pluginData);
-          resolve(pluginData);
-        });
+        Promise.all(pluginLoader)
+          .then(pluginData => {
+            this.loadedPlugins = pluginData;
+            resolve(pluginData);
+          })
+          .catch(err => this.logError(err));
       });
     });
   }

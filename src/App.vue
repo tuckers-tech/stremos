@@ -21,6 +21,7 @@ export default {
       this.$store.dispatch('setProjectMetadata', eventData);
     });
     this.$store.dispatch('updateProjectMetadata');
+    this.$store.dispatch('updatePlugins');
   },
 };
 </script>

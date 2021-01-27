@@ -5,4 +5,5 @@ module.exports = [
   'project-metadata::get-project-path',
   'project-metadata::create',
   'project::load',
+  'plugins::load',
 ];
