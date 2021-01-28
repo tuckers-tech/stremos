@@ -104,7 +104,7 @@ export default {
 <style scoped>
 .background {
   position: relative;
-  width: 100%;
+  width: 100% !important;
   height: 100%;
   /* background-color: red; */
 }

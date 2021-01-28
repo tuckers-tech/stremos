@@ -16,6 +16,7 @@ const actions = {
   updatePlugins({ commit }) {
     requestData('plugins::load')
       .then(plugins => {
+        console.log(plugins);
         commit('setPlugins', plugins);
       })
       .catch(err => console.log(err));

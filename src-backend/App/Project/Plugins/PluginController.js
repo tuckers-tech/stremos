@@ -23,6 +23,7 @@ module.exports = class PluginController extends Controller {
         Promise.all(pluginLoader)
           .then(pluginData => {
             this.loadedPlugins = pluginData;
+            this.logInfo(pluginData);
             resolve(pluginData);
           })
           .catch(err => this.logError(err));

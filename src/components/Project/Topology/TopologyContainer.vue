@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="topology-container">
     <VueBlocksContainer
       ref="container"
       @contextmenu.native="showContextMenu"
@@ -333,8 +333,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
+.topology-container {
+  display: flex;
+  margin: 0;
   width: 100%;
   height: 100%;
+  // background-color: red;
 }
 </style>
