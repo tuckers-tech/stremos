@@ -701,7 +701,7 @@ export default {
 .vue-container {
   display: flex;
   margin-left: 53px;
-  background-color: blue;
+  // background-color: blue;
   width: 100%;
 }
 </style>
