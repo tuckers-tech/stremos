@@ -4,7 +4,19 @@ const state = {
   plugins: [],
 };
 
-const getters = {};
+const getters = {
+  getAvailableBlocks: state => targetType => {
+    const availableBlocks = state.plugins.map(plugin => {
+      return {
+        name: plugin.name,
+        blocks: plugin.blocks.filter(block => block.blockType === targetType),
+      };
+    });
+
+    console.log(availableBlocks);
+    return availableBlocks;
+  },
+};
 
 const mutations = {
   setPlugins(state, updatedPlugins) {
