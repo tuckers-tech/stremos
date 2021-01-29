@@ -1,8 +1,12 @@
 <template>
   <div
-    class="flyout-entry-container"
+    class="flyout-entry-container noselect"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
+    @dragstart="dragStart($event)"
+    @drag="drag($event)"
+    @dragend="dragEnd($event)"
+    draggable
   >
     <div class="box block-box">
       <p class="is-size-5">
@@ -32,6 +36,17 @@ export default {
     },
     handleMouseLeave() {
       this.showInfo = false;
+    },
+
+    dragStart(event) {
+      event.dataTransfer.setData('newBlock', JSON.stringify(this.block));
+    },
+    drag() {
+      console.log('drag');
+    },
+    dragEnd(event) {
+      console.log(event);
+      console.log('dragend');
     },
   },
 };

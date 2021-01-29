@@ -32,6 +32,7 @@ export default {
       return this.$store.getters.getAvailableBlocks('service');
     },
   },
+  methods: {},
 };
 </script>
 

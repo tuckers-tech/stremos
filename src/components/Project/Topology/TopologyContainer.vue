@@ -1,5 +1,10 @@
 <template>
-  <div class="topology-container">
+  <div
+    class="topology-container"
+    @drop="onDrop($event)"
+    @dragover="onDragover($event)"
+    dropzone
+  >
     <VueBlocksContainer
       ref="container"
       @contextmenu.native="showContextMenu"
@@ -318,6 +323,13 @@ export default {
     showContextMenu(event) {
       event.preventDefault();
       console.log('showcontextmenu');
+    },
+    onDrop(event) {
+      event.preventDefault();
+      console.log(JSON.parse(event.dataTransfer.getData('newBlock')));
+    },
+    onDragover(event) {
+      event.preventDefault();
     },
   },
   mounted() {},
