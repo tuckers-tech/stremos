@@ -341,6 +341,6 @@ export default {
   // background-color: red;
   position: fixed;
   top: 0;
-  left: 0;
+  left: 110px;
 }
 </style>
