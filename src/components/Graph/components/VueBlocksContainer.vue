@@ -134,7 +134,7 @@ export default {
     optionsForChild() {
       return {
         width: 200,
-        titleHeight: 20,
+        titleHeight: 30,
         scale: this.scale,
         inputSlotClassName: this.inputSlotClassName,
         center: {

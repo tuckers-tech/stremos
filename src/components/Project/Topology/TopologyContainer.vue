@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import VueBlocksContainer from '@/components/Graph/components/VueBlocksContainer';
 import * as axios from 'axios';
 
@@ -305,9 +304,7 @@ export default {
       },
     };
   },
-  computed: {
-    ...mapGetters(['isCtrlDown', 'isSpaceDown', 'isPrimaryMouseDown']),
-  },
+  computed: {},
   methods: {
     createServer() {
       axios
@@ -319,7 +316,6 @@ export default {
           console.log(error);
         });
     },
-
     showContextMenu(event) {
       event.preventDefault();
       console.log('showcontextmenu');
@@ -350,7 +346,6 @@ export default {
   margin: 0;
   width: 100%;
   height: 100%;
-  // background-color: red;
   position: fixed;
   top: 0;
   left: 110px;

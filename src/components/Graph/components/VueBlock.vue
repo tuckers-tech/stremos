@@ -206,7 +206,9 @@ $blockBorder: 1px;
 
 $ioPaddingInner: 2px 0;
 $ioHeight: 16px;
-$ioFontSize: 14px;
+$ioFontSize: 12px;
+
+$headingPadding: 2px;
 
 $circleBorder: 1px;
 $circleSize: 10px;
@@ -236,6 +238,7 @@ $circleConnectedColor: #ffff00;
     border-top-left-radius: 4px;
     background: #bfbfbf;
     text-align: center;
+    padding: $headingPadding;
 
     .delete {
       color: red;
