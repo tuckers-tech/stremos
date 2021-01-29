@@ -35,8 +35,6 @@ module.exports = class ApplicationRuntime extends IPCController {
       this.pluginCtrl,
     );
 
-    // this.eventSubscriptions = [];
-
     this.watchApplicationEvents();
   }
 
