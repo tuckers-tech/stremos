@@ -10,7 +10,7 @@
   >
     <div class="box block-box">
       <p class="is-size-5">
-        {{ block.name }}
+        {{ block.title }}
       </p>
     </div>
     <span class="icon has-text-info info-icon" v-if="showInfo">

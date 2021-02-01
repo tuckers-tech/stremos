@@ -16,9 +16,11 @@ module.exports = class PluginController extends Controller {
       this.getPluginNames().then(pluginNames => {
         const pluginLoader = [];
 
-        pluginNames.forEach(pluginName => {
-          pluginLoader.push(this.loadSinglePlugin(pluginName));
-        });
+        pluginNames
+          .filter(name => name !== '.DS_Store')
+          .forEach(pluginName => {
+            pluginLoader.push(this.loadSinglePlugin(pluginName));
+          });
 
         Promise.all(pluginLoader)
           .then(pluginData => {

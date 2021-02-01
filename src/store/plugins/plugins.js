@@ -5,16 +5,27 @@ const state = {
 };
 
 const getters = {
-  getAvailableBlocks: state => targetType => {
-    const availableBlocks = state.plugins.map(plugin => {
+  getAvailableLibraries: state => targetType => {
+    const availableLibraries = state.plugins.map(plugin => {
       return {
         name: plugin.name,
         blocks: plugin.blocks.filter(block => block.blockType === targetType),
       };
     });
 
-    console.log(availableBlocks);
-    return availableBlocks;
+    console.log(availableLibraries);
+    return availableLibraries;
+  },
+  getAvailableBlocks: state => targetType => {
+    const availableBlocks = state.plugins.map(plugin => {
+      return plugin.blocks
+        .map(block => ({ ...block, pluginName: plugin.name }))
+        .filter(block => block.blockType === targetType);
+    });
+
+    var resultArray = Array.prototype.concat.apply([], availableBlocks);
+
+    return resultArray;
   },
 };
 
@@ -28,7 +39,6 @@ const actions = {
   updatePlugins({ commit }) {
     requestData('plugins::load')
       .then(plugins => {
-        console.log(plugins);
         commit('setPlugins', plugins);
       })
       .catch(err => console.log(err));

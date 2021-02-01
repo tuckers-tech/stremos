@@ -634,6 +634,7 @@ export default {
       return newBlocks;
     },
     importBlocksContent() {
+      console.log(this.blocksContent);
       if (this.blocksContent) {
         this.nodes = merge([], this.blocksContent);
       }

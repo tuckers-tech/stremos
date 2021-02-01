@@ -8,7 +8,7 @@
     <VueBlocksContainer
       ref="container"
       @contextmenu.native="showContextMenu"
-      :blocksContent="blocks"
+      :blocksContent="availableBlocks"
       :scene.sync="scene"
       class="container"
     />
@@ -17,7 +17,6 @@
 
 <script>
 import VueBlocksContainer from '@/components/Graph/components/VueBlocksContainer';
-import * as axios from 'axios';
 
 export default {
   name: 'TopologyContainer',
@@ -26,131 +25,13 @@ export default {
   },
   data() {
     return {
-      blocks: [
-        {
-          name: 'entry',
-          title: 'Server Entry Point',
-          family: 'Server',
-          description: 'Entry Point for Server',
-          fields: [
-            {
-              name: 'Request',
-              type: 'request',
-              attr: 'output',
-            },
-          ],
-        },
-        {
-          name: 'router',
-          title: 'Router',
-          family: 'Server',
-          description: 'Routes requests to the right blocks',
-          fields: [
-            {
-              name: 'Request',
-              type: 'request',
-              attr: 'input',
-            },
-            {
-              name: 'Request',
-              type: 'request',
-              attr: 'output',
-            },
-          ],
-        },
-        {
-          name: 'routeHandler',
-          title: 'Route Handler',
-          family: 'Server',
-          description: 'Handles Requests To Route',
-          fields: [
-            {
-              name: 'Request',
-              type: 'request',
-              attr: 'input',
-            },
-          ],
-        },
-        {
-          name: 'getById',
-          title: 'GET Element By ID',
-          family: 'Server',
-          description: 'Gets a piece of data by ID',
-          fields: [
-            {
-              name: 'Request',
-              type: 'request',
-              attr: 'input',
-            },
-            {
-              name: 'ID',
-              type: 'string',
-              attr: 'output',
-            },
-            {
-              name: 'ERROR',
-              type: 'error',
-              attr: 'output',
-            },
-          ],
-        },
-        {
-          name: 'getDataElement',
-          title: 'Get Data Element',
-          family: 'Server',
-          description: 'Gets a piece of data by ID',
-          fields: [
-            {
-              name: 'ID || Query',
-              type: 'any',
-              attr: 'input',
-            },
-            {
-              name: 'Element[]',
-              type: 'elementArr',
-              attr: 'output',
-            },
-          ],
-        },
-        {
-          name: 'sendResponse',
-          title: 'Get Data Element',
-          family: 'Server',
-          description: 'Gets a piece of data by ID',
-          fields: [
-            {
-              name: 'Element[]',
-              type: 'any',
-              attr: 'input',
-            },
-          ],
-        },
-        {
-          name: 'postHandler',
-          title: 'POST Handler',
-          family: 'Server',
-          description: 'Handles POST Request',
-          fields: [
-            {
-              name: 'Request',
-              type: 'request',
-              attr: 'input',
-            },
-            {
-              name: 'Data',
-              type: 'any',
-              attr: 'output',
-            },
-          ],
-        },
-      ],
       scene: {
         blocks: [
           {
             id: 1,
             x: -550,
             y: 0,
-            name: 'entry',
+            name: 'serverEntry',
             title: 'Server Entry',
             values: {
               property: [
@@ -180,7 +61,7 @@ export default {
             id: 3,
             x: 0,
             y: -150,
-            name: 'getById',
+            name: 'getByID',
             title: 'GET',
             values: {
               property: [
@@ -195,7 +76,7 @@ export default {
             id: 4,
             x: 250,
             y: -150,
-            name: 'getDataElement',
+            name: 'getDataByQuery',
             title: 'Get Data',
             values: {
               property: [
@@ -304,18 +185,12 @@ export default {
       },
     };
   },
-  computed: {},
-  methods: {
-    createServer() {
-      axios
-        .post('http://localhost:3000/generate-server', this.scene)
-        .then(function(response) {
-          console.log(response);
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+  computed: {
+    availableBlocks() {
+      return this.$store.getters.getAvailableBlocks('service');
     },
+  },
+  methods: {
     showContextMenu(event) {
       event.preventDefault();
       console.log('showcontextmenu');

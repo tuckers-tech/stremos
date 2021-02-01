@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     blockLibrary() {
-      return this.$store.getters.getAvailableBlocks('service');
+      return this.$store.getters.getAvailableLibraries('service');
     },
   },
   methods: {},
