@@ -1,6 +1,14 @@
 <template>
   <aside class="menu p-2 block-flyout">
     <aside class="menu">
+      <div class="field">
+        <div class="control has-icons-left has-icons-right">
+          <input class="input is-small" type="search" placeholder="Search" />
+          <span class="icon is-small is-left">
+            <i class="fas fa-search"></i>
+          </span>
+        </div>
+      </div>
       <div class="library" v-for="library in blockLibrary" :key="library.name">
         <p class="menu-label">
           {{ library.name }}
