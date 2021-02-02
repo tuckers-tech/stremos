@@ -69,7 +69,7 @@ export default {
 }
 
 .block-box {
-  padding: 5px;
+  padding: 10px 5px;
 
   &:hover {
     cursor: grab;

@@ -51,4 +51,9 @@ body {
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 3px;
+}
 </style>

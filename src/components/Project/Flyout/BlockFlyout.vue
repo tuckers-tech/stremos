@@ -53,4 +53,8 @@ export default {
 .library:not(:last-child) {
   margin-bottom: 12px;
 }
+
+.menu {
+  overflow-y: auto;
+}
 </style>
