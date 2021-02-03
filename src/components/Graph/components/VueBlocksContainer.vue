@@ -564,15 +564,27 @@ export default {
       if (block.selected) {
         this.blockDeselect(block);
       }
+
+      let removals = [];
+
       this.links.forEach(l => {
         if (l.originID === block.id || l.targetID === block.id) {
           this.removeLink(l.id);
+          removals.push(this.$store.dispatch('removeLink', l.id));
         }
       });
+
       this.blocks = this.blocks.filter(b => {
         return b.id !== block.id;
       });
-      this.updateScene();
+
+      removals.push(this.$store.dispatch('deleteBlock', block.id));
+
+      Promise.all(removals)
+        .then(() => {
+          this.updateScene();
+        })
+        .catch(err => console.log(err));
     },
     //
     prepareBlocks(blocks) {
@@ -634,7 +646,6 @@ export default {
       return newBlocks;
     },
     importBlocksContent() {
-      console.log(this.blocksContent);
       if (this.blocksContent) {
         this.nodes = merge([], this.blocksContent);
       }

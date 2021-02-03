@@ -41,13 +41,8 @@ export default {
     dragStart(event) {
       event.dataTransfer.setData('newBlock', JSON.stringify(this.block));
     },
-    drag() {
-      console.log('drag');
-    },
-    dragEnd(event) {
-      console.log(event);
-      console.log('dragend');
-    },
+    drag() {},
+    dragEnd() {},
   },
 };
 </script>
