@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="library" v-for="library in blockLibrary" :key="library.name">
-        <p class="menu-label">
+        <p class="menu-label has-text-left">
           {{ library.name }}
         </p>
 

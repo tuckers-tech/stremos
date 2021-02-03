@@ -1,6 +1,18 @@
 <template>
-  <aside class="inspector">
-    Inspector
+  <aside class="menu p-2 inspector">
+    <div class="field">
+      <div class="control has-icons-left has-icons-right">
+        <input class="input is-small" type="search" placeholder="Search" />
+        <span class="icon is-small is-left">
+          <i class="fas fa-search"></i>
+        </span>
+      </div>
+    </div>
+
+    <p class="menu-label has-text-left">
+      Metadata
+    </p>
+    {{ this.$store.getters.getActiveNode }}
   </aside>
 </template>
 
@@ -13,8 +25,8 @@ export default {
 <style lang="scss" scoped>
 .inspector {
   background-color: #f0f0f0;
-  width: 60px;
-  min-width: 60px;
+  width: 200px;
+  min-width: 200px;
   height: 100%;
   position: fixed;
   right: 0;

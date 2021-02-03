@@ -8,6 +8,8 @@
     <VueBlocksContainer
       ref="container"
       @contextmenu.native="showContextMenu"
+      @blockSelect="blockSelected"
+      @blockDeselect="blockDeselect"
       :blocksContent="availableBlocks"
       :scene.sync="scene"
       class="container"
@@ -54,13 +56,19 @@ export default {
     onDragover(event) {
       event.preventDefault();
     },
+    blockSelected(event) {
+      this.$store.dispatch('setActiveNode', event.id);
+    },
+    blockDeselect() {
+      this.$store.dispatch('unsetActiveNode');
+    },
   },
   watch: {
-    availableBlocks(newValue) {
-      console.log('blocks', newValue);
+    availableBlocks() {
+      // console.log('blocks', newValue);
     },
-    scene(newValue) {
-      console.log('scene', newValue);
+    scene() {
+      // console.log('scene', newValue);
     },
   },
 };

@@ -1,138 +1,139 @@
 const state = {
   blocks: [
-    {
-      id: 1,
-      x: -550,
-      y: 0,
-      name: 'serverEntry',
-      title: 'Server Entry',
-      values: {
-        property: [
-          {
-            name: 'message',
-            type: 'string',
-          },
-        ],
-      },
-    },
-    {
-      id: 2,
-      x: -250,
-      y: 0,
-      name: 'router',
-      title: 'Router',
-      values: {
-        property: [
-          {
-            name: 'message',
-            type: 'string',
-          },
-        ],
-      },
-    },
-    {
-      id: 3,
-      x: 0,
-      y: -150,
-      name: 'getByID',
-      title: 'GET',
-      values: {
-        property: [
-          {
-            name: 'id',
-            type: 'string',
-          },
-        ],
-      },
-    },
-    {
-      id: 4,
-      x: 250,
-      y: -150,
-      name: 'getDataByQuery',
-      title: 'Get Data',
-      values: {
-        property: [
-          {
-            name: 'id',
-            type: 'string',
-          },
-        ],
-      },
-    },
-    {
-      id: 5,
-      x: 500,
-      y: -150,
-      name: 'sendResponse',
-      title: 'Send Response',
-      values: {
-        property: [
-          {
-            name: 'id',
-            type: 'string',
-          },
-        ],
-      },
-    },
-    {
-      id: 6,
-      x: 500,
-      y: -75,
-      name: 'sendResponse',
-      title: 'Send Response',
-      values: {
-        property: [
-          {
-            name: 'id',
-            type: 'string',
-          },
-        ],
-      },
-    },
+    // {
+    //   id: 1,
+    //   x: -550,
+    //   y: 0,
+    //   name: 'serverEntry',
+    //   title: 'Server Entry',
+    //   values: {
+    //     property: [
+    //       {
+    //         name: 'message',
+    //         type: 'string',
+    //       },
+    //     ],
+    //   },
+    // },
+    // {
+    //   id: 2,
+    //   x: -250,
+    //   y: 0,
+    //   name: 'router',
+    //   title: 'Router',
+    //   values: {
+    //     property: [
+    //       {
+    //         name: 'message',
+    //         type: 'string',
+    //       },
+    //     ],
+    //   },
+    // },
+    // {
+    //   id: 3,
+    //   x: 0,
+    //   y: -150,
+    //   name: 'getByID',
+    //   title: 'GET',
+    //   values: {
+    //     property: [
+    //       {
+    //         name: 'id',
+    //         type: 'string',
+    //       },
+    //     ],
+    //   },
+    // },
+    // {
+    //   id: 4,
+    //   x: 250,
+    //   y: -150,
+    //   name: 'getDataByQuery',
+    //   title: 'Get Data',
+    //   values: {
+    //     property: [
+    //       {
+    //         name: 'id',
+    //         type: 'string',
+    //       },
+    //     ],
+    //   },
+    // },
+    // {
+    //   id: 5,
+    //   x: 500,
+    //   y: -150,
+    //   name: 'sendResponse',
+    //   title: 'Send Response',
+    //   values: {
+    //     property: [
+    //       {
+    //         name: 'id',
+    //         type: 'string',
+    //       },
+    //     ],
+    //   },
+    // },
+    // {
+    //   id: 6,
+    //   x: 500,
+    //   y: -75,
+    //   name: 'sendResponse',
+    //   title: 'Send Response',
+    //   values: {
+    //     property: [
+    //       {
+    //         name: 'id',
+    //         type: 'string',
+    //       },
+    //     ],
+    //   },
+    // },
   ],
   links: [
-    {
-      id: 1,
-      originID: 1,
-      originSlot: 0,
-      targetID: 2,
-      targetSlot: 0,
-    },
-    {
-      id: 2,
-      originID: 2,
-      originSlot: 0,
-      targetID: 3,
-      targetSlot: 0,
-    },
-    {
-      id: 3,
-      originID: 3,
-      originSlot: 0,
-      targetID: 4,
-      targetSlot: 0,
-    },
-    {
-      id: 4,
-      originID: 4,
-      originSlot: 0,
-      targetID: 5,
-      targetSlot: 0,
-    },
-    {
-      id: 5,
-      originID: 3,
-      originSlot: 1,
-      targetID: 6,
-      targetSlot: 0,
-    },
+    // {
+    //   id: 1,
+    //   originID: 1,
+    //   originSlot: 0,
+    //   targetID: 2,
+    //   targetSlot: 0,
+    // },
+    // {
+    //   id: 2,
+    //   originID: 2,
+    //   originSlot: 0,
+    //   targetID: 3,
+    //   targetSlot: 0,
+    // },
+    // {
+    //   id: 3,
+    //   originID: 3,
+    //   originSlot: 0,
+    //   targetID: 4,
+    //   targetSlot: 0,
+    // },
+    // {
+    //   id: 4,
+    //   originID: 4,
+    //   originSlot: 0,
+    //   targetID: 5,
+    //   targetSlot: 0,
+    // },
+    // {
+    //   id: 5,
+    //   originID: 3,
+    //   originSlot: 1,
+    //   targetID: 6,
+    //   targetSlot: 0,
+    // },
   ],
   container: {
     centerX: 0,
     centerY: 0,
     scale: 1,
   },
+  activeNode: null,
 };
 
 const getters = {
@@ -146,27 +147,32 @@ const getters = {
   getBlocks(state) {
     return state.blocks;
   },
+  getActiveNode(state) {
+    if (isNaN(parseInt(state.activeNode))) {
+      return false;
+    }
+
+    let returnVars = state.blocks.filter(
+      block => parseInt(block.id) === parseInt(state.activeNode),
+    );
+
+    return returnVars;
+  },
 };
 
 const mutations = {
   addBlock(state, newBlock) {
-    console.log(newBlock);
     const idList = state.blocks.map(block => parseInt(block.id));
     const nextID = Math.max(...idList) + 1;
 
     state.blocks.push({
-      id: nextID,
+      id: isNaN(parseInt(nextID)) ? 0 : nextID,
       x: 0,
       y: 0,
       name: newBlock.name,
       title: newBlock.title,
       values: {
-        property: [
-          {
-            name: 'message',
-            type: 'string',
-          },
-        ],
+        variables: [...newBlock.variables],
       },
     });
   },
@@ -185,11 +191,13 @@ const mutations = {
   removeLink(state, targetLinkID) {
     state.links = state.links.filter(link => link.id !== targetLinkID);
   },
+  setActiveNode(state, targetNodeID) {
+    state.activeNode = targetNodeID;
+  },
 };
 
 const actions = {
   addBlock({ commit }, blockInfo) {
-    console.log(blockInfo);
     commit('addBlock', blockInfo);
   },
   updateScene({ commit }, newScene) {
@@ -208,6 +216,12 @@ const actions = {
       commit('removeLink', targetLink);
       resolve();
     });
+  },
+  setActiveNode({ commit }, targetNodeID) {
+    commit('setActiveNode', targetNodeID);
+  },
+  unsetActiveNode({ commit }) {
+    commit('setActiveNode', null);
   },
 };
 
