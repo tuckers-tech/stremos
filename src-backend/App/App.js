@@ -20,6 +20,10 @@ module.exports = class App {
         session.defaultSession.loadExtension(
           'C:\\Users\\hawki\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\nhdogjmejiglipccpnnnanhbledajbpd\\5.3.3_0',
         );
+      } else if (os.platform() === 'darwin') {
+        session.defaultSession.loadExtension(
+          '/Users/hawk/Library/Application Support/Google/Chrome/Default/Extensions/nhdogjmejiglipccpnnnanhbledajbpd/5.3.4_0',
+        );
       }
     }
 

@@ -1,8 +1,11 @@
 <template>
   <div class="topology-page-container">
-    <BlockFlyout flyoutType="'service'" />
-    <TopologyContainer />
-    <Inspector />
+    <TopNav />
+    <div class="topology-body">
+      <BlockFlyout flyoutType="'service'" />
+      <TopologyContainer />
+      <Inspector />
+    </div>
   </div>
 </template>
 
@@ -10,32 +13,28 @@
 import BlockFlyout from '@/components/Project/Flyout/BlockFlyout';
 import TopologyContainer from '@/components/Project/Topology/TopologyContainer';
 import Inspector from '@/components/Navigation/Inspector/Inspector';
+import TopNav from '@/components/Project/Topology/TopNav';
+
 export default {
   components: {
     TopologyContainer,
     Inspector,
     BlockFlyout,
+    TopNav,
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.topology-page-container {
+.topology-body {
   height: 100%;
   width: 100%;
   position: relative;
+  display: flex;
+  flex-direction: column;
   // background-color: blue;
-}
-
-.inspector-container {
-  width: 60px;
-  min-width: 60px;
-  height: 100%;
-  position: fixed;
-  right: 0;
-  top: 0;
-  min-height: 100%;
-  z-index: 10;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  height: calc(100% - 50px);
+  margin-top: 50px;
+  z-index: 500;
 }
 </style>

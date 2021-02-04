@@ -49,10 +49,10 @@ export default {
   background-color: #f0f0f0;
   width: 200px;
   min-width: 200px;
-  height: 100%;
+  height: calc(100% - 50px);
   position: fixed;
   left: 53px;
-  top: 0;
+  top: 50px;
   min-height: 100%;
   z-index: 10;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -64,5 +64,6 @@ export default {
 
 .menu {
   overflow-y: auto;
+  height: calc(100% - 50px);
 }
 </style>

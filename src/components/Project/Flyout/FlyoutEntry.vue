@@ -65,6 +65,8 @@ export default {
 
 .block-box {
   padding: 10px 5px;
+  border-radius: 4px;
+  box-shadow: none;
 
   &:hover {
     cursor: grab;

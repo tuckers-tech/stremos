@@ -79,9 +79,9 @@ export default {
   display: flex;
   margin: 0;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 50px);
   position: fixed;
-  top: 0;
+  top: 50px;
   left: 110px;
 }
 </style>

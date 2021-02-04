@@ -131,7 +131,7 @@ const state = {
   container: {
     centerX: 0,
     centerY: 0,
-    scale: 1,
+    scale: 0.8,
   },
   activeNode: null,
 };
@@ -156,7 +156,7 @@ const getters = {
       block => parseInt(block.id) === parseInt(state.activeNode),
     );
 
-    return returnVars;
+    return returnVars[0];
   },
 };
 
@@ -194,6 +194,14 @@ const mutations = {
   setActiveNode(state, targetNodeID) {
     state.activeNode = targetNodeID;
   },
+  updateNode(state, newNodeVersion) {
+    console.log(newNodeVersion);
+    let otherNodes = state.blocks.filter(
+      block => block.id !== newNodeVersion.id,
+    );
+
+    state.blocks = [...otherNodes, newNodeVersion];
+  },
 };
 
 const actions = {
@@ -222,6 +230,48 @@ const actions = {
   },
   unsetActiveNode({ commit }) {
     commit('setActiveNode', null);
+  },
+  updateNode({ state, commit }, nodeUpdate) {
+    let targetNode = state.blocks.filter(
+      block => block.id === nodeUpdate.nodeID,
+    )[0];
+
+    let updateScope = nodeUpdate.slug.split('.');
+
+    let updatedNode;
+
+    if (updateScope[0] === 'variable') {
+      let oldVariables = targetNode.values.variables;
+
+      let targetEntry = oldVariables.filter(
+        variable => variable.slug === updateScope[1],
+      )[0];
+      targetEntry.value = nodeUpdate.value;
+
+      let newVariables = [
+        ...oldVariables.filter(variable => variable.slug !== updateScope[1]),
+        targetEntry,
+      ];
+
+      updatedNode = {
+        ...targetNode,
+        values: {
+          variables: newVariables,
+        },
+      };
+    } else {
+      let targetNode = state.blocks.filter(
+        block => block.id === nodeUpdate.nodeID,
+      )[0];
+
+      updatedNode = {
+        ...targetNode,
+      };
+
+      updatedNode[nodeUpdate.slug] = nodeUpdate.value;
+    }
+
+    commit('updateNode', updatedNode);
   },
 };
 
