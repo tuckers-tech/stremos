@@ -37,10 +37,14 @@ export default {
   },
   computed: {
     blockLibrary() {
-      return this.$store.getters.getAvailableLibraries('service');
+      return this.$store.getters.getAvailableLibraries(this.flyoutType);
     },
   },
   methods: {},
+  created() {
+    console.log('flyout created');
+    console.log(this.blockLibrary);
+  },
 };
 </script>
 

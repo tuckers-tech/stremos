@@ -21,16 +21,19 @@
 import VueBlocksContainer from '@/components/Graph/components/VueBlocksContainer';
 
 export default {
-  name: 'TopologyContainer',
+  name: 'GraphContainer',
   components: {
     VueBlocksContainer,
+  },
+  props: {
+    type: String,
   },
   data() {
     return {};
   },
   computed: {
     availableBlocks() {
-      return this.$store.getters.getAvailableBlocks('service');
+      return this.$store.getters.getAvailableBlocks(this.type);
     },
     scene: {
       get() {
@@ -68,8 +71,11 @@ export default {
       // console.log('blocks', newValue);
     },
     scene() {
-      // console.log('scene', newValue);
+      // this.$store.dispatch('updateScene', newScene);
     },
+  },
+  created() {
+    console.log(this.$route.path);
   },
 };
 </script>

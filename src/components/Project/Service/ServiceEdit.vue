@@ -2,8 +2,8 @@
   <div class="topology-page-container">
     <TopNav :links="topNavLinks" />
     <div class="topology-body">
-      <BlockFlyout :key="'topology'" :flyoutType="'topology'" />
-      <GraphContainer :type="'topology'" />
+      <BlockFlyout :key="'service'" :flyoutType="'service'" />
+      <GraphContainer :type="'service'" />
       <Inspector />
     </div>
   </div>
@@ -28,10 +28,22 @@ export default {
         {
           label: 'Topology',
           icon: 'chart-network',
-          isActive: true,
+          isActive: false,
           to: {
             name: 'projectTopology',
             params: { projectID: this.$route.params.projectID },
+          },
+        },
+        {
+          label: 'Service',
+          icon: 'cube',
+          isActive: true,
+          to: {
+            name: 'serviceEdit',
+            params: {
+              projectID: this.$route.params.projectID,
+              serviceID: this.$route.params.serviceID,
+            },
           },
         },
       ],

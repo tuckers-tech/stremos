@@ -56,12 +56,29 @@ const routes = [
           ),
       },
       {
-        path: 'topology',
-        name: 'projectTopology',
+        path: 'service/:serviceID',
+        name: 'serviceEdit',
         component: () =>
           import(
-            /* webpackChunkName: "projectTopology" */ '../components/Project/ProjectTopology.vue'
+            /* webpackChunkName: "serviceEdit" */ '../components/Project/Service/ServiceEdit.vue'
           ),
+      },
+      {
+        path: 'topology',
+        component: () =>
+          import(
+            /* webpackChunkName: "projectTopologyContainer" */ '../components/Project/ProjectTopologyContainer.vue'
+          ),
+        children: [
+          {
+            path: '/',
+            name: 'projectTopology',
+            component: () =>
+              import(
+                /* webpackChunkName: "projectTopology" */ '../components/Project/ProjectTopology.vue'
+              ),
+          },
+        ],
       },
     ],
   },

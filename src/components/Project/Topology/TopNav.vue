@@ -2,32 +2,35 @@
   <div class="breadcrumb-container">
     <nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
       <ul>
-        <li>
-          <router-link to="{}">
+        <li
+          v-for="link of links"
+          :key="link.label"
+          :class="{ 'is-active': link.isActive }"
+        >
+          <router-link :to="link.to">
             <span class="icon is-small">
-              <i class="fas fa-chart-network" aria-hidden="true"></i>
+              <i :class="['fa-' + link.icon, 'fa']" aria-hidden="true"></i>
             </span>
-            <span>Topology</span>
+            <span>{{ link.label }}</span>
           </router-link>
-        </li>
-        <li class="is-active">
-          <a href="#">
-            <span class="icon is-small">
-              <i class="fas fa-cube" aria-hidden="true"></i>
-            </span>
-            <span>Service</span>
-          </a>
         </li>
       </ul>
     </nav>
 
     <div class="button-group">
-      <button class="button  is-small is-success">
+      <router-link
+        tag="button"
+        :to="{
+          name: 'serviceEdit',
+          params: { projectID: $route.params.projectID, serviceID: 0 },
+        }"
+        class="button  is-small is-success"
+      >
         <span class="icon">
           <i class="fas fa-play"></i>
         </span>
         <span>Run</span>
-      </button>
+      </router-link>
     </div>
   </div>
 </template>
@@ -35,6 +38,12 @@
 <script>
 export default {
   name: 'TopNav',
+  props: {
+    links: Array,
+  },
+  data() {
+    return {};
+  },
 };
 </script>
 

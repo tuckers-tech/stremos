@@ -13,7 +13,7 @@
     <div class="columns">
       <div class="column">
         <TextInspectorInput
-          :key="activeNode.id"
+          :key="activeNode.x"
           :label="'X Position'"
           :placeholder="activeNode.x"
           :defaultValue="activeNode.x"
@@ -22,7 +22,7 @@
       </div>
       <div class="column">
         <TextInspectorInput
-          :key="activeNode.id"
+          :key="activeNode.y"
           :label="'Y Position'"
           :placeholder="activeNode.y"
           :defaultValue="activeNode.y"
