@@ -9,11 +9,15 @@ const template = `
   },
   "dependencies": {},
   "topology": {
-    "nodes": [],
-    "connections": []
+    "blocks": [],
+    "container": {
+      "centerX": 0,
+      "centerY": 0,
+      "scale": 0.8
+    },
+    "links": []
   },
-  "data": {},
-  "services": {}
+  "data": {}
 }
 `;
 

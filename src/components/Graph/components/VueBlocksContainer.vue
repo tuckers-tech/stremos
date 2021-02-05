@@ -5,8 +5,11 @@
       v-for="block in blocks"
       :key="block.id"
       v-bind.sync="block"
+      :id="block.id"
+      :name="block.name"
       :options="optionsForChild"
       @update="updateScene"
+      @dblClick="handleBlockDblClick"
       @linkingStart="linkingStart(block, $event)"
       @linkingStop="linkingStop(block, $event)"
       @linkingBreak="linkingBreak(block, $event)"
@@ -227,6 +230,10 @@ export default {
     },
   },
   methods: {
+    handleBlockDblClick(event) {
+      this.$emit('blockDblClick', event);
+    },
+
     changeTempLinkStyle() {
       this.tempLink.style = {
         stroke: '#8f8f8f',
@@ -565,12 +572,15 @@ export default {
         this.blockDeselect(block);
       }
 
-      let removals = [];
+      let removals = {
+        links: [],
+        blocks: [],
+      };
 
       this.links.forEach(l => {
         if (l.originID === block.id || l.targetID === block.id) {
           this.removeLink(l.id);
-          removals.push(this.$store.dispatch('removeLink', l.id));
+          removals.links.push(l.id);
         }
       });
 
@@ -578,13 +588,9 @@ export default {
         return b.id !== block.id;
       });
 
-      removals.push(this.$store.dispatch('deleteBlock', block.id));
+      removals.blocks.push(block.id);
 
-      Promise.all(removals)
-        .then(() => {
-          this.updateScene();
-        })
-        .catch(err => console.log(err));
+      this.$emit('removeElements', removals);
     },
     //
     prepareBlocks(blocks) {

@@ -1,5 +1,10 @@
 <template>
-  <div class="vue-block" :class="{ selected: selected }" :style="style">
+  <div
+    class="vue-block"
+    :class="{ selected: selected }"
+    :style="style"
+    @dblclick="triggerDoubleClick"
+  >
     <header :style="headerStyle">
       {{ title }}
       <a class="delete" @click="deleteBlock">x</a>
@@ -46,7 +51,9 @@ export default {
         return typeof val === 'number';
       },
     },
+    id: Number,
     selected: Boolean,
+    name: String,
     title: {
       type: String,
       default: 'Title',
@@ -105,6 +112,12 @@ export default {
     };
   },
   methods: {
+    triggerDoubleClick() {
+      this.$emit('dblClick', {
+        id: this.id,
+        name: this.name,
+      });
+    },
     handleMove(e) {
       this.mouseX = e.pageX || e.clientX + document.documentElement.scrollLeft;
       this.mouseY = e.pageY || e.clientY + document.documentElement.scrollTop;

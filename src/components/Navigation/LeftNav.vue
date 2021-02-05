@@ -164,7 +164,6 @@ export default {
 <style lang="scss" scoped>
 .leftnav-container {
   display: flex;
-  z-index: 10000;
 }
 
 .left-icon-container {

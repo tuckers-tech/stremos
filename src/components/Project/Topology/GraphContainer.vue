@@ -10,6 +10,8 @@
       @contextmenu.native="showContextMenu"
       @blockSelect="blockSelected"
       @blockDeselect="blockDeselect"
+      @blockDblClick="blockDblClick"
+      @removeElements="removeElements"
       :blocksContent="availableBlocks"
       :scene.sync="scene"
       class="container"
@@ -37,24 +39,54 @@ export default {
     },
     scene: {
       get() {
+        if (this.type === 'topology') {
+          return this.$store.getters.getTopologyScene;
+        }
         return this.$store.getters.getScene;
       },
       set(newScene) {
-        this.$store.dispatch('updateScene', newScene);
+        this.$store.dispatch('updateTopology', newScene);
       },
     },
   },
   methods: {
+    removeElements(removalItems) {
+      console.log(removalItems);
+
+      if (this.type === 'topology') {
+        removalItems.blocks.forEach(blockID => {
+          this.$store.dispatch('topologyDeleteBlock', blockID);
+        });
+
+        removalItems.links.forEach(linkID => {
+          this.$store.dispatch('topologyRemoveLink', linkID);
+        });
+      }
+    },
+    blockDblClick(event) {
+      console.log(event);
+      if (event.name === 'service') {
+        this.$router.push({
+          name: 'serviceEdit',
+          params: {
+            projectID: this.$route.params.projectID,
+            serviceID: event.id,
+          },
+        });
+      }
+    },
     showContextMenu(event) {
       event.preventDefault();
       console.log('showcontextmenu');
     },
     onDrop(event) {
       event.preventDefault();
-      this.$store.dispatch(
-        'addBlock',
-        JSON.parse(event.dataTransfer.getData('newBlock')),
-      );
+      if (this.type === 'topology') {
+        this.$store.dispatch(
+          'addTopologyBlock',
+          JSON.parse(event.dataTransfer.getData('newBlock')),
+        );
+      }
     },
     onDragover(event) {
       event.preventDefault();
