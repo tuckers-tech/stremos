@@ -75,7 +75,9 @@ export default {
 
       changeEvent.nodeID = this.activeNode.id;
 
-      this.$store.dispatch('updateTopologyNode', changeEvent);
+      console.log(event);
+
+      this.$store.dispatch('updateNode', changeEvent);
     },
   },
   watch: {},

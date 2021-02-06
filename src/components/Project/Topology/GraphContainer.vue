@@ -29,6 +29,7 @@ export default {
   },
   props: {
     type: String,
+    targetID: Number,
   },
   data() {
     return {};
@@ -41,18 +42,25 @@ export default {
       get() {
         if (this.type === 'topology') {
           return this.$store.getters.getTopologyScene;
+        } else if (this.type === 'service') {
+          return this.$store.getters.getServiceScene(this.targetID);
         }
-        return this.$store.getters.getScene;
+        return false;
       },
       set(newScene) {
-        this.$store.dispatch('updateTopology', newScene);
+        if (this.type === 'topology') {
+          this.$store.dispatch('updateTopology', newScene);
+        } else if (this.type === 'service') {
+          this.$store.dispatch('updateService', {
+            serviceID: this.targetID,
+            newScene,
+          });
+        }
       },
     },
   },
   methods: {
     removeElements(removalItems) {
-      console.log(removalItems);
-
       if (this.type === 'topology') {
         removalItems.blocks.forEach(blockID => {
           this.$store.dispatch('topologyDeleteBlock', blockID);
@@ -61,10 +69,23 @@ export default {
         removalItems.links.forEach(linkID => {
           this.$store.dispatch('topologyRemoveLink', linkID);
         });
+      } else if (this.type === 'service') {
+        removalItems.blocks.forEach(blockID => {
+          this.$store.dispatch('deleteServiceBlock', {
+            serviceID: this.targetID,
+            blockID,
+          });
+        });
+
+        removalItems.links.forEach(linkID => {
+          this.$store.dispatch('deleteServiceLink', {
+            serviceID: this.targetID,
+            linkID,
+          });
+        });
       }
     },
     blockDblClick(event) {
-      console.log(event);
       if (event.name === 'service') {
         this.$router.push({
           name: 'serviceEdit',
@@ -77,7 +98,6 @@ export default {
     },
     showContextMenu(event) {
       event.preventDefault();
-      console.log('showcontextmenu');
     },
     onDrop(event) {
       event.preventDefault();
@@ -86,13 +106,25 @@ export default {
           'addTopologyBlock',
           JSON.parse(event.dataTransfer.getData('newBlock')),
         );
+      } else if (this.type === 'service') {
+        this.$store.dispatch('addServiceBlock', {
+          serviceID: this.targetID,
+          node: JSON.parse(event.dataTransfer.getData('newBlock')),
+        });
       }
     },
     onDragover(event) {
       event.preventDefault();
     },
     blockSelected(event) {
-      this.$store.dispatch('setActiveNode', event.id);
+      if (this.type === 'topology') {
+        this.$store.dispatch('setActiveNode', event.id);
+      } else if (this.type === 'service') {
+        this.$store.dispatch('setServiceNodeActive', {
+          serviceID: this.targetID,
+          blockID: event.id,
+        });
+      }
     },
     blockDeselect() {
       this.$store.dispatch('unsetActiveNode');
@@ -105,9 +137,6 @@ export default {
     scene() {
       // this.$store.dispatch('updateScene', newScene);
     },
-  },
-  created() {
-    console.log(this.$route.path);
   },
 };
 </script>

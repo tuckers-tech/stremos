@@ -8,6 +8,7 @@
         type="text"
         :placeholder="placeholder"
         :disabled="disabled"
+        @change="onInputChange"
       />
     </div>
   </div>
@@ -38,17 +39,15 @@ export default {
     }
   },
   methods: {
+    onInputChange() {
+      this.emitValueUpdate();
+    },
     emitValueUpdate: _.debounce(function() {
       this.$emit('valueChange', {
         slug: this.slug,
         value: this.value,
       });
     }, 250),
-  },
-  watch: {
-    value() {
-      this.emitValueUpdate();
-    },
   },
 };
 </script>

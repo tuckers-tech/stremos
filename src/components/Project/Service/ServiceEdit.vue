@@ -1,9 +1,13 @@
 <template>
-  <div class="topology-page-container">
+  <div class="service-page-container">
     <TopNav :links="topNavLinks" />
-    <div class="topology-body">
+    <div class="service-body">
       <BlockFlyout :key="'service'" :flyoutType="'service'" />
-      <GraphContainer :type="'service'" />
+      <GraphContainer
+        class="service-graph"
+        :type="'service'"
+        :targetID="serviceID"
+      />
       <Inspector />
     </div>
   </div>
@@ -16,6 +20,7 @@ import Inspector from '@/components/Navigation/Inspector/Inspector';
 import TopNav from '@/components/Project/Topology/TopNav';
 
 export default {
+  name: 'ServiceEdit',
   components: {
     GraphContainer,
     Inspector,
@@ -49,17 +54,21 @@ export default {
       ],
     };
   },
+  computed: {
+    serviceID() {
+      return parseInt(this.$route.params.serviceID);
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.topology-body {
+.service-body {
   height: 100%;
   width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
-  // background-color: blue;
   height: calc(100% - 50px);
   margin-top: 50px;
   z-index: 500;

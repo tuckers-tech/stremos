@@ -1,5 +1,10 @@
 <template>
-  <div class="leftnav-container">
+  <div
+    :class="[
+      'leftnav-container',
+      { 'is-on-top': !this.$store.getters.isModalOpen },
+    ]"
+  >
     <div class="left-icon-container">
       <div
         :class="{
@@ -164,6 +169,10 @@ export default {
 <style lang="scss" scoped>
 .leftnav-container {
   display: flex;
+}
+
+.is-on-top {
+  z-index: 1000;
 }
 
 .left-icon-container {

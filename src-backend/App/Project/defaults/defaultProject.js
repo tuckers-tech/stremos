@@ -17,6 +17,7 @@ const template = `
     },
     "links": []
   },
+  "services": [],
   "data": {}
 }
 `;

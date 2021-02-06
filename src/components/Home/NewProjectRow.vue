@@ -17,13 +17,18 @@ export default {
   components: {},
   methods: {
     openNewProjectModal() {
-      this.$buefy.modal.open({
+      this.$store.dispatch('setModalStatus', true);
+      let modal = this.$buefy.modal.open({
         parent: this,
         component: NewProjectForm,
         hasModalCard: true,
-        customClass: 'custom-class custom-class-2',
+        customClass: 'top-modal',
         trapFocus: true,
         width: 500,
+      });
+
+      modal.$on('close', function() {
+        this.$store.dispatch('setModalStatus', false);
       });
     },
   },

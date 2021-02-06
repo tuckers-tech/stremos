@@ -52,6 +52,10 @@ body {
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
+.top-modal {
+  z-index: 100000;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 3px;

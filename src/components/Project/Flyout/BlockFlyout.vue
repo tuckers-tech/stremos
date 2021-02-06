@@ -41,10 +41,6 @@ export default {
     },
   },
   methods: {},
-  created() {
-    console.log('flyout created');
-    console.log(this.blockLibrary);
-  },
 };
 </script>
 

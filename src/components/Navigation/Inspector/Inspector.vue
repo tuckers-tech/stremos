@@ -1,6 +1,6 @@
 <template>
-  <div class="menu p-2 inspector">
-    <aside class="menu">
+  <aside class="menu p-2 inspector">
+    <div class="menu">
       <div class="field">
         <div class="control has-icons-left has-icons-right">
           <input class="input is-small" type="search" placeholder="Search" />
@@ -16,8 +16,8 @@
       <div v-else class="no-node-container">
         Select A Node
       </div>
-    </aside>
-  </div>
+    </div>
+  </aside>
 </template>
 
 <script>

@@ -13,7 +13,6 @@ const getters = {
       };
     });
 
-    console.log(availableLibraries);
     return availableLibraries;
   },
   getAvailableBlocks: state => targetType => {

@@ -18,19 +18,18 @@
     </nav>
 
     <div class="button-group">
-      <router-link
-        tag="button"
-        :to="{
-          name: 'serviceEdit',
-          params: { projectID: $route.params.projectID, serviceID: 0 },
-        }"
-        class="button  is-small is-success"
-      >
+      <button class="button is-small is-success">
         <span class="icon">
           <i class="fas fa-play"></i>
         </span>
         <span>Run</span>
-      </router-link>
+      </button>
+      <button class="button is-small is-info">
+        <span class="icon">
+          <i class="fas fa-server"></i>
+        </span>
+        <span>Deploy</span>
+      </button>
     </div>
   </div>
 </template>

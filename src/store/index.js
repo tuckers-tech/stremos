@@ -9,6 +9,7 @@ import keyboardMonitor from './InputMonitor/keyboardMonitor';
 // import topologyGraph from './graphs/topologyGraph';
 import preferences from './preferences/preferences';
 import plugins from './plugins/plugins';
+import misc from './misc/misc';
 
 Vue.use(Vuex);
 
@@ -27,5 +28,6 @@ export default new Vuex.Store({
     // topologyGraph,
     preferences,
     plugins,
+    misc,
   },
 });

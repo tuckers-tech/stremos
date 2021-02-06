@@ -3,7 +3,7 @@
     <TopNav :links="topNavLinks" />
     <div class="topology-body">
       <BlockFlyout :key="'topology'" :flyoutType="'topology'" />
-      <GraphContainer :type="'topology'" />
+      <GraphContainer class="topology-graph" :type="'topology'" />
       <Inspector />
     </div>
   </div>
@@ -16,6 +16,7 @@ import Inspector from '@/components/Navigation/Inspector/Inspector';
 import TopNav from '@/components/Project/Topology/TopNav';
 
 export default {
+  name: 'ProjectTopology',
   components: {
     GraphContainer,
     Inspector,
