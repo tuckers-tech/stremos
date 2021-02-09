@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="topContainer"
     class="topology-container"
     @drop="onDrop($event)"
     @dragover="onDragover($event)"
@@ -21,6 +22,7 @@
 
 <script>
 import VueBlocksContainer from '@/components/Graph/components/VueBlocksContainer';
+import { getMousePosition } from '@/components/Graph/helpers/mouse';
 
 export default {
   name: 'GraphContainer',
@@ -100,16 +102,25 @@ export default {
       event.preventDefault();
     },
     onDrop(event) {
+      const dropCords = getMousePosition(event.target.parentElement, event);
+
+      const {
+        height,
+        width,
+      } = event.target.parentElement.getBoundingClientRect();
+
       event.preventDefault();
       if (this.type === 'topology') {
-        this.$store.dispatch(
-          'addTopologyBlock',
-          JSON.parse(event.dataTransfer.getData('newBlock')),
-        );
+        this.$store.dispatch('addTopologyBlock', {
+          ...JSON.parse(event.dataTransfer.getData('newBlock')),
+          x: dropCords.x - 0.5 * width,
+          y: dropCords.y - 0.5 * height,
+        });
       } else if (this.type === 'service') {
         this.$store.dispatch('addServiceBlock', {
-          serviceID: this.targetID,
-          node: JSON.parse(event.dataTransfer.getData('newBlock')),
+          ...JSON.parse(event.dataTransfer.getData('newBlock')),
+          x: dropCords.x - 0.5 * width,
+          y: dropCords.y - 0.5 * height,
         });
       }
     },
@@ -117,14 +128,7 @@ export default {
       event.preventDefault();
     },
     blockSelected(event) {
-      if (this.type === 'topology') {
-        this.$store.dispatch('setActiveNode', event.id);
-      } else if (this.type === 'service') {
-        this.$store.dispatch('setServiceNodeActive', {
-          serviceID: this.targetID,
-          blockID: event.id,
-        });
-      }
+      this.$store.dispatch('setActiveNode', event.id);
     },
     blockDeselect() {
       this.$store.dispatch('unsetActiveNode');

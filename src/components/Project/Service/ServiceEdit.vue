@@ -59,6 +59,9 @@ export default {
       return parseInt(this.$route.params.serviceID);
     },
   },
+  created() {
+    this.$store.dispatch('setActiveService', this.$route.params.serviceID);
+  },
 };
 </script>
 

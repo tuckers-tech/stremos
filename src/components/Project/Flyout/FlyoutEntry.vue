@@ -6,6 +6,7 @@
     @dragstart="dragStart($event)"
     @drag="drag($event)"
     @dragend="dragEnd($event)"
+    @dblclick="handleDoubleClick"
     draggable
   >
     <div class="box block-box">
@@ -29,6 +30,7 @@ export default {
   },
   props: {
     block: Object,
+    flyoutType: String,
   },
   methods: {
     handleMouseEnter() {
@@ -37,9 +39,15 @@ export default {
     handleMouseLeave() {
       this.showInfo = false;
     },
-
     dragStart(event) {
       event.dataTransfer.setData('newBlock', JSON.stringify(this.block));
+    },
+    handleDoubleClick() {
+      if (this.flyoutType === 'topology') {
+        this.$store.dispatch('addTopologyBlock', this.block);
+      } else if (this.flyoutType === 'service') {
+        this.$store.dispatch('addServiceBlock', this.block);
+      }
     },
     drag() {},
     dragEnd() {},

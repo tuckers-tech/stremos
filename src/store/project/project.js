@@ -7,7 +7,8 @@ const state = {
   topology: {},
   data: {},
   services: [],
-  activeNode: { serviceID: null, blockID: null },
+  activeService: null,
+  activeNode: null,
 };
 
 const getters = {
@@ -15,27 +16,27 @@ const getters = {
     return state.metadata;
   },
   getActiveNode(state) {
-    if (isNaN(parseInt(state.activeNode.serviceID))) {
-      if (isNaN(parseInt(state.activeNode.blockID))) {
+    if (isNaN(parseInt(state.activeService))) {
+      if (isNaN(parseInt(state.activeNode))) {
         return false;
       }
 
       let returnVars = state.topology.blocks.filter(
-        block => parseInt(block.id) === parseInt(state.activeNode.blockID),
+        block => parseInt(block.id) === parseInt(state.activeNode),
       );
 
       return returnVars[0];
     } else {
-      if (isNaN(parseInt(state.activeNode.blockID))) {
+      if (isNaN(parseInt(state.activeNode))) {
         return false;
       }
 
       let targetService = state.services.filter(
-        service => service.id === state.activeNode.serviceID,
+        service => service.id === state.activeService,
       )[0];
 
       let returnVars = targetService.blocks.filter(
-        block => parseInt(block.id) === parseInt(state.activeNode.blockID),
+        block => parseInt(block.id) === parseInt(state.activeNode),
       );
 
       return returnVars[0];
@@ -79,12 +80,12 @@ const mutations = {
     state.topology = projectData.topology;
     state.services = projectData.services;
   },
-  setActiveNode(state, targetNodeData) {
-    state.activeNode = targetNodeData;
+  setActiveNode(state, targetNodeID) {
+    state.activeNode = targetNodeID;
   },
   updateNode(state, newNodeVersion) {
     let otherNodes;
-    if (isNaN(parseInt(state.activeNode.serviceID))) {
+    if (isNaN(parseInt(state.activeService))) {
       otherNodes = state.topology.blocks.filter(
         block => block.id !== newNodeVersion.id,
       );
@@ -92,11 +93,11 @@ const mutations = {
       state.topology.blocks = [...otherNodes, newNodeVersion];
     } else {
       otherNodes = state.services
-        .filter(service => service.id === state.activeNode.serviceID)[0]
+        .filter(service => service.id === state.activeService)[0]
         .blocks.filter(block => block.id === newNodeVersion.nodeID);
 
       state.services.filter(
-        service => service.id === state.activeNode.serviceID,
+        service => service.id === state.activeService,
       )[0].blocks = [...otherNodes, newNodeVersion];
     }
   },
@@ -172,6 +173,9 @@ const mutations = {
       .filter(service => service.id === deleteData.serviceID)[0]
       .links.filter(link => link.id !== deleteData.linkID);
   },
+  setActiveService(state, activeServiceID) {
+    state.activeService = activeServiceID;
+  },
 };
 
 const actions = {
@@ -186,20 +190,20 @@ const actions = {
     });
   },
   setActiveNode({ commit }, targetNodeID) {
-    commit('setActiveNode', { serviceID: null, blockID: targetNodeID });
+    commit('setActiveNode', targetNodeID);
   },
   unsetActiveNode({ commit }) {
     commit('setActiveNode', { serviceID: null, blockID: null });
   },
   updateNode({ state, commit }, nodeUpdate) {
     let targetNode;
-    if (isNaN(parseInt(state.activeNode.serviceID))) {
+    if (isNaN(parseInt(state.activeService))) {
       targetNode = state.topology.blocks.filter(
         block => block.id === nodeUpdate.nodeID,
       )[0];
     } else {
       targetNode = state.services
-        .filter(service => service.id === state.activeNode.serviceID)[0]
+        .filter(service => service.id === state.activeService)[0]
         .blocks.filter(block => block.id === nodeUpdate.nodeID)[0];
     }
 
@@ -249,8 +253,8 @@ const actions = {
 
     let newBlock = {
       id: isNaN(parseInt(nextID)) ? 0 : nextID,
-      x: 0,
-      y: 0,
+      x: blockInfo.x,
+      y: blockInfo.y,
       name: blockInfo.name,
       title: blockInfo.title,
       values: {
@@ -283,25 +287,26 @@ const actions = {
   // SERVICE
   addServiceBlock({ state, commit }, addServiceData) {
     const targetService = state.services.filter(
-      service => service.id === addServiceData.serviceID,
+      service => service.id === state.activeService,
     )[0];
+    console.log(targetService);
 
     const idList = targetService.blocks.map(block => parseInt(block.id));
     const nextID = Math.max(...idList) + 1;
 
     let newBlock = {
       id: isNaN(parseInt(nextID)) ? 0 : nextID,
-      x: 0,
-      y: 0,
-      name: addServiceData.node.name,
-      title: addServiceData.node.title,
+      x: addServiceData.x,
+      y: addServiceData.y,
+      name: addServiceData.name,
+      title: addServiceData.title,
       values: {
-        variables: [...addServiceData.node.variables],
+        variables: [...addServiceData.variables],
       },
     };
 
     commit('addServiceBlock', {
-      serviceID: addServiceData.serviceID,
+      serviceID: state.activeService,
       block: newBlock,
     });
   },
@@ -325,8 +330,11 @@ const actions = {
   deleteServiceLink({ commit }, deleteData) {
     commit('deleteServiceLink', deleteData);
   },
-  setServiceNodeActive({ commit }, activeNodeData) {
-    commit('setActiveNode', activeNodeData);
+  setActiveService({ commit }, activeServiceID) {
+    commit('setActiveService', activeServiceID);
+  },
+  unsetActiveService({ commit }) {
+    commit('setActiveService', null);
   },
 };
 

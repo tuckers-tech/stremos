@@ -594,6 +594,7 @@ export default {
     },
     //
     prepareBlocks(blocks) {
+      if (!blocks) return false;
       return blocks
         .map(block => {
           let node = this.nodes.find(n => {
@@ -660,6 +661,7 @@ export default {
       let scene = merge(this.defaultScene, this.scene);
 
       let blocks = this.prepareBlocks(scene.blocks);
+      if (!blocks) return false;
       blocks = this.prepareBlocksLinking(blocks, scene.links);
 
       // set last selected after update blocks from props

@@ -16,6 +16,7 @@
 
         <FlyoutEntry
           v-for="block in library.blocks"
+          :flyoutType="flyoutType"
           :key="block.name"
           :block="block"
         />
