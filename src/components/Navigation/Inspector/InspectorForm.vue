@@ -55,16 +55,28 @@
         :defaultValue="variable.value"
         @valueChange="inputValueChanged"
       />
+
+      <SelectInspectorInput
+        v-if="variable.type === 'select'"
+        :key="variable.slug"
+        :slug="'variable.' + variable.slug"
+        :label="variable.name"
+        :options="variable.options"
+        :defaultValue="variable.value"
+        @valueChange="inputValueChanged"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import TextInspectorInput from '@/components/Navigation/Inspector/InspectorInputs/TextInspectorInput';
+import SelectInspectorInput from '@/components/Navigation/Inspector/InspectorInputs/SelectInspectorInput';
 export default {
   name: 'InspectorForm',
   components: {
     TextInspectorInput,
+    SelectInspectorInput,
   },
   props: {
     activeNode: Object,
@@ -74,8 +86,6 @@ export default {
       let changeEvent = event;
 
       changeEvent.nodeID = this.activeNode.id;
-
-      console.log(event);
 
       this.$store.dispatch('updateNode', changeEvent);
     },
