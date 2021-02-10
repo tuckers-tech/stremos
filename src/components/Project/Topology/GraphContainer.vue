@@ -134,14 +134,6 @@ export default {
       this.$store.dispatch('unsetActiveNode');
     },
   },
-  watch: {
-    availableBlocks() {
-      // console.log('blocks', newValue);
-    },
-    scene() {
-      // this.$store.dispatch('updateScene', newScene);
-    },
-  },
 };
 </script>
 

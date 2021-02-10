@@ -46,25 +46,38 @@
     </p>
 
     <div v-for="variable in activeNode.values.variables" :key="variable.slug">
-      <TextInspectorInput
-        v-if="variable.type === 'string'"
-        :key="variable.slug"
-        :slug="'variable.' + variable.slug"
-        :label="variable.name"
-        :placeholder="variable.placeholder"
-        :defaultValue="variable.value"
-        @valueChange="inputValueChanged"
-      />
+      <div v-if="variable.show">
+        <TextInspectorInput
+          v-if="variable.type === 'string'"
+          :key="variable.slug"
+          :slug="'variable.' + variable.slug"
+          :label="variable.name"
+          :placeholder="variable.placeholder"
+          :defaultValue="variable.value"
+          @valueChange="inputValueChanged"
+        />
 
-      <SelectInspectorInput
-        v-if="variable.type === 'select'"
-        :key="variable.slug"
-        :slug="'variable.' + variable.slug"
-        :label="variable.name"
-        :options="variable.options"
-        :defaultValue="variable.value"
-        @valueChange="inputValueChanged"
-      />
+        <SelectInspectorInput
+          v-if="variable.type === 'select'"
+          :key="variable.slug"
+          :slug="'variable.' + variable.slug"
+          :label="variable.name"
+          :options="variable.options"
+          :defaultValue="variable.value"
+          @valueChange="inputValueChanged"
+          @triggerAction="triggerAction"
+        />
+
+        <NumberInspectorInput
+          v-if="variable.type === 'number'"
+          :key="variable.slug"
+          :slug="'variable.' + variable.slug"
+          :label="variable.name"
+          :placeholder="variable.placeholder"
+          :defaultValue="variable.value"
+          @valueChange="inputValueChanged"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -72,11 +85,13 @@
 <script>
 import TextInspectorInput from '@/components/Navigation/Inspector/InspectorInputs/TextInspectorInput';
 import SelectInspectorInput from '@/components/Navigation/Inspector/InspectorInputs/SelectInspectorInput';
+import NumberInspectorInput from '@/components/Navigation/Inspector/InspectorInputs/NumberInspectorInput';
 export default {
   name: 'InspectorForm',
   components: {
     TextInspectorInput,
     SelectInspectorInput,
+    NumberInspectorInput,
   },
   props: {
     activeNode: Object,
@@ -88,6 +103,13 @@ export default {
       changeEvent.nodeID = this.activeNode.id;
 
       this.$store.dispatch('updateNode', changeEvent);
+    },
+    triggerAction(event) {
+      let action = event;
+
+      action.nodeID = this.activeNode.id;
+
+      this.$store.dispatch('triggerAction', action);
     },
   },
   watch: {},

@@ -39,8 +39,8 @@ export default {
 <style lang="scss" scoped>
 .inspector {
   background-color: #f0f0f0;
-  width: 200px;
-  min-width: 200px;
+  width: 250px;
+  min-width: 250px;
   height: calc(100% - 50px);
   position: fixed;
   right: 0;
@@ -48,11 +48,16 @@ export default {
   min-height: 100%;
   z-index: 10;
   overflow-y: auto;
-  padding-bottom: 10px;
+  margin-bottom: 50px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .no-node-container {
   padding: 25px;
+}
+
+.menu {
+  overflow-y: auto;
+  height: calc(100% - 25px);
 }
 </style>

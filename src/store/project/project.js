@@ -218,12 +218,16 @@ const actions = {
       let targetEntry = oldVariables.filter(
         variable => variable.slug === updateScope[1],
       )[0];
+
       targetEntry.value = nodeUpdate.value;
 
-      let newVariables = [
-        ...oldVariables.filter(variable => variable.slug !== updateScope[1]),
-        targetEntry,
-      ];
+      let targetIndex = oldVariables.findIndex(
+        variable => variable.slug === updateScope[1],
+      );
+
+      let newVariables = oldVariables.slice();
+
+      newVariables.splice(targetIndex, 1, targetEntry);
 
       updatedNode = {
         ...targetNode,
@@ -232,10 +236,6 @@ const actions = {
         },
       };
     } else {
-      // let targetNode = state.topology.blocks.filter(
-      //   block => block.id === nodeUpdate.nodeID,
-      // )[0];
-
       updatedNode = {
         ...targetNode,
       };
@@ -335,6 +335,64 @@ const actions = {
   },
   unsetActiveService({ commit }) {
     commit('setActiveService', null);
+  },
+
+  triggerAction({ commit }, action) {
+    let targetGroup;
+    let targetSlugs = [];
+    let targetStatus = [];
+
+    action.actions.forEach((actionStep, index) => {
+      let splitStep = actionStep.split('.');
+
+      if (index === 0) {
+        targetGroup = splitStep[0];
+      }
+
+      targetSlugs.push(splitStep[1]);
+      targetStatus.push(splitStep[2]);
+    });
+
+    let targetNode;
+    if (isNaN(parseInt(state.activeService))) {
+      targetNode = state.topology.blocks.filter(
+        block => block.id === action.nodeID,
+      )[0];
+    } else {
+      targetNode = state.services
+        .filter(service => service.id === state.activeService)[0]
+        .blocks.filter(block => block.id === action.nodeID)[0];
+    }
+
+    let oldVariables = targetNode.values.variables.slice();
+
+    let newVariables = [];
+
+    oldVariables.forEach(variable => {
+      if (variable.group === targetGroup) {
+        if (targetSlugs.includes(variable.slug)) {
+          newVariables.push({
+            ...variable,
+            show: true,
+          });
+        } else {
+          newVariables.push({
+            ...variable,
+            show: false,
+          });
+        }
+      } else {
+        newVariables.push(variable);
+      }
+    });
+
+    let updatedNode = targetNode;
+
+    updatedNode.values.variables = newVariables;
+
+    console.log(newVariables);
+
+    commit('updateNode', updatedNode);
   },
 };
 

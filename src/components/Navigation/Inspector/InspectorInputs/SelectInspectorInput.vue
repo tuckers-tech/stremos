@@ -3,7 +3,7 @@
     <label class="label is-small has-text-left">{{ label }}</label>
     <div class="control">
       <div class="select is-small is-fullwidth">
-        <select v-model="value">
+        <select v-model="value" @change="onInputChange">
           <option value="select">Select An Option</option>
           <option
             v-for="option of options"
@@ -15,12 +15,10 @@
         </select>
       </div>
     </div>
-    {{ options }}
   </div>
 </template>
 
 <script>
-import _ from 'lodash';
 export default {
   name: 'SelectInspectorInput',
   props: {
@@ -49,13 +47,27 @@ export default {
   methods: {
     onInputChange() {
       this.emitValueUpdate();
+
+      let targetOption = this.options.filter(
+        option => option.value === this.value,
+      )[0];
+
+      if (targetOption.actions) {
+        this.emitActionChange(targetOption.actions);
+      }
     },
-    emitValueUpdate: _.debounce(function() {
+    emitValueUpdate() {
       this.$emit('valueChange', {
         slug: this.slug,
         value: this.value,
       });
-    }, 250),
+    },
+    emitActionChange(actions) {
+      this.$emit('triggerAction', {
+        slug: this.slug,
+        actions,
+      });
+    },
   },
 };
 </script>
