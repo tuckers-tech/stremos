@@ -5,7 +5,7 @@
       <input
         v-model="value"
         class="input is-small"
-        type="text"
+        type="number"
         :placeholder="placeholder"
         :disabled="disabled"
         @change="onInputChange"
