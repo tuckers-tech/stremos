@@ -71,7 +71,6 @@ const mutations = {
     state.activeNode = targetNodeID;
   },
   updateNode(state, newNodeVersion) {
-    console.log(newNodeVersion);
     let otherNodes = state.blocks.filter(
       block => block.id !== newNodeVersion.id,
     );

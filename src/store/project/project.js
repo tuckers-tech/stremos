@@ -336,21 +336,25 @@ const actions = {
   unsetActiveService({ commit }) {
     commit('setActiveService', null);
   },
-
   triggerAction({ commit }, action) {
-    let targetGroup;
-    let targetSlugs = [];
-    let targetStatus = [];
+    let actions = [];
 
-    action.actions.forEach((actionStep, index) => {
+    action.actions.forEach(actionStep => {
       let splitStep = actionStep.split('.');
 
-      if (index === 0) {
-        targetGroup = splitStep[0];
+      if (splitStep.length === 2) {
+        actions.push({
+          group: splitStep[0],
+          slug: '*',
+          trigger: splitStep[1],
+        });
+      } else {
+        actions.push({
+          group: splitStep[0],
+          slug: splitStep[1],
+          trigger: splitStep[2],
+        });
       }
-
-      targetSlugs.push(splitStep[1]);
-      targetStatus.push(splitStep[2]);
     });
 
     let targetNode;
@@ -369,17 +373,35 @@ const actions = {
     let newVariables = [];
 
     oldVariables.forEach(variable => {
-      if (variable.group === targetGroup) {
-        if (targetSlugs.includes(variable.slug)) {
-          newVariables.push({
-            ...variable,
-            show: true,
-          });
+      let targetGroups = actions.filter(
+        action => action.group === variable.group,
+      );
+
+      if (targetGroups.length > 0) {
+        let targetSlugs = actions.filter(
+          action => action.slug === variable.slug || action.slug === '*',
+        );
+
+        if (targetSlugs.length > 0) {
+          switch (targetSlugs[0].trigger) {
+            case 'hide':
+              newVariables.push({
+                ...variable,
+                show: false,
+              });
+              break;
+            case 'show':
+              newVariables.push({
+                ...variable,
+                show: true,
+              });
+              break;
+            default:
+              console.log(`Trigger: ${action.trigger} is not supported.`);
+              break;
+          }
         } else {
-          newVariables.push({
-            ...variable,
-            show: false,
-          });
+          newVariables.push(variable);
         }
       } else {
         newVariables.push(variable);
@@ -389,8 +411,6 @@ const actions = {
     let updatedNode = targetNode;
 
     updatedNode.values.variables = newVariables;
-
-    console.log(newVariables);
 
     commit('updateNode', updatedNode);
   },

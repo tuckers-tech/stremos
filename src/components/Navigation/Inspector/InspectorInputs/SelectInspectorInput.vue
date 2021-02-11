@@ -52,8 +52,10 @@ export default {
         option => option.value === this.value,
       )[0];
 
-      if (targetOption.actions) {
-        this.emitActionChange(targetOption.actions);
+      if (targetOption) {
+        if (targetOption.actions) {
+          this.emitActionChange(targetOption.actions);
+        }
       }
     },
     emitValueUpdate() {
